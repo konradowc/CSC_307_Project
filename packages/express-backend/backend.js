@@ -6,7 +6,7 @@ const port = 8000;
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
+app.get("/", (req, res) => { // will need to set up all the gets to get the proper stuff according to the rest model
   res.send("Hello World!");
 });
 
