@@ -1,14 +1,13 @@
 import mongoose from "mongoose";
 import userModel from "./user";
 
-
 // use process.env.Mongoose or something like that
-
 
 mongoose.set("debug", true);
 // this is the code from assignment 4, I will adapt this into something that is usable for the project
 mongoose
-  .connect("mongodb://localhost:27017/users", { // reuse cluster 0 for this, will need to figure out how to protect the secrets, use .env variables
+  .connect("mongodb://localhost:27017/users", {
+    // reuse cluster 0 for this, will need to figure out how to protect the secrets, use .env variables
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
