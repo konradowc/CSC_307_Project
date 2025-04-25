@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+    "lint": "npx eslint ."
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +14,7 @@
     "packages/*"
   ],
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.25.1",
     "eslint": "^9.25.1",
     "eslint-config-prettier": "^10.1.2",
