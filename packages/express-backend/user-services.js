@@ -1,13 +1,12 @@
 import mongoose from "mongoose";
 import userModel from "./user";
-
-// use process.env.Mongoose or something like that
+import "dotenv/config.js";
 
 mongoose.set("debug", true);
 // this is the code from assignment 4, I will adapt this into something that is usable for the project
 mongoose
-  .connect("mongodb://localhost:27017/users", {
-    // reuse cluster 0 for this, will need to figure out how to protect the secrets, use .env variables
+  .connect(process.env.MONGODB_URI, {
+    // we will be using cluster 0, I will share the url later
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
