@@ -1,5 +1,6 @@
 import { useState } from "react";
-
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
 import {
   BrowserRouter as Router,
   Route,
@@ -7,25 +8,18 @@ import {
 } from "react-router-dom";
 
 import Profile from "./pages/Profile";
+import CreatePost from "./pages/CreatePost"; 
 
 function App() {
   return (
-    <div>
-      <Profile />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/profile" element={<Profile />}/>
+        <Route path="/createPost" element={<CreatePost />}/>
+      </Routes>
+    </Router>   
   );
 }
 
-// const App = () => {
-//   return (
-//     <div>
-//       <h1 className="text-2xl">Test Page</h1>
-//       <p className="text-gray-700">
-//         If this shows up, the issue might be in your profile
-//         page.
-//       </p>
-//     </div>
-//   );
-// };
 
 export default App;
