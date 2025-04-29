@@ -11,3 +11,5 @@ The style used for this project by Prettier is as follows: no trailing commas, n
 Everything else like spacing is just default for Prettier
 
 For ESLint, the file is default except for the addition of allowing jest and nodes.
+
+Additionally to run ESLint, run "npm run lint", to run Prettier, run "npm run format".
