@@ -21,6 +21,12 @@ export default defineConfig([
       "plugin:prettier/recommended"
     ),
 
+    settings: {
+      react: {
+        version: "detect"
+      }
+    },
+
     languageOptions: {
       globals: {
         ...globals.browser,
