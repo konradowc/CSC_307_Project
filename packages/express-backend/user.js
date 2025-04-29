@@ -7,6 +7,11 @@ const UserSchema = new mongoose.Schema( // this is not the final version, will n
       required: true,
       trim: true
     },
+    city: {
+      type: String,
+      required: true,
+      trim: true
+    },
     posts: [
       {
         type: mongoose.Schema.Types.ObjectId,

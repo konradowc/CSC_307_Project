@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 
-const BlogSchema = new mongoose.Schema( // will add the ability to upload images later, will probably use cloudinary and just store url in schema
+const BlogSchema = new mongoose.Schema(
   {
     title: String,
     content: String,
     image: {
+      // make it so that the image is stored in mongo
       type: String,
       required: false
     },
