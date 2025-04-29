@@ -1,0 +1,52 @@
+/* Apply Open Sans as the default font for the entire profile */
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+.profile-container {
+  padding: 5rem 7rem;
+}
+
+.profile-username {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.profile-location {
+  color: #4a4a4a;
+  margin-bottom: 3rem;
+}
+
+.posts-heading {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.posts-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.post-item {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.post-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.post-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.post-content {
+  color: #4a4a4a;
+}
