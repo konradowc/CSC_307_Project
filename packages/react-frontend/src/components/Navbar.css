@@ -1,0 +1,45 @@
+/* Navbar.css */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 1rem 2rem; /* Padding for spacing */
+  left: 0; /* Ensure navbar stays aligned to the left */
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 40px;
+}
+
+.logo-link {
+  display: inline-block; /* To ensure the image behaves like a link */
+}
+
+.right {
+  display: flex;
+  gap: 3rem;
+}
+
+.navbar-link {
+  text-decoration: none;
+  color: black;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition:
+    color 0.3s,
+    text-decoration 0.3s; /* Smooth transition */
+}
+
+.navbar-link:hover {
+  color: #b7202b; /* Change text color to red on hover */
+}
+
+.navbar-link.active {
+  text-decoration: underline; /* Underline the current page link */
+}
