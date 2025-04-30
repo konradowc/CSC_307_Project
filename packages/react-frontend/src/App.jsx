@@ -1,6 +1,4 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import {
   BrowserRouter as Router,
   Route,
@@ -8,18 +6,21 @@ import {
 } from "react-router-dom";
 
 import Profile from "./pages/Profile";
-import CreatePost from "./pages/CreatePost"; 
+import CreatePost from "./pages/CreatePost";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/profile" element={<Profile />}/>
-        <Route path="/createPost" element={<CreatePost />}/>
-      </Routes>
-    </Router>   
+      <Navbar />
+      <div style={{ paddingTop: "80px" }}>
+        <Routes>
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/createPost" element={<CreatePost />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
-
 
 export default App;
