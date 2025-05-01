@@ -50,3 +50,31 @@ body {
 .post-content {
   color: #4a4a4a;
 }
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.create-button {
+  display: inline-block;
+  text-decoration: none;
+  color: black;
+  background-color: white;
+  font-weight: 600;
+  padding: 0.6rem 1.25rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.create-button:hover {
+  background-color: #f3f3f3;
+}
