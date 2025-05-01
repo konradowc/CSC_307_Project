@@ -1,12 +1,19 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import './CreatePost.css';
 
 export default function CreatePost() {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [publishedPosts, setPublishedPosts] = useState([]);
+    const navigate = useNavigate();
 
     const handlePublish = () => {
+      const newPost = { title, content };
+      navigate("/profile", { state: { newPost } }); 
+    };
+
+    /*const handlePublish = () => {
         const newPost = {
             title,
             content,
@@ -14,7 +21,7 @@ export default function CreatePost() {
         setPublishedPosts([...publishedPosts, newPost]);
         setTitle("");
         setContent("");
-    };
+    };*/
 
     return (
         <div className="container">

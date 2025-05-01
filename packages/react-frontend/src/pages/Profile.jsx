@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { Link, useLocation as useRouterLocation } from "react-router-dom";
 import "./Profile.css"; // Import the CSS file
 
 const Profile = () => {
+  const routerLocation = useRouterLocation();
+  const { newPost } = routerLocation.state || {};
   const [posts, setPosts] = useState([]);
 
   const username = "Jane Doe";
@@ -27,10 +30,27 @@ const Profile = () => {
     fetchPosts();
   }, []);
 
+  useEffect(() => {
+    if (newPost?.title && newPost?.content) {
+      setPosts((prevPosts) => [
+        ...prevPosts,
+        { id: prevPosts.length + 1, ...newPost }
+      ]);
+    }
+  }, [newPost]);
+
   return (
     <div className="profile-container">
-      <h1 className="profile-username">{username}</h1>
-      <p className="profile-location">{location}</p>
+      <div className="profile-header">
+        <div className="profile-info">
+          <h1 className="profile-username">{username}</h1>
+          <p className="profile-location">{location}</p>
+        </div>
+
+        <Link to="/createPost" className="create-button">
+          Create Blog Post
+      </Link>
+    </div>
 
       <h2 className="posts-heading">Blog Posts</h2>
       {posts.length === 0 ? (
