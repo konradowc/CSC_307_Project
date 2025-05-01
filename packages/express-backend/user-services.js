@@ -2,20 +2,22 @@ import mongoose from "mongoose";
 import userModel from "./user.js";
 import dotenv from "dotenv";
 //import multer from "multer";
+import blogModel from ".blog_post.js";
 
 mongoose.set("debug", true);
 dotenv.config();
 
 const mongoURL = process.env.MONGODB_URI;
 
-const conn = await mongoose
+//const conn =
+await mongoose
   .connect(mongoURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
   .catch((error) => console.log(error));
 
-const db = conn.connection;
+//const db = conn.connection;
 
 /*let gfsBucket;
 db.once("open", () => {
@@ -49,8 +51,8 @@ function findUserByName(name) {
   return userModel.find({ name: name });
 }
 
-function postImage(imagefile) {
-  /* return new Promise((resolve, reject) => {
+//function postImage(imagefile) {
+/* return new Promise((resolve, reject) => {
     const uploadStream = gfsBucket.openUploadStream(
       imagefile.originalname,
       {
@@ -63,6 +65,25 @@ function postImage(imagefile) {
     uploadStream.on("finish", resolve);
     uploadStream.on("error", reject);
   });*/
+//}
+
+function getPosts(city) {
+  let promise;
+  if (city == undefined) {
+    console.log(
+      "getPosts: City was not defined - returning all cities"
+    );
+    promise = blogModel.find();
+  } else {
+    promise = blogModel.find({ city: city });
+  }
+  return promise;
+}
+
+function addPost(post) {
+  const postToAdd = new blogModel(post);
+  const promise = postToAdd.save();
+  return promise;
 }
 
 export default {
@@ -70,5 +91,7 @@ export default {
   getUsers,
   findUserById,
   findUserByName,
-  postImage
+  //postImage,
+  getPosts,
+  addPost
 };
