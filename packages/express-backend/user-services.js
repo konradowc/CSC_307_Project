@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import userModel from "./user";
+import blogModel from ".blog_post.js";
 import "dotenv/config.js";
 
 mongoose.set("debug", true);
@@ -42,10 +43,31 @@ function findUserByJob(job) {
   return userModel.find({ job: job });
 }
 
+function getPosts(city) {
+  let promise;
+  if (city == undefined) {
+    console.log(
+      "getPosts: City was not defined - returning all cities"
+    );
+    promise = blogModel.find();
+  } else {
+    promise = blogModel.find({ city: city });
+  }
+  return promise;
+}
+
+function addPost(post) {
+  const postToAdd = new blogModel(post);
+  const promise = postToAdd.save();
+  return promise;
+}
+
 export default {
   addUser,
   getUsers,
   findUserById,
   findUserByName,
-  findUserByJob
+  findUserByJob,
+  getPosts,
+  addPost
 };
