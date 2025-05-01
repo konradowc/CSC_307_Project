@@ -1,25 +1,36 @@
 import mongoose from "mongoose";
-import userModel from "./user";
-import "dotenv/config.js";
+import userModel from "./user.js";
+import dotenv from "dotenv";
+//import multer from "multer";
 
 mongoose.set("debug", true);
-// this is the code from assignment 4, I will adapt this into something that is usable for the project
-mongoose
-  .connect(process.env.MONGODB_URI, {
-    // we will be using cluster 0, I will share the url later
+dotenv.config();
+
+const mongoURL = process.env.MONGODB_URI;
+
+const conn = await mongoose
+  .connect(mongoURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
   .catch((error) => console.log(error));
 
-function getUsers(name, job) {
+const db = conn.connection;
+
+/*let gfsBucket;
+db.once("open", () => {
+  gfsBucket = new GridFSBucket(db.db, {
+    bucketName: "uploads"
+  });
+  console.log("✅ GridFS ready");
+});*/
+
+function getUsers(name) {
   let promise;
-  if (name === undefined && job === undefined) {
+  if (name === undefined) {
     promise = userModel.find();
-  } else if (name && !job) {
+  } else if (name) {
     promise = findUserByName(name);
-  } else if (job && !name) {
-    promise = findUserByJob(job);
   }
   return promise;
 }
@@ -38,8 +49,20 @@ function findUserByName(name) {
   return userModel.find({ name: name });
 }
 
-function findUserByJob(job) {
-  return userModel.find({ job: job });
+function postImage(imagefile) {
+  /* return new Promise((resolve, reject) => {
+    const uploadStream = gfsBucket.openUploadStream(
+      imagefile.originalname,
+      {
+        contentType: imagefile.mimetype
+      }
+    );
+
+    uploadStream.end(imagefile.buffer);
+
+    uploadStream.on("finish", resolve);
+    uploadStream.on("error", reject);
+  });*/
 }
 
 export default {
@@ -47,5 +70,5 @@ export default {
   getUsers,
   findUserById,
   findUserByName,
-  findUserByJob
+  postImage
 };

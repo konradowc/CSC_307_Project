@@ -5,7 +5,10 @@ const BlogSchema = new mongoose.Schema(
     title: String,
     content: String,
     image: {
-      // make it so that the image is stored in mongo
+      // this is simply going to be a reference to the image
+      // in order to actually serve the image, we will need to make it so that the image is first posted and then the blog is posted
+      // so that the blog can actually grab the image which will be stored in a separate database
+      // make it so that the image is stored in mongo, use gridfs
       type: String,
       required: false
     },
