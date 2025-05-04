@@ -5,13 +5,11 @@ const BlogSchema = new mongoose.Schema(
     title: String,
     content: String,
     image: {
-      // this is simply going to be a reference to the image
-      // in order to actually serve the image, we will need to make it so that the image is first posted and then the blog is posted
-      // so that the blog can actually grab the image which will be stored in a separate database
-      // make it so that the image is stored in mongo, use gridfs
+      // make this so that it is simply a url which will be accessed by cloudinary
       type: String,
       required: false
     },
+    imagePublicId: String, // for deletion
     createdAt: { type: Date, default: Date.now },
     userID: {
       type: mongoose.Schema.Types.ObjectId,

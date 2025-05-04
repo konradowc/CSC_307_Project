@@ -1,14 +1,13 @@
 // backend.js
 import express from "express";
-//import userServices from "./user-services.js";
-//import multer from "multer";
+import multer from "multer";
+import { storage } from "./cloudinary.js";
 import db from "./user-services.js";
 
 const app = express();
 const port = 8000;
 
-//const storage = multer.memoryStorage();
-//const upload = multer({ storage });
+const upload = multer({ storage });
 
 app.use(express.json());
 
@@ -17,20 +16,16 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-// will add a post method to post images into the repository
-/*app.post("/upload", upload.single("file"), async (req, res) => {
-  try {
-    const fileMeta = await userServices.postImage(req.file);
-    res.json({
-      message: "✅ File uploaded",
-      fileId: fileMeta._id,
-      filename: fileMeta.filename
-    });
-  } catch (error) {
-    console.error("GridFS upload error:", error);
-    res.status(500).send("Failed to upload file");
-  }
-});*/
+// this uses multer to post images to cloudinary directly
+app.post("/upload", upload.single("file"), async (req, res) => {
+  if (!req.file)
+    return res.status(400).send("No file uploaded.");
+  res.status(200).json({
+    imageUrl: req.file.path, // Cloudinary image URL
+    publicId: req.file.filename // Can be used to delete the image
+  });
+});
+
 // GETs all the blog posts given a certain city name, if none is provided all posts are returned
 app.get("/api/posts", (req, res) => {
   console.log("GET /posts");

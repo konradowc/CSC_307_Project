@@ -37,7 +37,8 @@ export default defineConfig([
 
     rules: {
       "react/prop-types": 0,
-      "react/react-in-jsx-scope": "off"
+      "react/react-in-jsx-scope": "off",
+      "linebreak-style": "off"
     }
   }
 ]);
