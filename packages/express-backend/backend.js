@@ -26,51 +26,71 @@ app.post("/upload", upload.single("file"), async (req, res) => {
   });
 });
 
-// GETs all the blog posts given a certain city name, if none is provided all posts are returned
-app.get("/api/posts", (req, res) => {
-  console.log("GET /posts");
+/*
+BLOG POSTS
+*/
 
+// GETs all the blog posts given a certain city name
+// returns 200 if success, 400 if undefined city, and 401 if failure
+app.get("/api/posts", (req, res) => {
   const city = req.query.city;
 
-  let posts;
   if (city == undefined) {
     // no city given, what should be done?
-    // for now, just get all posts:
-    db.getPosts()
-      .then((ret) => {
-        posts = ret;
+    console.log("GET api/posts: no city defined");
+    res.status(400).send(undefined);
+    /*db.getPosts()
+      .then((posts) => {
+        res.status(200).send(posts);
       })
       .catch((error) => {
         console.log("GET api/posts: " + error);
-      });
+        res.status(400).send(undefined);
+      });*/
   } else {
     db.getPosts(city)
-      .then((ret) => {
-        posts = ret;
+      .then((posts) => {
+        res.status(200).send(posts);
       })
       .catch((error) => {
         console.log("GET api/posts: " + error);
+        res.status(404).send(undefined);
       });
   }
-  res.send(posts);
 });
 
-// POSTs a blog post passed in as a JSON object in req, returns a positive status of 201 and sends the post back
+// POSTs a blog post passed in as a JSON object
+// returns 201 if success or 400 if failure
 app.post("/api/posts", (req, res) => {
-  console.log("POST /posts");
-
   const postToAdd = req.body;
 
-  let post;
   db.addPost(postToAdd)
-    .then((res) => {
-      post = res;
+    .then((post) => {
+      res.status(201).send(post);
     })
     .catch((error) => {
       console.log("POST api/posts: " + error);
+      res.status(400).send(undefined);
     });
+});
 
-  res.status(201).send(post);
+/*
+USERS
+*/
+
+// POSTs a user passed in as a JSON object
+// returns 201 if success or 400 if failure
+app.post("/api/auth/signup", (req, res) => {
+  const userToAdd = req.body;
+
+  db.addUser(userToAdd)
+    .then((user) => {
+      res.status(201).send(user);
+    })
+    .catch((error) => {
+      console.log("POST api/auth/signup: " + error);
+      res.status(400).send(undefined);
+    });
 });
 
 app.listen(port, () => {
