@@ -1,6 +1,6 @@
 
 .container {
-    max-width: 700px;
+    max-width: 900px;
     margin: 50px auto;
     padding: 20px;
   }
@@ -8,10 +8,6 @@
   .heading {
     font-size: 36px;
     font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .form-group {
     margin-bottom: 20px;
   }
   
@@ -27,37 +23,62 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
+    font-family: Arial;
   }
   
   .button {
-    background-color: black;
-    color: white;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
+    background-color: white;
+    color: black;
+    padding: 8px 15px;
+    border-radius: 40px;
+    font-weight: 600;
     cursor: pointer;
-    font-size: 16px;
+    border: 2px solid black;
+    font-size: 14px;
+    float: right;
+    margin-right: -30px;
   }
   
   .button:hover {
-    background-color: #333;
+    background-color: black;
+    color: white;
+  }
+
+  .textarea-container {
+    position: relative;
+    margin-bottom: 20px;
   }
   
-  .published-post {
-    margin-top: 40px;
-    padding: 20px;
+  .textarea {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 8px;
+    resize: vertical;
   }
   
-  .published-title {
-    font-size: 28px;
-    font-weight: bold;
+  .add-image-inside {
+    position: absolute;
+    color: black;
+    bottom: 12px;
+    right: -20px;
+    background-color: white;
+    border: 1.5px solid rgb(171, 171, 171);
+    padding: 6px 16px;
+    border-radius: 40px;  
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    float: right;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    
   }
   
-  .published-content {
-    margin-top: 15px;
-    line-height: 1.6;
+  .add-image-inside:hover {
+    background-color: black;
+    color: white;
   }
+
+
   
