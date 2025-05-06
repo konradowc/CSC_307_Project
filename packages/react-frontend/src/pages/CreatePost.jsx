@@ -27,7 +27,7 @@ export default function CreatePost() {
         <div className="container">
           <h1 className="heading">Create Blog Post</h1>
     
-          <div className="form-group">
+          <div className="form-group textarea-container">
             <label className="label">Post Title</label>
             <input
               type="text"
@@ -38,8 +38,7 @@ export default function CreatePost() {
             />
           </div>
     
-          <div className="form-group">
-            <label className="label">Content</label>
+          <div className="form-group textarea-container">
             <textarea
               placeholder="Enter post content"
               value={content}
@@ -47,21 +46,23 @@ export default function CreatePost() {
               rows="10"
               className="textarea"
             />
+              <input
+                id="image-upload"
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+              />
+               <label htmlFor="image-upload" className="add-image-inside">
+                  Add Image
+              </label>
           </div>
     
-          <button
-            onClick={handlePublish}
-            className="button"
-          >
-            Publish Blog Post
-          </button>
-    
-          {publishedPosts.map((post, index) => (
-            <div className="published-post" key={index}>
-                <h2 className="published-title">{post.title}</h2>
-                <p className="published-content">{post.content}</p>
-            </div>
-            ))}
+          <div className="button-row">
+            <button className="button" onClick={handlePublish}>
+              Publish Blog Post
+            </button>
+          </div>
+  
     </div>
     );
 }
