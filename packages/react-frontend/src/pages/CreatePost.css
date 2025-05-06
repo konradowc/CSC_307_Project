@@ -1,84 +1,80 @@
-
 .container {
-    max-width: 900px;
-    margin: 50px auto;
-    padding: 20px;
-  }
-  
-  .heading {
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 5px;
-  }
-  
-  .input, .textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    font-family: Arial;
-  }
-  
-  .button {
-    background-color: white;
-    color: black;
-    padding: 8px 15px;
-    border-radius: 40px;
-    font-weight: 600;
-    cursor: pointer;
-    border: 2px solid black;
-    font-size: 14px;
-    float: right;
-    margin-right: -30px;
-  }
-  
-  .button:hover {
-    background-color: black;
-    color: white;
-  }
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 20px;
+}
 
-  .textarea-container {
-    position: relative;
-    margin-bottom: 20px;
-  }
-  
-  .textarea {
-    width: 100%;
-    padding: 1rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    resize: vertical;
-  }
-  
-  .add-image-inside {
-    position: absolute;
-    color: black;
-    bottom: 12px;
-    right: -20px;
-    background-color: white;
-    border: 1.5px solid rgb(171, 171, 171);
-    padding: 6px 16px;
-    border-radius: 40px;  
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    float: right;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    
-  }
-  
-  .add-image-inside:hover {
-    background-color: black;
-    color: white;
-  }
+.heading {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
 
+.label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
 
-  
+.input,
+.textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: Arial;
+}
+
+.button {
+  background-color: white;
+  color: black;
+  padding: 8px 15px;
+  border-radius: 40px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid black;
+  font-size: 14px;
+  float: right;
+  margin-right: -30px;
+}
+
+.button:hover {
+  background-color: black;
+  color: white;
+}
+
+.textarea-container {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.textarea {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  resize: vertical;
+}
+
+.add-image-inside {
+  position: absolute;
+  color: black;
+  bottom: 12px;
+  right: -20px;
+  background-color: white;
+  border: 1.5px solid rgb(171, 171, 171);
+  padding: 6px 16px;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  float: right;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.add-image-inside:hover {
+  background-color: black;
+  color: white;
+}
