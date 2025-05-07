@@ -46,10 +46,6 @@ function findUserByName(name) {
   return userModel.find({ name: name });
 }
 
-//function postImage(imagefile) {
-
-//}
-
 function getPosts(city) {
   let promise;
   if (city == undefined) {
@@ -74,7 +70,6 @@ export default {
   getUsers,
   findUserById,
   findUserByName,
-  //postImage,
   getPosts,
   addPost,
   findUserByIdAndUpdate

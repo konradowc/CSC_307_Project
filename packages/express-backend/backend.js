@@ -1,7 +1,7 @@
 // backend.js
 import express from "express";
 import multer from "multer";
-import { storage } from "./cloudinary.js";
+import { storage, deleteImage } from "./cloudinary.js";
 import db from "./user-services.js";
 
 const app = express();
@@ -24,6 +24,22 @@ app.post("/upload", upload.single("file"), async (req, res) => {
     imageUrl: req.file.path, // Cloudinary image URL
     publicId: req.file.filename // Can be used to delete the image
   });
+});
+
+// this deletes images from cloudinary
+// will need to encode publicId when inserting into endpoint
+app.delete("/upload/:publicId", async (req, res) => {
+  const publicId = req.params.publicId;
+
+  try {
+    const result = await deleteImage(publicId);
+    res.status(200).json({ message: "Image deleted", result });
+  } catch (err) {
+    res.status(500).json({
+      error: "Failed to delete image",
+      details: err
+    });
+  }
 });
 
 /*

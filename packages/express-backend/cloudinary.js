@@ -13,9 +13,15 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: "blog_images", // optional folder in your Cloudinary account
+    folder: "blog_images",
     allowed_formats: ["jpg", "png", "jpeg"]
   }
 });
 
-export { cloudinary, storage };
+function deleteImage(publicId) {
+  let promise;
+  promise = cloudinary.uploader.destroy(publicId);
+  return promise;
+}
+
+export { cloudinary, storage, deleteImage };

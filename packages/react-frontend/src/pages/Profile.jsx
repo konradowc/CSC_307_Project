@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation as useRouterLocation } from "react-router-dom";
+import {
+  Link,
+  useLocation as useRouterLocation
+} from "react-router-dom";
 import "./Profile.css"; // Import the CSS file
 
 const Profile = () => {
@@ -49,8 +52,8 @@ const Profile = () => {
 
         <Link to="/createPost" className="create-button">
           Create Blog Post
-      </Link>
-    </div>
+        </Link>
+      </div>
 
       <h2 className="posts-heading">Blog Posts</h2>
       {posts.length === 0 ? (

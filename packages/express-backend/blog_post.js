@@ -9,7 +9,10 @@ const BlogSchema = new mongoose.Schema(
       type: String,
       required: false
     },
-    imagePublicId: String, // for deletion
+    imagePublicId: {
+      type: String,
+      required: false
+    },
     createdAt: { type: Date, default: Date.now },
     userID: {
       type: mongoose.Schema.Types.ObjectId,
