@@ -78,6 +78,21 @@ app.post("/api/posts", (req, res) => {
 USERS
 */
 
+// GETs a user (including profile info and their posts)
+// returns 200 if success, 401 if failure
+app.get("/api/users/:id", (req, res) => {
+  const id = req.params.id;
+
+  db.findUserById(id)
+    .then((user) => {
+      res.status(200).send(user);
+    })
+    .catch((error) => {
+      console.log("GET api/users/:id: " + error);
+      res.status(400).send(undefined);
+    });
+});
+
 // POSTs a user passed in as a JSON object
 // returns 201 if success or 400 if failure
 app.post("/api/auth/signup", (req, res) => {
@@ -90,6 +105,30 @@ app.post("/api/auth/signup", (req, res) => {
     .catch((error) => {
       console.log("POST api/auth/signup: " + error);
       res.status(400).send(undefined);
+    });
+});
+
+// PATCHs a user's profile settings
+// returns 200 if success, 400 if failure, or 403 if forbidden
+app.patch("/api/users/:id/settings", (req, res) => {
+  const id = req.params.id;
+
+  const fieldsToUpdate = req.body;
+
+  if (fieldsToUpdate.posts != undefined) {
+    // trying to update posts (not allowed here)
+    console.log(
+      "PATCH api/users/:id/settings: attempting to update blog posts in settings"
+    );
+    res.status(403).send(undefined);
+  }
+
+  db.findUserByIdAndUpdate(id, fieldsToUpdate)
+    .then((user) => {
+      res.status(200).send(user);
+    })
+    .catch((error) => {
+      console.log("PATCH api/users/:id/settings: " + error);
     });
 });
 

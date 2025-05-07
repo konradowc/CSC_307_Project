@@ -29,6 +29,13 @@ function findUserById(id) {
   return userModel.findById(id);
 }
 
+function findUserByIdAndUpdate(id, updates) {
+  return userModel.findByIdAndUpdate(id, updates, {
+    new: true,
+    runValidators: true
+  });
+}
+
 function addUser(user) {
   const userToAdd = new userModel(user);
   const promise = userToAdd.save();
@@ -69,5 +76,6 @@ export default {
   findUserByName,
   //postImage,
   getPosts,
-  addPost
+  addPost,
+  findUserByIdAndUpdate
 };
