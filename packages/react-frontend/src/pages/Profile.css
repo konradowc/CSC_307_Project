@@ -69,12 +69,13 @@ body {
   background-color: white;
   font-weight: 600;
   padding: 0.6rem 1.25rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border: 2px solid black;
+  border-radius: 40px;
   cursor: pointer;
   transition: background-color 0.2s;
 }
 
 .create-button:hover {
-  background-color: #f3f3f3;
+  background-color: black;
+  color: white;
 }
