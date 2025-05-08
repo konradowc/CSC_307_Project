@@ -228,3 +228,5 @@ function validName(name) {
 function validCity(city) {
   return city !== ""; // list of cities in future?
 }
+
+// curl -X POST http://localhost:8000/api/auth/signup -H "Content-Type: application/json" -d "{\"name\": \"John\", \"city\": \"San Luis Obispo\", \"posts\": []}"
