@@ -3,6 +3,7 @@ import express from "express";
 import multer from "multer";
 import { storage, deleteImage } from "./cloudinary.js";
 import db from "./user-services.js";
+import cors from "cors"
 
 const app = express();
 const port = 8000;
@@ -10,6 +11,7 @@ const port = 8000;
 const upload = multer({ storage });
 
 app.use(express.json());
+app.use(cors())
 
 app.get("/", (req, res) => {
   // will need to set up all the gets to get the proper stuff according to the rest model
@@ -49,30 +51,42 @@ BLOG POSTS
 // GETs all the blog posts given a certain city name
 // returns 200 if success, 400 if undefined city, and 401 if failure
 app.get("/api/posts", (req, res) => {
-  const city = req.query.city;
 
-  if (city == undefined) {
-    // no city given, what should be done?
-    console.log("GET api/posts: no city defined");
-    res.status(400).send(undefined);
-    /*db.getPosts()
-      .then((posts) => {
-        res.status(200).send(posts);
-      })
-      .catch((error) => {
-        console.log("GET api/posts: " + error);
-        res.status(400).send(undefined);
-      });*/
-  } else {
-    db.getPosts(city)
-      .then((posts) => {
-        res.status(200).send(posts);
-      })
-      .catch((error) => {
-        console.log("GET api/posts: " + error);
-        res.status(404).send(undefined);
-      });
-  }
+  
+  const city = req.query.city;
+  db.getPosts(city)
+    .then(posts => res.status(200).json(posts))
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: "Server error" });
+    });
+
+  
+  // const city = req.query.city; - temporarily not filtering by city
+
+  // if (city == undefined) {
+  //   // no city given, what should be done?
+  //   console.log("GET api/posts: no city defined");
+  //   res.status(400).send(undefined);
+  //   /*db.getPosts()
+  //     .then((posts) => {
+  //       res.status(200).send(posts);
+  //     })
+  //     .catch((error) => {
+  //       console.log("GET api/posts: " + error);
+  //       res.status(400).send(undefined);
+  //     });*/
+  // } else {
+  //   db.getPosts(city)
+  //     .then((posts) => {
+  //       res.status(200).send(posts);
+  //     })
+  //     .catch((error) => {
+  //       console.log("GET api/posts: " + error);
+  //       res.status(404).send(undefined);
+  //     });
+  // }
+
 });
 
 // POSTs a blog post passed in as a JSON object

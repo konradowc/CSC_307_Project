@@ -1,9 +1,11 @@
+//blog_post.js
 import mongoose from "mongoose";
 
 const BlogSchema = new mongoose.Schema(
   {
     title: String,
     content: String,
+    city:{type: String, required: true},
     image: {
       // make this so that it is simply a url which will be accessed by cloudinary
       type: String,

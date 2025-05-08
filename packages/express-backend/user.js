@@ -1,3 +1,4 @@
+//user.js
 import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema( // this is not the final version, will need to assess and improve

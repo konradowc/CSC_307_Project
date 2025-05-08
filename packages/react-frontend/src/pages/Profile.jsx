@@ -1,3 +1,4 @@
+//Profile.jsx
 import React, { useEffect, useState } from "react";
 import {
   Link,
@@ -13,25 +14,16 @@ const Profile = () => {
   const username = "Jane Doe";
   const location = "City Name, CA";
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const fakePosts = [
-        {
-          id: 1,
-          title: "My First Blog Post",
-          content: "This is my first post!"
-        },
-        {
-          id: 2,
-          title: "Another Day",
-          content: "Today was a good day."
-        }
-      ];
-      setPosts(fakePosts);
-    };
 
-    fetchPosts();
+  useEffect(() => {
+    fetch("http://localhost:8000/api/posts?city=CityName")
+      .then(r => r.json())
+      .then(setPosts)
+      .catch(console.error);
   }, []);
+
+
+
 
   useEffect(() => {
     if (newPost?.title && newPost?.content) {

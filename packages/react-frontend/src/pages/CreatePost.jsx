@@ -1,5 +1,6 @@
+//CreatePost.jsx
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useRevalidator } from "react-router-dom";
 import "./CreatePost.css";
 
 export default function CreatePost() {
@@ -8,20 +9,33 @@ export default function CreatePost() {
   const [publishedPosts, setPublishedPosts] = useState([]);
   const navigate = useNavigate();
 
-  const handlePublish = () => {
-    const newPost = { title, content };
-    navigate("/profile", { state: { newPost } });
-  };
+ 
 
-  /*const handlePublish = () => {
-        const newPost = {
-            title,
-            content,
-        };
-        setPublishedPosts([...publishedPosts, newPost]);
-        setTitle("");
-        setContent("");
-    };*/
+  const handlePublish = () => {
+    const newPost = {
+      title,
+      content,
+      userID: "6801c14b792ac5e5f8f0e0c7",
+      city: "CityName" 
+    };
+
+    fetch("http://localhost:8000/api/posts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newPost),
+    })
+      .then(res => {
+        if (!res.ok) throw new Error(`Status ${res.status}`);
+        return res.json();
+      })
+      .then(savedPost => {
+        navigate("/profile", { state: { newPost: savedPost } });
+      })
+      .catch(err => {
+        console.error("Publish failed:", err);
+        alert("Could not save your post.");
+      });
+  };
 
   return (
     <div className="container">
