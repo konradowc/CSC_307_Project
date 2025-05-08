@@ -3,7 +3,7 @@ import express from "express";
 import multer from "multer";
 import { storage, deleteImage } from "./cloudinary.js";
 import db from "./user-services.js";
-import cors from "cors"
+import cors from "cors";
 
 const app = express();
 const port = 8000;
@@ -11,7 +11,7 @@ const port = 8000;
 const upload = multer({ storage });
 
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 
 app.get("/", (req, res) => {
   // will need to set up all the gets to get the proper stuff according to the rest model
@@ -51,17 +51,14 @@ BLOG POSTS
 // GETs all the blog posts given a certain city name
 // returns 200 if success, 400 if undefined city, and 401 if failure
 app.get("/api/posts", (req, res) => {
-
-  
   const city = req.query.city;
   db.getPosts(city)
-    .then(posts => res.status(200).json(posts))
-    .catch(err => {
+    .then((posts) => res.status(200).json(posts))
+    .catch((err) => {
       console.error(err);
       res.status(500).json({ error: "Server error" });
     });
 
-  
   // const city = req.query.city; - temporarily not filtering by city
 
   // if (city == undefined) {
@@ -86,13 +83,29 @@ app.get("/api/posts", (req, res) => {
   //       res.status(404).send(undefined);
   //     });
   // }
-
 });
 
 // POSTs a blog post passed in as a JSON object
 // returns 201 if success or 400 if failure
 app.post("/api/posts", (req, res) => {
   const postToAdd = req.body;
+
+  //const title = postToAdd.title;
+  //const content = postToAdd.content;
+  const city = postToAdd.city;
+  //const image = postToAdd.image;
+  //const imagePublicId = postToAdd.imagePublicId;
+  //const createdAt = postToAdd.createdAt;
+  //const userID = postToAdd.userID;
+
+  // validation
+
+  if (!validCity(city)) {
+    console.log("POST api/posts: invalid city");
+    res.status(400).send(undefined);
+  }
+
+  // posting
 
   db.addPost(postToAdd)
     .then((post) => {
@@ -128,6 +141,28 @@ app.get("/api/users/:id", (req, res) => {
 app.post("/api/auth/signup", (req, res) => {
   const userToAdd = req.body;
 
+  const name = userToAdd.name;
+  const city = userToAdd.city;
+  const posts = userToAdd.posts;
+
+  // validation
+
+  if (!validName(name)) {
+    console.log("POST api/auth/signup: invalid name");
+    res.status(400).send(undefined);
+  }
+  if (!validCity(city)) {
+    console.log("POST api/auth/signup: invalid city");
+    res.status(400).send(undefined);
+  }
+  if (!Array.isArray(posts) || posts.length !== 0) {
+    // should be an array of length 0
+    console.log("POST api/auth/signup: bad posts");
+    res.status(400).send(undefined);
+  }
+
+  // posting
+
   db.addUser(userToAdd)
     .then((user) => {
       res.status(201).send(user);
@@ -145,13 +180,29 @@ app.patch("/api/users/:id/settings", (req, res) => {
 
   const fieldsToUpdate = req.body;
 
-  if (fieldsToUpdate.posts != undefined) {
+  const name = fieldsToUpdate.name;
+  const city = fieldsToUpdate.city;
+  const posts = fieldsToUpdate.posts;
+
+  // validation
+
+  if (name !== undefined && !validName(name)) {
+    console.log("PATCH api/users/:id/settings: invalid name");
+    res.status(400).send(undefined);
+  }
+  if (city !== undefined && !validCity(city)) {
+    console.log("PATCH api/users/:id/settings: invalid city");
+    res.status(400).send(undefined);
+  }
+  if (posts !== undefined) {
     // trying to update posts (not allowed here)
     console.log(
       "PATCH api/users/:id/settings: attempting to update blog posts in settings"
     );
     res.status(403).send(undefined);
   }
+
+  // updating
 
   db.findUserByIdAndUpdate(id, fieldsToUpdate)
     .then((user) => {
@@ -167,3 +218,13 @@ app.listen(port, () => {
     `Example app listening at http://localhost:${port}`
   );
 });
+
+// helper functions
+
+function validName(name) {
+  return /^[a-zA-z]+$/.test(name);
+}
+
+function validCity(city) {
+  return city !== ""; // list of cities in future?
+}
