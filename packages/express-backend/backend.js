@@ -50,6 +50,7 @@ BLOG POSTS
 
 // GETs all the blog posts given a certain city name
 // returns 200 if success, 400 if undefined city, and 401 if failure
+
 app.get("/api/posts", (req, res) => {
   const city = req.query.city;
   db.getPosts(city)
@@ -87,6 +88,7 @@ app.get("/api/posts", (req, res) => {
 
 // POSTs a blog post passed in as a JSON object
 // returns 201 if success or 400 if failure
+
 app.post("/api/posts", (req, res) => {
   const postToAdd = req.body;
 
@@ -99,14 +101,12 @@ app.post("/api/posts", (req, res) => {
   //const userID = postToAdd.userID;
 
   // validation
-
   if (!validCity(city)) {
     console.log("POST api/posts: invalid city");
     res.status(400).send(undefined);
   }
 
   // posting
-
   db.addPost(postToAdd)
     .then((post) => {
       res.status(201).send(post);
@@ -117,12 +117,61 @@ app.post("/api/posts", (req, res) => {
     });
 });
 
+// PATCHs a blog post (edits it)
+// returns 200 if success, 400 if failure, or 403 if forbidden
+
+app.patch("/api/posts/:id", (req, res) => {
+  const id = req.params.id;
+
+  const fieldsToUpdate = req.body;
+
+  //const title = fieldsToUpdate.title;
+  //const content = fieldsToUpdate.content;
+  const city = fieldsToUpdate.city;
+  //const image = fieldsToUpdate.image;
+  //const imagePublicId = fieldsToUpdate.imagePublicId;
+  //const createdAt = fieldsToUpdate.createdAt;
+  //const userID = fieldsToUpdate.userID;
+
+  // validation
+  if (!validCity(city)) {
+    console.log("PATCH api/posts/:id: invalid city");
+    res.status(400).send(undefined);
+  }
+
+  // updating
+  db.findPostByIdAndUpdate(id, fieldsToUpdate)
+    .then((user) => {
+      res.status(200).send(user);
+    })
+    .catch((error) => {
+      console.log("PATCH api/users/:id/settings: " + error);
+    });
+});
+
+// DELETEs a blog post from id
+// returns 200 if success or 400 if failure
+
+app.delete("/api/posts/:id", (req, res) => {
+  const id = req.params.id;
+
+  db.findPostByIdAndDelete(id)
+    .then(() => {
+      res.status(200).send(null); // maybe send something else?
+    })
+    .catch((error) => {
+      console.log("DELETE api/posts/:id: " + error);
+      res.status(400).send(undefined);
+    });
+});
+
 /*
 USERS
 */
 
 // GETs a user (including profile info and their posts)
 // returns 200 if success, 401 if failure
+
 app.get("/api/users/:id", (req, res) => {
   const id = req.params.id;
 
@@ -138,6 +187,7 @@ app.get("/api/users/:id", (req, res) => {
 
 // POSTs a user passed in as a JSON object
 // returns 201 if success or 400 if failure
+
 app.post("/api/auth/signup", (req, res) => {
   const userToAdd = req.body;
 
@@ -146,7 +196,6 @@ app.post("/api/auth/signup", (req, res) => {
   const posts = userToAdd.posts;
 
   // validation
-
   if (!validName(name)) {
     console.log("POST api/auth/signup: invalid name");
     res.status(400).send(undefined);
@@ -162,7 +211,6 @@ app.post("/api/auth/signup", (req, res) => {
   }
 
   // posting
-
   db.addUser(userToAdd)
     .then((user) => {
       res.status(201).send(user);
@@ -175,6 +223,7 @@ app.post("/api/auth/signup", (req, res) => {
 
 // PATCHs a user's profile settings
 // returns 200 if success, 400 if failure, or 403 if forbidden
+
 app.patch("/api/users/:id/settings", (req, res) => {
   const id = req.params.id;
 
@@ -185,7 +234,6 @@ app.patch("/api/users/:id/settings", (req, res) => {
   const posts = fieldsToUpdate.posts;
 
   // validation
-
   if (name !== undefined && !validName(name)) {
     console.log("PATCH api/users/:id/settings: invalid name");
     res.status(400).send(undefined);
@@ -203,13 +251,28 @@ app.patch("/api/users/:id/settings", (req, res) => {
   }
 
   // updating
-
   db.findUserByIdAndUpdate(id, fieldsToUpdate)
     .then((user) => {
       res.status(200).send(user);
     })
     .catch((error) => {
       console.log("PATCH api/users/:id/settings: " + error);
+    });
+});
+
+// DELETEs a user from id
+// returns 200 if success or 400 if failure
+
+app.delete("/api/users/:id", (req, res) => {
+  const id = req.params.id;
+
+  db.findUserByIdAndDelete(id)
+    .then(() => {
+      res.status(200).send(null); // maybe send something else?
+    })
+    .catch((error) => {
+      console.log("DELETE api/users/:id: " + error);
+      res.status(400).send(undefined);
     });
 });
 
