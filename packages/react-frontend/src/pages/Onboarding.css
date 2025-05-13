@@ -1,0 +1,105 @@
+.onboarding-container {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 0 20px;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.logo-image {
+  height: 32px; /* or adjust based on design */
+  margin-bottom: 32px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.website-name {
+  font-weight: 600;
+}
+
+.step-img {
+  margin: 0 auto 32px;
+  display: block;
+  height: 40px;
+}
+
+h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.subtext {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 32px;
+}
+
+.input-field {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.input-field label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.input-field input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.next-button {
+  width: 100%;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 999px;
+  border: 2px solid black;
+  background: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.next-button:hover {
+  background: black;
+  color: white;
+}
+
+.form-wrapper {
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.input-field {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto 20px;
+  text-align: left;
+}
+
+.input-field label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.input-field input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+}
+
+.next-button {
+  width: 100%;
+  max-width: 320px;
+}

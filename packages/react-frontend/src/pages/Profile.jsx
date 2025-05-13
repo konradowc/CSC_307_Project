@@ -16,24 +16,10 @@ const Profile = () => {
   const location = "City Name, CA";
 
   useEffect(() => {
-    const hardcodedPost = {
-      id: "test-0",
-      title: "Hardcoded Test Post",
-      content: "This is a sample blog post to test styling.",
-      date: "05.10.25"
-    };
-
-    const fetchedPosts = [
-      hardcodedPost,
-      {
-        id: "test-1",
-        title: "Sample Post",
-        content: "This is another post.",
-        date: "05.10.26"
-      }
-    ];
-
-    setPosts(fetchedPosts);
+    fetch("http://localhost:8000/api/posts?city=CityName")
+      .then((r) => r.json())
+      .then(setPosts)
+      .catch(console.error);
   }, []);
 
   useEffect(() => {
