@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-items: center;
   background-color: white;
-  padding: 1rem 2rem; /* Padding for spacing */
+  padding: 30px 80px; /* Padding for spacing */
   left: 0; /* Ensure navbar stays aligned to the left */
 }
 

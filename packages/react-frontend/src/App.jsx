@@ -9,6 +9,9 @@ import {
 import Profile from "./pages/Profile";
 import CreatePost from "./pages/CreatePost";
 import Navbar from "./components/Navbar";
+import StepOne from "./pages/StepOne";
+import StepTwo from "./pages/StepTwo";
+import StepThree from "./pages/StepThree";
 
 function App() {
   return (
@@ -18,6 +21,18 @@ function App() {
         <Routes>
           <Route path="/profile" element={<Profile />} />
           <Route path="/createPost" element={<CreatePost />} />
+          <Route
+            path="/onboarding/step1"
+            element={<StepOne />}
+          />
+          <Route
+            path="/onboarding/step2"
+            element={<StepTwo />}
+          />
+          <Route
+            path="/onboarding/step3"
+            element={<StepThree />}
+          />
         </Routes>
       </div>
     </Router>
