@@ -1,0 +1,192 @@
+.blogpost-item {
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  background-color: #ffffff;
+  transition: box-shadow 0.2s ease;
+}
+
+.blogpost-item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.blogpost-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Ensures the title and ellipsis icon are aligned horizontally */
+}
+
+.blogpost-header-text {
+  display: flex;
+  align-items: center; /* Align title and date horizontally */
+  gap: 0.7rem;
+}
+
+.blogpost-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #222;
+}
+
+.blogpost-date {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.blogpost-content {
+  font-size: 1rem;
+  color: #4a4a4a;
+  line-height: 1.6;
+  margin-top: 0.5rem;
+}
+
+/* Menu container to position the ellipsis and the delete button */
+.menu-container {
+  position: relative;
+}
+
+.post-options-icon {
+  cursor: pointer;
+}
+
+.menu-overlay {
+  position: absolute;
+  top: -10px;
+  right: 0;
+  z-index: 10;
+}
+
+.menu-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 16px;
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  border-radius: 999px; /* Full pill shape */
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap; /* Prevent text from wrapping */
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.menu-icon {
+  width: 20px;
+  height: 20px;
+  transition: filter 0.3s ease;
+}
+
+/* Hover effect */
+.menu-button:hover {
+  background-color: black;
+  color: white;
+}
+
+.menu-button:hover .menu-icon {
+  filter: brightness(0) invert(1); /* Turns the icon white */
+}
+
+/* Popup styling */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.popup-content {
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 24px;
+  width: auto;
+  max-width: 320px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.popup-icon {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 16px;
+}
+
+.popup h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  margin-bottom: 12px;
+}
+
+.popup p {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.5;
+  margin: 0;
+  margin-bottom: 24px;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.popup-actions button {
+  flex: 1;
+  font-size: 1rem;
+  padding: 12px 0;
+  border-radius: 40px;
+  cursor: pointer;
+  border: 2px solid #b7202b;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+.popup-actions button:first-child {
+  background-color: #fff;
+  color: #b7202b;
+}
+
+.popup-actions button:first-child:hover {
+  background-color: #b7202b;
+  color: #fff;
+}
+
+.popup-actions button:last-child {
+  background-color: #b7202b;
+  color: #fff;
+  border: none;
+}
+
+.popup-actions button:last-child:hover {
+  background-color: #930000;
+}
+
+.popup-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.popup-close img {
+  width: 24px;
+  height: 24px;
+}
