@@ -14,16 +14,12 @@ const Profile = () => {
   const username = "Jane Doe";
   const location = "City Name, CA";
 
-
   useEffect(() => {
     fetch("http://localhost:8000/api/posts?city=CityName")
-      .then(r => r.json())
+      .then((r) => r.json())
       .then(setPosts)
       .catch(console.error);
   }, []);
-
-
-
 
   useEffect(() => {
     if (newPost?.title && newPost?.content) {
