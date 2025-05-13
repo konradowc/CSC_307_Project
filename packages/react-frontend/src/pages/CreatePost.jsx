@@ -9,29 +9,27 @@ export default function CreatePost() {
   const [publishedPosts, setPublishedPosts] = useState([]);
   const navigate = useNavigate();
 
- 
-
   const handlePublish = () => {
     const newPost = {
       title,
       content,
       userID: "6801c14b792ac5e5f8f0e0c7",
-      city: "CityName" 
+      city: "CityName"
     };
 
     fetch("http://localhost:8000/api/posts", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newPost),
+      body: JSON.stringify(newPost)
     })
-      .then(res => {
+      .then((res) => {
         if (!res.ok) throw new Error(`Status ${res.status}`);
         return res.json();
       })
-      .then(savedPost => {
+      .then((savedPost) => {
         navigate("/profile", { state: { newPost: savedPost } });
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Publish failed:", err);
         alert("Could not save your post.");
       });
