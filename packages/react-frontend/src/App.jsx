@@ -3,22 +3,36 @@ import { useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
-  Routes
+  Routes,
+  Outlet
 } from "react-router-dom";
 
 import Profile from "./pages/Profile";
 import CreatePost from "./pages/CreatePost";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 import Navbar from "./components/Navbar";
 import StepOne from "./pages/StepOne";
 import StepTwo from "./pages/StepTwo";
 import StepThree from "./pages/StepThree";
 
+function WithNavbar() {
+  return (
+    <>
+      <Navbar />
+      <div style={{ paddingTop: "80px" }}>
+        <Outlet />
+      </div>
+    </>
+  );
+}
+
 function App() {
   return (
     <Router>
-      <Navbar />
-      <div style={{ paddingTop: "80px" }}>
-        <Routes>
+      <Routes>
+        <Route element={<WithNavbar />}>
+          <Route path="/" />
           <Route path="/profile" element={<Profile />} />
           <Route path="/createPost" element={<CreatePost />} />
           <Route
@@ -33,8 +47,11 @@ function App() {
             path="/onboarding/step3"
             element={<StepThree />}
           />
-        </Routes>
-      </div>
+        </Route>
+
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+      </Routes>
     </Router>
   );
 }
