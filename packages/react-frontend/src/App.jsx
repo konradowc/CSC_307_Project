@@ -3,14 +3,27 @@ import { useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
-  Routes
+  Routes,
+  Outlet
 } from "react-router-dom";
 
 import Profile from "./pages/Profile";
 import CreatePost from "./pages/CreatePost";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 import Navbar from "./components/Navbar";
-import Login from "./pages/Login";
-import { loginUser, signupUser } from "./Security"; // added routes for security but team may want to change it
+import { loginUser, signupUser } from "./Security";
+
+function WithNavbar() {
+  return (
+    <>
+      <Navbar />
+      <div style={{ paddingTop: "80px" }}>
+        <Outlet />
+      </div>
+    </>
+  );
+}
 
 function App() {
   const INVALID_TOKEN = "INVALID_TOKEN";
@@ -19,26 +32,16 @@ function App() {
 
   return (
     <Router>
-      <Navbar />
-      <div style={{ paddingTop: "80px" }}>
-        <Routes>
+      <Routes>
+        <Route element={<WithNavbar />}>
+          <Route path="/" />
           <Route path="/profile" element={<Profile />} />
           <Route path="/createPost" element={<CreatePost />} />
-          <Route
-            path="/login"
-            element={<Login handleSubmit={loginUser} />}
-          />
-          <Route
-            path="/signup"
-            element={
-              <Login
-                handleSubmit={signupUser}
-                buttonLabel="Sign Up"
-              />
-            }
-          />
-        </Routes>
-      </div>
+        </Route>
+
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+      </Routes>
     </Router>
   );
 }

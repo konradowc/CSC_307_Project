@@ -46,6 +46,10 @@ function findUserByName(name) {
   return userModel.find({ name: name });
 }
 
+function findUserByIdAndDelete(id) {
+  return userModel.findByIdAndDelete(id);
+}
+
 function getPosts(city) {
   let promise;
   if (city == undefined) {
@@ -65,6 +69,17 @@ function addPost(post) {
   return promise;
 }
 
+function findPostByIdAndDelete(id) {
+  return blogModel.findByIdAndDelete(id);
+}
+
+function findPostByIdAndUpdate(id, updates) {
+  return blogModel.findByIdAndUpdate(id, updates, {
+    new: true,
+    runValidators: true
+  });
+}
+
 export default {
   addUser,
   getUsers,
@@ -72,5 +87,8 @@ export default {
   findUserByName,
   getPosts,
   addPost,
-  findUserByIdAndUpdate
+  findUserByIdAndUpdate,
+  findPostByIdAndDelete,
+  findUserByIdAndDelete,
+  findPostByIdAndUpdate
 };
