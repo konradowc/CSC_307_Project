@@ -6,7 +6,7 @@ body {
 }
 
 .profile-container {
-  max-width: 100%;
+  max-width: 100%; /*is this necessary?*/
   padding: 0px 80px 80px; /* top | sides | bottom */
   box-sizing: border-box;
 }
