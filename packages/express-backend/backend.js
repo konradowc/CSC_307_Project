@@ -14,7 +14,6 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/", (req, res) => {
-  // will need to set up all the gets to get the proper stuff according to the rest model
   res.send("Hello World!");
 });
 
@@ -31,17 +30,14 @@ app.post("/upload", upload.single("file"), async (req, res) => {
 // this deletes images from cloudinary
 // will need to encode publicId when inserting into endpoint
 app.delete("/upload/:publicId", async (req, res) => {
-  const publicId = req.params.publicId;
-
-  try {
-    const result = await deleteImage(publicId);
-    res.status(200).json({ message: "Image deleted", result });
-  } catch (err) {
-    res.status(500).json({
-      error: "Failed to delete image",
-      details: err
-    });
-  }
+  dbRequest(
+    db.deleteImage,
+    [req.params.publicId],
+    res,
+    genErrHeader(req),
+    200,
+    500
+  );
 });
 
 /*
@@ -57,7 +53,8 @@ app.get("/api/posts", (req, res) => {
     [req.body.city],
     res,
     genErrHeader(req),
-    200
+    200,
+    401
   );
 });
 
@@ -78,12 +75,19 @@ app.post("/api/posts", (req, res) => {
   const errheader = genErrHeader(req);
 
   if (valid(fieldsToValidate, false, res, errheader)) {
-    dbRequest(db.addPost, [postToAdd], res, errheader, 201);
+    dbRequest(
+      db.addPost,
+      [postToAdd],
+      res,
+      errheader,
+      201,
+      400
+    );
   }
 });
 
 // PATCHs a blog post (edits it)
-// returns 200 if success, 400 if failure, or 403 if forbidden
+// returns 200 if success, 400 if failure
 
 app.patch("/api/posts/:id", (req, res) => {
   const postFieldsToUpdate = req.body;
@@ -106,7 +110,8 @@ app.patch("/api/posts/:id", (req, res) => {
       [req.params.id, postFieldsToUpdate],
       res,
       errheader,
-      200
+      200,
+      400
     );
   }
 });
@@ -120,7 +125,8 @@ app.delete("/api/posts/:id", (req, res) => {
     [req.params.id],
     res,
     genErrHeader(req),
-    200
+    200,
+    400
   );
 });
 
@@ -137,7 +143,8 @@ app.get("/api/users/:id", (req, res) => {
     [req.params.id],
     res,
     genErrHeader(req),
-    200
+    200,
+    401
   );
 });
 
@@ -154,12 +161,19 @@ app.post("/api/auth/signup", (req, res) => {
   const errheader = genErrHeader(req);
 
   if (valid(fieldsToValidate, false, res, errheader)) {
-    dbRequest(db.addUser, [userToAdd], res, errheader, 201);
+    dbRequest(
+      db.addUser,
+      [userToAdd],
+      res,
+      errheader,
+      201,
+      400
+    );
   }
 });
 
 // PATCHs a user's profile settings
-// returns 200 if success, 400 if failure, or 403 if forbidden
+// returns 200 if success, 400 if failure
 
 app.patch("/api/users/:id/settings", (req, res) => {
   const userFieldsToUpdate = req.body;
@@ -176,7 +190,8 @@ app.patch("/api/users/:id/settings", (req, res) => {
       [req.params.id, userFieldsToUpdate],
       res,
       genErrHeader(req),
-      200
+      200,
+      400
     );
   }
 });
@@ -190,7 +205,8 @@ app.delete("/api/users/:id", (req, res) => {
     [req.params.id],
     res,
     genErrHeader(req),
-    200
+    200,
+    400
   );
 });
 
@@ -202,14 +218,21 @@ app.listen(port, () => {
 
 // database request
 
-function dbRequest(func, params, res, errheader, successCode) {
+function dbRequest(
+  func,
+  params,
+  res,
+  errheader,
+  successCode,
+  failureCode
+) {
   func(...params)
     .then((result) => {
       res.status(successCode).send(result);
     })
     .catch((error) => {
       console.log(errheader + error);
-      res.status(400).send(undefined);
+      res.status(failureCode).send(undefined);
     });
 }
 
