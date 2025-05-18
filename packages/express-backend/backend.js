@@ -31,7 +31,7 @@ app.post("/upload", upload.single("file"), async (req, res) => {
 // will need to encode publicId when inserting into endpoint
 app.delete("/upload/:publicId", async (req, res) => {
   dbRequest(
-    db.deleteImage,
+    deleteImage,
     [req.params.publicId],
     res,
     genErrHeader(req),
@@ -50,7 +50,7 @@ BLOG POSTS
 app.get("/api/posts", (req, res) => {
   dbRequest(
     db.getPosts,
-    [req.body.city],
+    [req.query.city],
     res,
     genErrHeader(req),
     200,
@@ -240,8 +240,9 @@ function dbRequest(
 
 function valid(fields, OKifundefined, res, errheader) {
   let isValid = true;
-  fields.array.forEach((field) => {
+  fields.forEach((field) => {
     // for each field, call the relevant validator
+    console.log("checking: " + field[0] + " " + field[1]);
     if (field[1] !== undefined) {
       if (!validators["valid" + field[0]](field[1])) {
         console.log(errheader + "invalid" + field[0]);
