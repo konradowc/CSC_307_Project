@@ -67,6 +67,8 @@ const Profile = () => {
               title={post.title}
               content={post.content}
               date={post.date}
+              isOwner={true} // because it's your profile
+              onDelete={() => handleDelete(post.id)} // example
             />
           ))}
         </ul>
