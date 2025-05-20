@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./Auth.css";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); // hook for navigation
+  const navigate = useNavigate();
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -64,7 +64,9 @@ export default function SignIn() {
 
         <p className="auth-switch">
           Don’t have an account with us?{" "}
-          <Link to="/signup">Sign Up</Link>
+          <span onClick={() => navigate("/signup")}>
+            Sign Up
+          </span>
         </p>
       </div>
     </div>

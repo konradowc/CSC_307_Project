@@ -190,3 +190,42 @@
   width: 24px;
   height: 24px;
 }
+
+.blogpost-image-wrapper {
+  margin-top: 1rem;
+}
+
+.blogpost-image {
+  width: 300px;         /* fixed width */
+  height: 200px;        /* fixed height */
+  border-radius: 12px;
+  object-fit: contain;    /* crop to fill space */
+  background-color: #f0f0f0; /* optional: fallback bg */
+}
+
+.blogpost-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.author-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #ddd;
+}
+
+.author-name {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.author-location {
+  font-size: 0.9rem;
+  color: #777;
+  margin: 0.2rem 0 0 0;
+}

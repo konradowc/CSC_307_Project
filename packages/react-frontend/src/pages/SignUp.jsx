@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./Auth.css";
 
 export default function SignUp() {
@@ -88,7 +88,9 @@ export default function SignUp() {
 
         <p className="auth-switch">
           Already have an account with us?{" "}
-          <a href="/signin">Sign In</a>
+          <span onClick={() => navigate("/signin")}>
+            Sign In
+          </span>
         </p>
       </div>
     </div>
