@@ -16,6 +16,8 @@ import StepOne from "./pages/StepOne";
 import StepTwo from "./pages/StepTwo";
 import StepThree from "./pages/StepThree";
 import Explore from "./pages/Explore";
+import Settings from "./pages/Settings";
+import EditAccount from "./pages/EditAccount";
 
 function WithNavbar() {
   return (
@@ -36,6 +38,11 @@ function App() {
           <Route path="/" />
           <Route path="/explore" element={<Explore />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route
+            path="/editAccount"
+            element={<EditAccount />}
+          />
           <Route path="/createPost" element={<CreatePost />} />
           <Route
             path="/onboarding/step1"
