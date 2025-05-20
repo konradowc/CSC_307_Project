@@ -15,6 +15,7 @@ import Navbar from "./components/Navbar";
 import StepOne from "./pages/StepOne";
 import StepTwo from "./pages/StepTwo";
 import StepThree from "./pages/StepThree";
+import Explore from "./pages/Explore";
 
 function WithNavbar() {
   return (
@@ -33,6 +34,7 @@ function App() {
       <Routes>
         <Route element={<WithNavbar />}>
           <Route path="/" />
+          <Route path="/explore" element={<Explore />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/createPost" element={<CreatePost />} />
           <Route
