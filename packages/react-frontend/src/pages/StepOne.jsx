@@ -9,12 +9,51 @@ const StepOne = () => {
   const [username, setUsername] = useState("");
   const navigate = useNavigate(); // hook for navigation
 
-  const handleNext = (e) => {
+  const handleNext = async (e) => {
     e.preventDefault();
     console.log("Username:", username);
+    const token = localStorage.getItem("authToken");
+    const updates = { username }; // will need to add a validation that username is not empty
+
+    if (username.length === 0) {
+      // will need to make this better eventually
+      console.error("need a username");
+      alert("please put in a username");
+      return;
+    }
+
+    // use finduserbyemail and update function that will be implemented in backend
+    // will use a general patch and then can copy paste logic for steps two and three
+
+    // see if this works
+    try {
+      const response = await fetch(
+        "http://localhost:8000/users",
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify(updates)
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(
+          errorData.error || "Failed to update user."
+        );
+      }
+
+      const data = await response.json();
+      console.log("User updated successfully:", data.user);
+      navigate("/onboarding/step2");
+    } catch (error) {
+      console.error("Error updating user:", error.message);
+    }
 
     // Navigate to Step Two
-    navigate("/onboarding/step2");
   };
 
   return (

@@ -12,6 +12,7 @@ import CreatePost from "./pages/CreatePost";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Navbar from "./components/Navbar";
+import { loginUser, signupUser } from "./Security";
 import StepOne from "./pages/StepOne";
 import StepTwo from "./pages/StepTwo";
 import StepThree from "./pages/StepThree";
@@ -32,6 +33,10 @@ function WithNavbar() {
 }
 
 function App() {
+  const INVALID_TOKEN = "INVALID_TOKEN";
+  const [token, setToken] = useState(INVALID_TOKEN);
+  const [message, setMessage] = useState("");
+
   return (
     <Router>
       <Routes>
