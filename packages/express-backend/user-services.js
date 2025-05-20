@@ -46,6 +46,17 @@ function findUserByName(name) {
   return userModel.find({ name: name });
 }
 
+function doesUserEmailExist(email) {
+  if (userModel.find({ email: email }).length > 0) {
+    return true;
+  }
+  return false;
+}
+
+function findUserByEmail(email) {
+  return userModel.findOne({ email: email });
+}
+
 function findUserByIdAndDelete(id) {
   return userModel.findByIdAndDelete(id);
 }
@@ -80,6 +91,15 @@ function findPostByIdAndUpdate(id, updates) {
   });
 }
 
+function findUserByEmailAndUpdate(email, updates) {
+  const updatedUser = userModel.findOneAndUpdate(
+    { email: email },
+    { $set: updates },
+    { new: true, runValidators: true }
+  );
+  return updatedUser;
+}
+
 export default {
   addUser,
   getUsers,
@@ -90,5 +110,8 @@ export default {
   findUserByIdAndUpdate,
   findPostByIdAndDelete,
   findUserByIdAndDelete,
-  findPostByIdAndUpdate
+  findPostByIdAndUpdate,
+  doesUserEmailExist,
+  findUserByEmail,
+  findUserByEmailAndUpdate
 };
