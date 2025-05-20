@@ -6,9 +6,11 @@ import trash from "../assets/trash.svg";
 import trashRed from "../assets/trash-red.svg";
 import closeIcon from "../assets/x.svg";
 
+
 const BlogPost = ({
   title,
   content,
+  image,
   date = "10.12.25",
   onDelete
 }) => {
@@ -98,7 +100,15 @@ const BlogPost = ({
         </div>
       </div>
       <p className="blogpost-content">{content}</p>
-
+      {image && (
+        <div className="blogpost-image-wrapper">
+          <img
+            src={image}
+            alt="Blog post visual"
+            className="blogpost-image"
+          />
+        </div> // Adding image in blog post
+      )}
       {/* Popup for delete confirmation */}
       {isPopupOpen && (
         <div className="popup">

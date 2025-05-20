@@ -61,6 +61,8 @@ button:hover {
   margin-top: 1rem;
 }
 
-.auth-switch a {
+.auth-switch span {
   color: black;
+  cursor: pointer;
+  text-decoration: underline;
 }
