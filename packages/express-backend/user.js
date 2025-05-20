@@ -13,6 +13,10 @@ const UserSchema = new mongoose.Schema( // this is not the final version, will n
       required: true,
       trim: true
     },
+    profile_picture: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Image"
+    },
     posts: [
       {
         type: mongoose.Schema.Types.ObjectId,

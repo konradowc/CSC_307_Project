@@ -17,19 +17,27 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-// this uses multer to post images to cloudinary directly
+/*
+IMAGES
+*/
+
+// POSTs a single image to cloudinary
+// returns 200 if success, 400 if failure
+
 app.post("/upload", upload.single("file"), async (req, res) => {
   if (!req.file)
     return res.status(400).send("No file uploaded.");
   res.status(200).json({
-    imageUrl: req.file.path, // Cloudinary image URL
+    url: req.file.path, // Cloudinary image URL
     publicId: req.file.filename // Can be used to delete the image
   });
 });
 
-// this deletes images from cloudinary
-// will need to encode publicId when inserting into endpoint
+// DELETEs a single image from cloudinary
+// returns 200 if success, 500 if failure
+
 app.delete("/upload/:publicId", async (req, res) => {
+  // will need to encode publicId when inserting into endpoint
   dbRequest(
     deleteImage,
     [req.params.publicId],
@@ -45,7 +53,7 @@ BLOG POSTS
 */
 
 // GETs all the blog posts given a certain city name
-// returns 200 if success, 400 if undefined city, and 401 if failure
+// returns 200 if success, 401 if failure
 
 app.get("/api/posts", (req, res) => {
   dbRequest(
