@@ -17,19 +17,30 @@ const Profile = () => {
 
   useEffect(() => {
     fetch("http://localhost:8000/api/posts?city=CityName")
-      .then((r) => r.json())
+    .then((r) => r.json())
+    .then((fetchedPosts) => {
+      if (newPost?.title && newPost?.content) {
+        setPosts([...fetchedPosts, newPost]); // add image post
+      } else {
+        setPosts(fetchedPosts);
+      }
+    })
+    .catch(console.error);
+}, [newPost]);
+      /*.then((r) => r.json())
       .then(setPosts)
       .catch(console.error);
-  }, []);
+  }, []);*/
 
-  useEffect(() => {
+  /*useEffect(() => {
+    console.log("newPost received:", newPost);
     if (newPost?.title && newPost?.content) {
       setPosts((prevPosts) => [
         ...prevPosts,
         { id: prevPosts.length + 1, ...newPost }
       ]);
     }
-  }, [newPost]);
+  }, [newPost]);*/
 
   return (
     <div className="profile-container">
@@ -69,6 +80,7 @@ const Profile = () => {
               date={post.date}
               isOwner={true} // because it's your profile
               onDelete={() => handleDelete(post.id)} // example
+              image={post.image} // Added image
             />
           ))}
         </ul>

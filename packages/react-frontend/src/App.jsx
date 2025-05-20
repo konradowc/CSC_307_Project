@@ -15,6 +15,7 @@ import Navbar from "./components/Navbar";
 import StepOne from "./pages/StepOne";
 import StepTwo from "./pages/StepTwo";
 import StepThree from "./pages/StepThree";
+import Explore from "./pages/Explore";
 import Settings from "./pages/Settings";
 import EditAccount from "./pages/EditAccount";
 import OtherProfile from "./pages/OtherProfile";
@@ -36,6 +37,7 @@ function App() {
       <Routes>
         <Route element={<WithNavbar />}>
           <Route path="/" />
+          <Route path="/explore" element={<Explore />} />
           <Route path="/profile" element={<Profile />} />
           {/* Routing when connected to backend */}
           {/* <Route
