@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./Auth.css";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
+  const navigate = useNavigate();
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -53,7 +54,11 @@ export default function SignUp() {
 
         <p className="auth-switch">
           Already have an account with us?{" "}
-          <a href="/signin">Sign In</a>
+          <span
+            onClick={() => navigate("/signin")}
+          >
+            Sign In
+          </span>
         </p>
       </div>
     </div>

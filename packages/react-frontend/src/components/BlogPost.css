@@ -190,3 +190,15 @@
   width: 24px;
   height: 24px;
 }
+
+.blogpost-image-wrapper {
+  margin-top: 1rem;
+}
+
+.blogpost-image {
+  width: 300px;         /* fixed width */
+  height: 200px;        /* fixed height */
+  border-radius: 12px;
+  object-fit: contain;    /* crop to fill space */
+  background-color: #f0f0f0; /* optional: fallback bg */
+}
