@@ -8,6 +8,8 @@ import closeIcon from "../assets/x.svg";
 
 
 const BlogPost = ({
+  authorName,
+  authorAvatar,
   title,
   content,
   image,
@@ -63,6 +65,19 @@ const BlogPost = ({
 
   return (
     <li className="blogpost-item">
+        {authorName && (
+        <div className="blogpost-author">
+          <img
+            src={authorAvatar}
+            alt={authorName}
+            className="author-avatar"
+          />
+          <div>
+            <h3 className="author-name">{authorName}</h3>
+            <p className="author-location">City Name, CA</p>
+          </div>
+        </div>
+      )}
       <div className="blogpost-header">
         <div className="blogpost-header-text">
           <h3 className="blogpost-title">{title}</h3>
