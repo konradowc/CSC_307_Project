@@ -26,21 +26,7 @@ const Profile = () => {
       }
     })
     .catch(console.error);
-}, [newPost]);
-      /*.then((r) => r.json())
-      .then(setPosts)
-      .catch(console.error);
-  }, []);*/
-
-  /*useEffect(() => {
-    console.log("newPost received:", newPost);
-    if (newPost?.title && newPost?.content) {
-      setPosts((prevPosts) => [
-        ...prevPosts,
-        { id: prevPosts.length + 1, ...newPost }
-      ]);
-    }
-  }, [newPost]);*/
+}, [newPost]); 
 
   return (
     <div className="profile-container">
