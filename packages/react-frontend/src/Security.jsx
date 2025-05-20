@@ -1,7 +1,10 @@
 //security.jsx
 // this contains the functions used for logging and signing in, implemented from TA4
 
+// currently none of these functions are in use, need to figure out how to use them
+
 export function loginUser(creds) {
+  // will need to tweak these methods
   const promise = fetch(`/login`, {
     // see if this is good
     method: "POST",
