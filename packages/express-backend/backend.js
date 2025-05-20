@@ -4,7 +4,11 @@ import multer from "multer";
 import { storage, deleteImage } from "./cloudinary.js";
 import db from "./user-services.js";
 import cors from "cors";
-import { registerUser, authenticateUser } from "./auth.js";
+import {
+  registerUser,
+  authenticateUser,
+  loginUser
+} from "./auth.js";
 
 const app = express();
 const port = 8000;
@@ -20,6 +24,8 @@ app.get("/", (req, res) => {
   // will need to set up all the gets to get the proper stuff according to the rest model
   res.send("Hello World!");
 });
+
+// need to configure a sign up path way using registerUser and post
 
 // this uses multer to post images to cloudinary directly
 app.post(
@@ -133,7 +139,7 @@ app.post("/api/posts", authenticateUser, (req, res) => {
 // PATCHs a blog post (edits it)
 // returns 200 if success, 400 if failure, or 403 if forbidden
 
-app.patch("/api/posts/:id", (req, res) => {
+app.patch("/api/posts/:id", authenticateUser, (req, res) => {
   const id = req.params.id;
 
   const fieldsToUpdate = req.body;
@@ -165,7 +171,7 @@ app.patch("/api/posts/:id", (req, res) => {
 // DELETEs a blog post from id
 // returns 200 if success or 400 if failure
 
-app.delete("/api/posts/:id", (req, res) => {
+app.delete("/api/posts/:id", authenticateUser, (req, res) => {
   const id = req.params.id;
 
   db.findPostByIdAndDelete(id)
@@ -199,7 +205,7 @@ app.get("/api/users/:id", authenticateUser, (req, res) => {
 
 // POSTs a user passed in as a JSON object
 // returns 201 if success or 400 if failure
-
+// will probably remove this
 app.post("/api/auth/signup", (req, res) => {
   const userToAdd = req.body;
 
@@ -278,7 +284,7 @@ app.patch(
 // DELETEs a user from id
 // returns 200 if success or 400 if failure
 
-app.delete("/api/users/:id", (req, res) => {
+app.delete("/api/users/:id", authenticateUser, (req, res) => {
   const id = req.params.id;
 
   db.findUserByIdAndDelete(id)
@@ -295,6 +301,33 @@ app.listen(port, () => {
   console.log(
     `Example app listening at http://localhost:${port}`
   );
+});
+
+// will probably add the posts and stuff for the function
+app.post("/signup", registerUser);
+app.post("/signin", loginUser);
+
+app.patch("/users", authenticateUser, (req, res) => {
+  const { email } = req.user;
+  const updates = req.body;
+
+  db.findUserByEmailAndUpdate(email, updates)
+    .then((updatedUser) => {
+      if (!updatedUser) {
+        return res
+          .status(404)
+          .json({ error: "User not found" });
+      }
+      console.log("Updated successfully:", updatedUser);
+      res.status(200).json({
+        message: "User updated successfully",
+        user: updatedUser
+      });
+    })
+    .catch((error) => {
+      console.error("Error updating user:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    });
 });
 
 // helper functions

@@ -1,25 +1,47 @@
-//CreatePost.jsx
 import React, { useState } from "react";
-import { useNavigate, useRevalidator } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./CreatePost.css";
 
 export default function CreatePost() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [publishedPosts, setPublishedPosts] = useState([]);
-  const [imagePreview, setImagePreview] = useState(null); // For image preview
-  const [imageFile, setImageFile] = useState(null);// For image files
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null); // For backend image URL
+  const [imagePublicId, setImagePublicId] = useState(null); // For Cloudinary delete
   const navigate = useNavigate();
 
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
-    if (file) {
-      setImageFile(file);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result); // Base64 string
-      };
-      reader.readAsDataURL(file);
+    if (!file) return;
+
+    setImageFile(file);
+
+    const reader = new FileReader();
+    reader.onloadend = () => setImagePreview(reader.result);
+    reader.readAsDataURL(file);
+
+    // Send to backend
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const res = await fetch("http://localhost:8000/upload", {
+        method: "POST",
+        body: formData
+      });
+
+      if (!res.ok)
+        throw new Error(
+          `Upload failed with status ${res.status}`
+        );
+      const data = await res.json();
+
+      setImageUrl(data.imageUrl);
+      setImagePublicId(data.publicId);
+    } catch (err) {
+      console.error("Image upload failed:", err);
+      alert("Image upload failed.");
     }
   };
 
@@ -29,7 +51,8 @@ export default function CreatePost() {
       content,
       userID: "6801c14b792ac5e5f8f0e0c7",
       city: "CityName",
-      // need to send image to backend
+      image: imageUrl,
+      imagePublicId: imagePublicId
     };
 
     fetch("http://localhost:8000/api/posts", {
@@ -46,11 +69,11 @@ export default function CreatePost() {
           state: {
             newPost: {
               ...savedPost,
-              image: imagePreview, // Temporarily used for display, need to send to backend 
-            },
-          },
+              image: imageUrl // Actual Cloudinary image
+            }
+          }
         });
-      }) 
+      })
       .catch((err) => {
         console.error("Publish failed:", err);
         alert("Could not save your post.");
@@ -85,7 +108,7 @@ export default function CreatePost() {
           type="file"
           accept="image/*"
           style={{ display: "none" }}
-          onChange={handleImageChange} // Adding image file
+          onChange={handleImageChange}
         />
         <label
           htmlFor="image-upload"
@@ -96,13 +119,17 @@ export default function CreatePost() {
       </div>
 
       {imagePreview && (
-          <img
-            src={imagePreview}
-            alt="Preview"
-            className="preview-image"
-            style={{ marginTop: "1rem", width: "200px", borderRadius: "8px" }}
-          /> // Adding image preview
-        )}  
+        <img
+          src={imagePreview}
+          alt="Preview"
+          className="preview-image"
+          style={{
+            marginTop: "1rem",
+            width: "200px",
+            borderRadius: "8px"
+          }}
+        />
+      )}
 
       <div className="button-row">
         <button className="button" onClick={handlePublish}>
@@ -111,5 +138,4 @@ export default function CreatePost() {
       </div>
     </div>
   );
-} 
-
+}
