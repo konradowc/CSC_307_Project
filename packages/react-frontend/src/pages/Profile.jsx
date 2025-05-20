@@ -15,18 +15,27 @@ const Profile = () => {
   const username = "Jane Doe";
   const location = "City Name, CA";
 
+  //   useEffect(() => {
+  //     fetch("http://localhost:8000/api/posts?city=CityName")
+  //     .then((r) => r.json())
+  //     .then((fetchedPosts) => {
+  //       if (newPost?.title && newPost?.content) {
+  //         setPosts([...fetchedPosts, newPost]); // add image post
+  //       } else {
+  //         setPosts(fetchedPosts);
+  //       }
+  //     })
+  //     .catch(console.error);
+  // }, [newPost]);
+
   useEffect(() => {
     fetch("http://localhost:8000/api/posts?city=CityName")
-    .then((r) => r.json())
-    .then((fetchedPosts) => {
-      if (newPost?.title && newPost?.content) {
-        setPosts([...fetchedPosts, newPost]); // add image post
-      } else {
-        setPosts(fetchedPosts);
-      }
-    })
-    .catch(console.error);
-}, [newPost]); 
+      .then((r) => r.json())
+      .then((fetchedPosts) => {
+        setPosts(fetchedPosts); // don't append newPost
+      })
+      .catch(console.error);
+  }, []);
 
   return (
     <div className="profile-container">
