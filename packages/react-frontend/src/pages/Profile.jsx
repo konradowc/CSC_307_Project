@@ -1,10 +1,11 @@
-//Profile.jsx
 import React, { useEffect, useState } from "react";
 import {
   Link,
   useLocation as useRouterLocation
 } from "react-router-dom";
-import "./Profile.css"; // Import the CSS file
+import BlogPost from "../components/BlogPost";
+import "./Profile.css";
+import penLine from "../assets/pen-line.svg";
 
 const Profile = () => {
   const routerLocation = useRouterLocation();
@@ -16,47 +17,71 @@ const Profile = () => {
 
   useEffect(() => {
     fetch("http://localhost:8000/api/posts?city=CityName")
-      .then((r) => r.json())
+    .then((r) => r.json())
+    .then((fetchedPosts) => {
+      if (newPost?.title && newPost?.content) {
+        setPosts([...fetchedPosts, newPost]); // add image post
+      } else {
+        setPosts(fetchedPosts);
+      }
+    })
+    .catch(console.error);
+}, [newPost]);
+      /*.then((r) => r.json())
       .then(setPosts)
       .catch(console.error);
-  }, []);
+  }, []);*/
 
-  useEffect(() => {
+  /*useEffect(() => {
+    console.log("newPost received:", newPost);
     if (newPost?.title && newPost?.content) {
       setPosts((prevPosts) => [
         ...prevPosts,
         { id: prevPosts.length + 1, ...newPost }
       ]);
     }
-  }, [newPost]);
+  }, [newPost]);*/
 
   return (
     <div className="profile-container">
       <div className="profile-header">
         <div className="profile-info">
-          <h1 className="profile-username">{username}</h1>
-          <p className="profile-location">{location}</p>
+          <div className="avatar-placeholder" />
+          <div>
+            <h1 className="profile-username">{username}</h1>
+            <p className="profile-location">{location}</p>
+          </div>
         </div>
 
         <Link to="/createPost" className="create-button">
+          <img
+            src={penLine}
+            alt="Create"
+            className="pen-icon"
+          />
           Create Blog Post
         </Link>
       </div>
 
-      <h2 className="posts-heading">Blog Posts</h2>
+      <h2 className="posts-heading">
+        Blog Posts{" "}
+        <span className="post-count">{posts.length}</span>
+      </h2>
+
       {posts.length === 0 ? (
         <p>No posts yet.</p>
       ) : (
         <ul className="posts-list">
           {posts.map((post) => (
-            <li key={post.id} className="post-item">
-              <div className="post-header">
-                <h3 className="post-title">{post.title}</h3>
-                <p>:</p>
-                <p>10.12.25</p>
-              </div>
-              <p className="post-content">{post.content}</p>
-            </li>
+            <BlogPost
+              key={post.id}
+              title={post.title}
+              content={post.content}
+              date={post.date}
+              isOwner={true} // because it's your profile
+              onDelete={() => handleDelete(post.id)} // example
+              image={post.image} // Added image
+            />
           ))}
         </ul>
       )}

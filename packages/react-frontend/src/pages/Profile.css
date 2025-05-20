@@ -1,81 +1,154 @@
-/* Apply Open Sans as the default font for the entire profile */
 body {
   font-family: "Open Sans", sans-serif;
+  margin: 0;
+  background-color: #fff;
+  color: #1a1a1a;
 }
 
 .profile-container {
-  padding: 5rem 7rem;
+  max-width: 100%; /*is this necessary?*/
+  padding: 0px 80px 80px; /* top | sides | bottom */
+  box-sizing: border-box;
 }
 
-.profile-username {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 8px;
-}
-
-.profile-location {
-  color: #4a4a4a;
-  margin-bottom: 3rem;
-}
-
-.posts-heading {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 16px;
-}
-
-.posts-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.post-item {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 16px;
-}
-
-.post-header {
-  display: flex;
-  align-items: baseline;
-  gap: 1rem;
-}
-
-.post-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-}
-
-.post-content {
-  color: #4a4a4a;
-}
-
+/* Header */
 .profile-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
+  align-items: flex-start;
+  margin-bottom: 3rem;
 }
 
 .profile-info {
-  flex: 1;
+  display: flex;
+  gap: 1.5rem;
 }
 
+.avatar-placeholder {
+  width: 64px;
+  height: 64px;
+  background-color: #ddd;
+  border-radius: 50%;
+}
+
+.profile-username {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.profile-location {
+  font-size: 1rem;
+  color: #666;
+  margin-top: 4px;
+}
+
+/* Create Post Button */
 .create-button {
-  display: inline-block;
-  text-decoration: none;
-  color: black;
-  background-color: white;
+  padding: 10px 18px;
   font-weight: 600;
-  padding: 0.6rem 1.25rem;
+  font-size: 0.95rem;
   border: 2px solid black;
   border-radius: 40px;
-  cursor: pointer;
-  transition: background-color 0.2s;
+  background-color: white;
+  color: black;
+  text-decoration: none;
+  transition: 0.2s ease;
 }
 
 .create-button:hover {
   background-color: black;
   color: white;
+}
+
+/* Posts section */
+.posts-heading {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.post-count {
+  background-color: #000;
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.posts-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Blog post item (assuming you use classNames in BlogPost or style globally) */
+.blogpost-item {
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  background-color: white;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.blogpost-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+
+.blogpost-title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.blogpost-date {
+  font-size: 0.875rem;
+  color: #888;
+}
+
+.blogpost-content {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #333;
+  margin-top: 0.5rem;
+}
+
+.create-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 2px solid black;
+  border-radius: 40px;
+  background-color: white;
+  color: black;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.create-button:hover {
+  background-color: black;
+  color: white;
+}
+
+/* Pen icon inside the button */
+.pen-icon {
+  width: 18px;
+  height: 18px;
+  transition: filter 0.2s ease;
+}
+
+/* Invert icon color on hover */
+.create-button:hover .pen-icon {
+  filter: brightness(0) invert(1);
 }
