@@ -1,6 +1,6 @@
 //user.js
 import mongoose from "mongoose";
-
+// need to dictate whether user or admin
 const UserSchema = new mongoose.Schema( // this is not the final version, will need to assess and improve
   {
     name: {
