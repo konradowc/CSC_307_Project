@@ -4,7 +4,11 @@ import multer from "multer";
 import { storage, deleteImage } from "./cloudinary.js";
 import db from "./user-services.js";
 import cors from "cors";
-import { registerUser, authenticateUser } from "./auth.js";
+import {
+  registerUser,
+  authenticateUser,
+  loginUser
+} from "./auth.js";
 
 const app = express();
 const port = 8000;
@@ -46,7 +50,7 @@ app.post(
 
 app.delete(
   "/upload/:publicId",
-  authenticateUser,
+  //authenticateUser,
   async (req, res) => {
     // will need to encode publicId when inserting into endpoint
     dbRequest(
@@ -108,46 +112,54 @@ app.post("/api/posts", authenticateUser, (req, res) => {
 // PATCHs a blog post (edits it)
 // returns 200 if success, 400 if failure
 
-app.patch("/api/posts/:id", (req, res) => {
-  const postFieldsToUpdate = req.body;
-  const fieldsToValidate = [
-    ["city", postFieldsToUpdate.city]
-    //["title", postFieldsToUpdate.title],
-    //["content", postFieldsToUpdate.content],
-    //["image", postFieldsToUpdate.content],
-    //["imagePublicId", postFieldsToUpdate.imagePublicId],
-    //["createdAt", postFieldsToUpdate.createdAt],
-    //["userID", postFieldsToUpdate.userID]
-  ];
-  const errheader = genErrHeader(req);
+app.patch(
+  "/api/posts/:id",
+  //authenticateUser,
+  (req, res) => {
+    const postFieldsToUpdate = req.body;
+    const fieldsToValidate = [
+      ["city", postFieldsToUpdate.city]
+      //["title", postFieldsToUpdate.title],
+      //["content", postFieldsToUpdate.content],
+      //["image", postFieldsToUpdate.content],
+      //["imagePublicId", postFieldsToUpdate.imagePublicId],
+      //["createdAt", postFieldsToUpdate.createdAt],
+      //["userID", postFieldsToUpdate.userID]
+    ];
+    const errheader = genErrHeader(req);
 
-  // TO-DO: update old images
+    // TO-DO: update old images
 
-  if (valid(fieldsToValidate, true, res, errheader)) {
-    dbRequest(
-      db.findPostByIdAndUpdate,
-      [req.params.id, postFieldsToUpdate],
-      res,
-      errheader,
-      200,
-      400
-    );
+    if (valid(fieldsToValidate, true, res, errheader)) {
+      dbRequest(
+        db.findPostByIdAndUpdate,
+        [req.params.id, postFieldsToUpdate],
+        res,
+        errheader,
+        200,
+        400
+      );
+    }
   }
-});
+);
 
 // DELETEs a blog post from id
 // returns 200 if success or 400 if failure
 
-app.delete("/api/posts/:id", (req, res) => {
-  dbRequest(
-    db.findPostByIdAndDelete,
-    [req.params.id],
-    res,
-    genErrHeader(req),
-    200,
-    400
-  );
-});
+app.delete(
+  "/api/posts/:id",
+  //authenticateUser,
+  (req, res) => {
+    dbRequest(
+      db.findPostByIdAndDelete,
+      [req.params.id],
+      res,
+      genErrHeader(req),
+      200,
+      400
+    );
+  }
+);
 
 /*
 USERS
@@ -169,7 +181,7 @@ app.get("/api/users/:id", authenticateUser, (req, res) => {
 
 // POSTs a user passed in as a JSON object
 // returns 201 if success or 400 if failure
-
+// will probably remove this
 app.post("/api/auth/signup", (req, res) => {
   const userToAdd = req.body;
   const fieldsToValidate = [
@@ -222,22 +234,28 @@ app.patch(
 // DELETEs a user from id
 // returns 200 if success or 400 if failure
 
-app.delete("/api/users/:id", (req, res) => {
-  dbRequest(
-    db.findUserByIdAndDelete,
-    [req.params.id],
-    res,
-    genErrHeader(req),
-    200,
-    400
-  );
-});
+app.delete(
+  "/api/users/:id",
+  //authenticateUser,
+  (req, res) => {
+    dbRequest(
+      db.findUserByIdAndDelete,
+      [req.params.id],
+      res,
+      genErrHeader(req),
+      200,
+      400
+    );
+  }
+);
 
 app.listen(port, () => {
   console.log(
     `Example app listening at http://localhost:${port}`
   );
 });
+
+// helper functions
 
 // database request
 
@@ -311,4 +329,33 @@ function genErrHeader(req) {
   return req.method + " " + req.route.path + ": ";
 }
 
-// curl -X POST http://localhost:8000/api/auth/signup -H "Content-Type: application/json" -d "{\"name\": \"John\", \"city\": \"San Luis Obispo\", \"posts\": []}"
+/*
+manual stuff
+*/
+
+// will probably add the posts and stuff for the function
+app.post("/signup", registerUser);
+app.post("/signin", loginUser);
+
+app.patch("/users", authenticateUser, (req, res) => {
+  const { email } = req.user;
+  const updates = req.body;
+
+  db.findUserByEmailAndUpdate(email, updates)
+    .then((updatedUser) => {
+      if (!updatedUser) {
+        return res
+          .status(404)
+          .json({ error: "User not found" });
+      }
+      console.log("Updated successfully:", updatedUser);
+      res.status(200).json({
+        message: "User updated successfully",
+        user: updatedUser
+      });
+    })
+    .catch((error) => {
+      console.error("Error updating user:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    });
+});

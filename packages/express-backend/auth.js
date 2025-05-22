@@ -1,34 +1,41 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import us from "./user-services.js";
+import dotenv from "dotenv";
 
-const creds = [];
+dotenv.config();
 
+// for these functions, the username is the email
+// maybe ask about the steps and stuff
 export function registerUser(req, res) {
-  const { username, pwd } = req.body; // from form
+  const { email, pwd } = req.body; // from form
 
-  if (!username || !pwd) {
+  if (!email || !pwd) {
     res.status(400).send("Bad request: Invalid input data.");
-  } else if (creds.find((c) => c.username === username)) {
-    res.status(409).send("Username already taken");
+  } else if (us.doesUserEmailExist(email)) {
+    res.status(409).send("email already taken");
   } else {
     bcrypt
       .genSalt(10)
       .then((salt) => bcrypt.hash(pwd, salt))
       .then((hashedPassword) => {
-        generateAccessToken(username).then((token) => {
+        generateAccessToken(email).then((token) => {
           console.log("Token:", token);
           res.status(201).send({ token: token });
-          creds.push({ username, hashedPassword });
+          us.addUser({
+            email: email,
+            password: hashedPassword
+          });
         });
       });
   }
 }
 
-function generateAccessToken(username) {
+function generateAccessToken(email) {
   return new Promise((resolve, reject) => {
     jwt.sign(
-      { username: username },
-      process.env.TOKEN_SECRET, // will need to create the token secret
+      { email: email },
+      process.env.TOKEN_SECRET,
       { expiresIn: "1d" },
       (error, token) => {
         if (error) {
@@ -55,6 +62,7 @@ export function authenticateUser(req, res, next) {
       process.env.TOKEN_SECRET,
       (error, decoded) => {
         if (decoded) {
+          req.user = decoded;
           next();
         } else {
           console.log("JWT error:", error);
@@ -65,29 +73,32 @@ export function authenticateUser(req, res, next) {
   }
 }
 
-export function loginUser(req, res) {
-  const { username, pwd } = req.body; // from form
-  const retrievedUser = creds.find(
-    (c) => c.username === username
-  );
+export async function loginUser(req, res) {
+  const { email, pwd } = req.body; // from form
+  const retrievedUser = await us.findUserByEmail(email);
 
   if (!retrievedUser) {
     // invalid username
     res.status(401).send("Unauthorized");
+    //console.error("could not retrieve user");
   } else {
+    //console.log(retrievedUser.password);
+    //console.log(pwd);
     bcrypt
-      .compare(pwd, retrievedUser.hashedPassword)
+      .compare(pwd, retrievedUser.password)
       .then((matched) => {
         if (matched) {
-          generateAccessToken(username).then((token) => {
+          generateAccessToken(email).then((token) => {
             res.status(200).send({ token: token });
           });
         } else {
           // invalid password
-          res.status(401).send("Unauthorized");
+          res.status(401).send("Unauthorized"); // will need to change these to be more vague
+          //console.error("bad pass");
         }
       })
       .catch(() => {
+        //console.error("erroring for some reason: ", error);
         res.status(401).send("Unauthorized");
       });
   }

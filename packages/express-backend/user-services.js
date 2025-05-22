@@ -55,6 +55,30 @@ function findUserByIdAndDelete(id) {
 }
 
 /*
+EMAILS (findUserByAndUpdate, doesUserExist, findUserBy)
+*/
+
+function findUserByEmailAndUpdate(email, updates) {
+  const updatedUser = userModel.findOneAndUpdate(
+    { email: email },
+    { $set: updates },
+    { new: true, runValidators: true }
+  );
+  return updatedUser;
+}
+
+function doesUserEmailExist(email) {
+  if (userModel.find({ email: email }).length > 0) {
+    return true;
+  }
+  return false;
+}
+
+function findUserByEmail(email) {
+  return userModel.findOne({ email: email });
+}
+
+/*
 POSTS (get, add, findByIdAndUpdate, findByIdAndDelete)
 */
 
@@ -94,9 +118,12 @@ export default {
   findUserById,
   findUserByName,
   findUserByIdAndUpdate,
-  findPostByIdAndDelete,
+  findUserByIdAndDelete,
+  doesUserEmailExist,
+  findUserByEmail,
+  findUserByEmailAndUpdate,
   getPosts,
   addPost,
   findPostByIdAndUpdate,
-  findUserByIdAndDelete
+  findPostByIdAndDelete
 };
