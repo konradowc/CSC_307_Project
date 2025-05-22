@@ -1,0 +1,17 @@
+:root {
+  /* Color palette */
+  --red: #b7202b;
+  --black: #222;
+  --dark-gray: #838383;
+  --light-gray: #cecece;
+  --white: #fff;
+
+  /* Typography */
+  --font-base: "Open Sans", sans-serif;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.75rem;
+  --text-xxl: 2.5rem;
+}

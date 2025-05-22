@@ -1,8 +1,10 @@
+@import "../style.css";
+
 .onboarding-container {
   max-width: 400px;
   margin: 60px auto;
   padding: 0 20px;
-  font-family: sans-serif;
+  font-family: var(--font-base);
   text-align: center;
 }
 
@@ -24,14 +26,14 @@
 }
 
 h1 {
-  font-size: 1.25rem;
+  font-size: var(--text-xl);
   font-weight: 700;
   margin-bottom: 4px;
 }
 
 .subtext {
-  font-size: 0.85rem;
-  color: #555;
+  font-size: var(--text-sm);
+  color: var(--dark-gray);
   margin-bottom: 32px;
 }
 
@@ -42,7 +44,7 @@ h1 {
 
 .input-field label {
   display: block;
-  font-size: 0.9rem;
+  font-size: var(--text-base);
   margin-bottom: 4px;
   font-weight: 500;
 }
@@ -50,9 +52,9 @@ h1 {
 .input-field input {
   width: 100%;
   padding: 10px;
-  font-size: 1rem;
+  font-size: var(--text-base);
   border-radius: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--light-gray);
 }
 
 .next-button {
@@ -60,20 +62,20 @@ h1 {
   padding: 10px;
   font-weight: bold;
   border-radius: 999px;
-  border: 2px solid black;
-  background: white;
+  border: 2px solid var(--black);
+  background: var(--white);
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
 .next-button:hover {
-  background: black;
-  color: white;
+  background: var(--black);
+  color: var(--white);
 }
 
 .form-wrapper {
-  max-width: 320px;
-  margin: 0 auto;
+  max-width: 420px;
+  /* margin: 0 auto; */
 }
 
 .input-field {
@@ -85,7 +87,7 @@ h1 {
 
 .input-field label {
   display: block;
-  font-size: 0.9rem;
+  font-size: var(--text-base);
   margin-bottom: 4px;
   font-weight: 500;
 }
@@ -93,9 +95,9 @@ h1 {
 .input-field input {
   width: 100%;
   padding: 10px;
-  font-size: 1rem;
+  font-size: var(--text-base);
   border-radius: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--light-gray);
   box-sizing: border-box;
 }
 

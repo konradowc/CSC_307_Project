@@ -1,3 +1,5 @@
+@import "../style.css";
+
 .container {
   max-width: 900px;
   margin: 50px auto;
@@ -5,7 +7,7 @@
 }
 
 .heading {
-  font-size: 36px;
+  font-size: var(--text-xxl);
   font-weight: bold;
   margin-bottom: 20px;
 }
@@ -20,29 +22,28 @@
 .textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--light-gray);
   border-radius: 5px;
-  font-size: 16px;
-  font-family: Arial;
+  font-size: var(--text-base);
+  font-family: var(--font-base);
 }
 
 .button {
-  background-color: white;
+  background-color: var(--white);
   color: black;
   padding: 8px 15px;
   border-radius: 40px;
   font-weight: 600;
   cursor: pointer;
-  border: 2px solid black;
-  font-size: 14px;
+  border: 2px solid var(--black);
+  font-size: var(--text-base);
   float: right;
   margin-right: -30px;
 }
 
-
 .button:hover {
-  background-color: black;
-  color: white;
+  background-color: var(--black);
+  color: var(--white);
 }
 
 .textarea-container {
@@ -53,37 +54,29 @@
 .textarea {
   width: 100%;
   padding: 1rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
+  font-size: var(--text-base);
+  border: 1px solid var(--light-gray);
   border-radius: 8px;
   resize: vertical;
 }
 
 .add-image-inside {
   position: absolute;
-  color: black;
+  color: var(--black);
   bottom: 12px;
   right: -20px;
-  background-color: white;
-  border: 1.5px solid rgb(171, 171, 171);
+  background-color: var(--white);
+  border: 1.5px solid var(--dark-gray);
   padding: 6px 16px;
   border-radius: 40px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: var(--text-sm);
   font-weight: 600;
   float: right;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .add-image-inside:hover {
-  background-color: black;
-  color: white;
+  background-color: var(--black);
+  color: var(--white);
 }
-
-
-
-
-
-
-
-
