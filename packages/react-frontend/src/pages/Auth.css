@@ -56,6 +56,14 @@ button:hover {
   color: white;
 }
 
+.logo-image {
+  height: 42px; /* or adjust based on design */
+  margin-bottom: 32px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .auth-switch {
   font-size: 0.85rem;
   margin-top: 1rem;
