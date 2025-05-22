@@ -173,8 +173,8 @@ USERS
 // returns 200 if success, 401 if failure
 
 app.get(
-  "/api/users/:id",
-  //authenticateUser,
+  "/api/users/:id", //
+  // authenticateUser,
   (req, res) => {
     dbRequest(
       db.findUserById,
@@ -364,6 +364,19 @@ app.patch("/users", authenticateUser, (req, res) => {
     })
     .catch((error) => {
       console.error("Error updating user:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    });
+});
+
+app.get("/users", authenticateUser, (req, res) => {
+  const { email } = req.user;
+
+  db.findUserByEmail(email)
+    .then((user) => {
+      return res.status(200).json({ user });
+    })
+    .catch((error) => {
+      console.error("Error finding user:", error);
       res.status(500).json({ error: "Internal Server Error" });
     });
 });

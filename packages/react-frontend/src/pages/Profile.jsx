@@ -7,51 +7,73 @@ import BlogPost from "../components/BlogPost";
 import "./Profile.css";
 import penLine from "../assets/pen-line.svg";
 
-
-
 function formatDateTime(isoString, options = {}) {
   const date = new Date(isoString);
   if (isNaN(date)) return "";
 
   const defaults = {
-    month:  "short",   // e.g. “May”
-    day:    "numeric", // e.g. “8”
-    year:   "numeric", // e.g. “2025”
-    hour:   "numeric", // e.g. “12”
+    month: "short", // e.g. “May”
+    day: "numeric", // e.g. “8”
+    year: "numeric", // e.g. “2025”
+    hour: "numeric", // e.g. “12”
     minute: "2-digit", // e.g. “11”
-    hour12: true       // AM/PM
+    hour12: true // AM/PM
   };
 
-  return date.toLocaleString(
-    "en-US",
-    { ...defaults, ...options }
-  );
+  return date.toLocaleString("en-US", {
+    ...defaults,
+    ...options
+  });
 }
 
 const Profile = () => {
   const routerLocation = useRouterLocation();
   const { newPost } = routerLocation.state || {};
   const [posts, setPosts] = useState([]);
+  const [username, setUsername] = useState("Jane Doe");
+  const [state, setState] = useState("CA");
+  const [city, setCity] = useState("City Name");
 
-  const username = "Jane Doe";
-  const location = "City Name, CA";
+  const token = localStorage.getItem("authToken");
+
+  // make it so that profile is updated with the users actual information
+  useEffect(() => {
+    fetch("http://localhost:8000/users", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const user = data.user;
+        setUsername(user.name);
+        setState(user.state);
+        setCity(user.city);
+      })
+      .catch(console.error);
+  }, []);
 
   useEffect(() => {
     fetch("http://localhost:8000/api/posts?city=CityName")
-      .then(r => {
+      .then((r) => {
         if (!r.ok) throw new Error(r.status);
         return r.json();
       })
-      .then(fetchedPosts => {
+      .then((fetchedPosts) => {
         const sorted = fetchedPosts
           .slice()
-          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+          .sort(
+            (a, b) =>
+              new Date(b.createdAt) - new Date(a.createdAt)
+          );
         setPosts(sorted);
       })
       .catch(console.error);
   }, []);
-  
-      /*.then((r) => r.json())
+
+  /*.then((r) => r.json())
       .then(setPosts)
       .catch(console.error);
   }, []);*/
@@ -73,7 +95,9 @@ const Profile = () => {
           <div className="avatar-placeholder" />
           <div>
             <h1 className="profile-username">{username}</h1>
-            <p className="profile-location">{location}</p>
+            <p className="profile-location">
+              {city}, {state}
+            </p>
           </div>
         </div>
 

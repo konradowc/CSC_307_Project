@@ -13,7 +13,7 @@ const StepOne = () => {
     e.preventDefault();
     console.log("Username:", username);
     const token = localStorage.getItem("authToken");
-    const updates = { username }; // will need to add a validation that username is not empty
+    const updates = { name: username }; // will need to add a validation that username is not empty
 
     if (username.length === 0) {
       // will need to make this better eventually
@@ -35,7 +35,7 @@ const StepOne = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`
           },
-          body: JSON.stringify(updates)
+          body: JSON.stringify(updates) // for some reason there is an issue here where the user is not getting their name updated
         }
       );
 
