@@ -1,9 +1,10 @@
-/* Navbar.css */
+@import "../style.css";
+
 .nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
+  background-color: var(--white);
   padding: 30px 80px; /* Padding for spacing */
   left: 0; /* Ensure navbar stays aligned to the left */
 }
@@ -29,7 +30,7 @@
 .navbar-link {
   text-decoration: none;
   color: black;
-  font-size: 1.1rem;
+  font-size: var(--text-lg);
   font-weight: bold;
   transition:
     color 0.3s,
@@ -37,7 +38,7 @@
 }
 
 .navbar-link:hover {
-  color: #b7202b; /* Change text color to red on hover */
+  color: var(--red); /* Change text color to red on hover */
 }
 
 .navbar-link.active {

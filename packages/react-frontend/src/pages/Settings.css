@@ -1,3 +1,5 @@
+@import "../style.css";
+
 .settings-container {
   /* padding: 0px 80px;
   max-width: 1440px;
@@ -5,11 +7,11 @@
   max-width: 100%; /*is this necessary?*/
   padding: 0px 80px 80px; /* top | sides | bottom */
   box-sizing: border-box;
-  font-family: "Open Sans", sans-serif;
+  font-family: var(--font-base);
 }
 
 .settings-title {
-  font-size: 2.5rem;
+  font-size: var(--text-xxl);
   font-weight: 700;
   margin-top: 0px;
   margin-bottom: 72px;
@@ -20,10 +22,10 @@
   display: flex;
   gap: 4rem;
   align-items: flex-start;
-  background-color: white;
+  background-color: var(--white);
   padding: 100px;
   border-radius: 24px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--light-gray);
   /* max-width: 900px; */
   /* margin: 0 auto; */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
@@ -32,7 +34,7 @@
 .settings-avatar {
   width: 206px;
   height: 206px;
-  background-color: #ddd;
+  background-color: var(--light-gray);
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -54,15 +56,15 @@
 }
 
 .settings-info label {
-  font-size: 0.8rem;
+  font-size: var(--text-sm);
   font-weight: 600;
-  color: #888;
+  color: var(--dark-gray);
   display: block;
   margin-bottom: 4px;
 }
 
 .settings-info p {
-  font-size: 1rem;
+  font-size: var(--text-base);
   margin: 0;
 }
 
@@ -77,39 +79,39 @@
 .signout-btn {
   padding: 8px 16px;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: var(--text-base);
   border-radius: 40px;
-  border: 2px solid black;
+  border: 2px solid var(--black);
   cursor: pointer;
   transition: 0.2s ease;
 }
 
 .edit-btn {
-  background-color: white;
+  background-color: var(--white);
   color: black;
 }
 
 .edit-btn:hover {
-  background-color: black;
-  color: white;
+  background-color: var(--black);
+  color: var(--white);
 }
 
 .signout-btn {
-  background-color: black;
-  color: white;
-  border: 2px solid black;
+  background-color: var(--black);
+  color: var(--white);
+  border: 2px solid var(--black);
 }
 
 .signout-btn:hover {
-  background-color: #333;
+  background-color: var(--black);
 }
 
 /* Input fields */
 .settings-info input {
   width: 100%;
   padding: 10px 16px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
+  font-size: var(--text-base);
+  border: 1px solid var(--light-gray);
   border-radius: 12px;
   margin-top: 4px;
   font-family: inherit;
@@ -134,7 +136,7 @@
 .settings-avatar {
   width: 206px;
   height: 206px;
-  background-color: #ddd;
+  background-color: var(--light-gray);
   border-radius: 50%;
   cursor: pointer;
   overflow: hidden;
@@ -158,7 +160,7 @@
   opacity: 0.5;
   bottom: 45px;
   right: 45px;
-  background-color: white;
+  background-color: var(--white);
   border-radius: 50%;
   padding: 4px;
 }
