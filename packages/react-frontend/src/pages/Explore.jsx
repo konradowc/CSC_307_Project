@@ -1,30 +1,61 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import {
+  Link,
+  useLocation as useRouterLocation
+} from "react-router-dom";
 import BlogPost from "../components/BlogPost";
 import "./Profile.css"; 
 import "../components/BlogPost.css"; 
 import flowersImage from "../assets/flowers.png";
 
+
+function formatDateTime(isoString, options = {}) {
+  const date = new Date(isoString);
+  if (isNaN(date)) return "";
+
+  const defaults = {
+    month:  "short",   // e.g. “May”
+    day:    "numeric", // e.g. “8”
+    year:   "numeric", // e.g. “2025”
+    hour:   "numeric", // e.g. “12”
+    minute: "2-digit", // e.g. “11”
+    hour12: true       // AM/PM
+  };
+
+  return date.toLocaleString(
+    "en-US",
+    { ...defaults, ...options }
+  );
+}
+
+
+
 const Explore = () => {
-    const dummyPosts = [
-        {
-          id: 1,
-          authorName: "John Doe",
-          authorAvatar: flowersImage,
-          title: "Blog Post 1",
-          content: "Testing",
-          date: "10.10.2025",
-          image: flowersImage,
-        },
-        {
-          id: 2,
-          authorName: "Jane Smith",
-          authorAvatar: flowersImage,
-          title: "Blog Post 2",
-          content: "Another blog post content goes here...",
-          date: "10.10.2025",
-          image: null,
-        },
-      ];
+
+  const routerLocation = useRouterLocation();
+    const { newPost } = routerLocation.state || {};
+    const [posts, setPosts] = useState([]);
+
+    const city = "CityName" //Update in Sprint 3 to use user data
+
+    useEffect(() => {
+      fetch(`http://localhost:8000/api/posts?city=${city}`)
+        .then(r => r.json())
+        .then(fetchedPosts => {
+          const all = newPost
+            ? [...fetchedPosts, newPost]
+            : fetchedPosts;
+          all.sort((a, b) => 
+            new Date(b.createdAt) - new Date(a.createdAt)
+          );
+          setPosts(all);
+        })
+        .catch(console.error);
+    }, [newPost, city]);
+
+  
+
+      
 
       return (
         <div className="profile-container">
@@ -36,18 +67,18 @@ const Explore = () => {
           </p>
     
           <h2 className="posts-heading">
-            Blog Posts <span className="post-count">{dummyPosts.length}</span>
+            Blog Posts <span className="post-count">{posts.length}</span>
           </h2>
     
           <ul className="posts-list">
-            {dummyPosts.map((post) => (
+            {posts.map((post) => (
               <BlogPost
                 key={post.id}
                 authorName={post.authorName}
                 authorAvatar={post.authorAvatar}
                 title={post.title}
                 content={post.content}
-                date={post.date}
+                date={formatDateTime(post.createdAt)}
                 image={post.image}
               />
             ))}

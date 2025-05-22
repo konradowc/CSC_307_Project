@@ -7,6 +7,27 @@ import BlogPost from "../components/BlogPost";
 import "./Profile.css";
 import penLine from "../assets/pen-line.svg";
 
+
+
+function formatDateTime(isoString, options = {}) {
+  const date = new Date(isoString);
+  if (isNaN(date)) return "";
+
+  const defaults = {
+    month:  "short",   // e.g. “May”
+    day:    "numeric", // e.g. “8”
+    year:   "numeric", // e.g. “2025”
+    hour:   "numeric", // e.g. “12”
+    minute: "2-digit", // e.g. “11”
+    hour12: true       // AM/PM
+  };
+
+  return date.toLocaleString(
+    "en-US",
+    { ...defaults, ...options }
+  );
+}
+
 const Profile = () => {
   const routerLocation = useRouterLocation();
   const { newPost } = routerLocation.state || {};
@@ -15,27 +36,35 @@ const Profile = () => {
   const username = "Jane Doe";
   const location = "City Name, CA";
 
-  //   useEffect(() => {
-  //     fetch("http://localhost:8000/api/posts?city=CityName")
-  //     .then((r) => r.json())
-  //     .then((fetchedPosts) => {
-  //       if (newPost?.title && newPost?.content) {
-  //         setPosts([...fetchedPosts, newPost]); // add image post
-  //       } else {
-  //         setPosts(fetchedPosts);
-  //       }
-  //     })
-  //     .catch(console.error);
-  // }, [newPost]);
-
   useEffect(() => {
     fetch("http://localhost:8000/api/posts?city=CityName")
-      .then((r) => r.json())
-      .then((fetchedPosts) => {
-        setPosts(fetchedPosts); // don't append newPost
+      .then(r => {
+        if (!r.ok) throw new Error(r.status);
+        return r.json();
+      })
+      .then(fetchedPosts => {
+        const sorted = fetchedPosts
+          .slice()
+          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        setPosts(sorted);
       })
       .catch(console.error);
   }, []);
+  
+      /*.then((r) => r.json())
+      .then(setPosts)
+      .catch(console.error);
+  }, []);*/
+
+  /*useEffect(() => {
+    console.log("newPost received:", newPost);
+    if (newPost?.title && newPost?.content) {
+      setPosts((prevPosts) => [
+        ...prevPosts,
+        { id: prevPosts.length + 1, ...newPost }
+      ]);
+    }
+  }, [newPost]);*/
 
   return (
     <div className="profile-container">
@@ -72,7 +101,7 @@ const Profile = () => {
               key={post.id}
               title={post.title}
               content={post.content}
-              date={post.date}
+              date={formatDateTime(post.createdAt)}
               isOwner={true} // because it's your profile
               onDelete={() => handleDelete(post.id)} // example
               image={post.image} // Added image
