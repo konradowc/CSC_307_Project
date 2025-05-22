@@ -25,6 +25,7 @@ const UserSchema = new mongoose.Schema( // this is not the final version, will n
       trim: true
     },
     profile_picture: {
+      // need to implement
       type: mongoose.Schema.Types.ObjectId,
       ref: "Image"
     },
