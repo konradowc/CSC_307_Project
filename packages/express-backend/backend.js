@@ -33,7 +33,7 @@ IMAGES
 
 app.post(
   "/upload",
-  authenticateUser,
+  //authenticateUser,
   upload.single("file"),
   async (req, res) => {
     if (!req.file)
@@ -84,30 +84,34 @@ app.get("/api/posts", (req, res) => {
 
 // POSTs a blog post passed in as a JSON object
 // returns 201 if success or 400 if failure
-app.post("/api/posts", authenticateUser, (req, res) => {
-  const postToAdd = req.body;
-  const fieldsToValidate = [
-    ["city", postToAdd.city]
-    //["title", postToAdd.title],
-    //["content", postToAdd.content],
-    //["image", postToAdd.content],
-    //["imagePublicId", postToAdd.imagePublicId],
-    //["createdAt", postToAdd.createdAt],
-    //["userID", postToAdd.userID]
-  ];
-  const errheader = genErrHeader(req);
+app.post(
+  "/api/posts",
+  //authenticateUser,
+  (req, res) => {
+    const postToAdd = req.body;
+    const fieldsToValidate = [
+      ["city", postToAdd.city]
+      //["title", postToAdd.title],
+      //["content", postToAdd.content],
+      //["image", postToAdd.content],
+      //["imagePublicId", postToAdd.imagePublicId],
+      //["createdAt", postToAdd.createdAt],
+      //["userID", postToAdd.userID]
+    ];
+    const errheader = genErrHeader(req);
 
-  if (valid(fieldsToValidate, false, res, errheader)) {
-    dbRequest(
-      db.addPost,
-      [postToAdd],
-      res,
-      errheader,
-      201,
-      400
-    );
+    if (valid(fieldsToValidate, false, res, errheader)) {
+      dbRequest(
+        db.addPost,
+        [postToAdd],
+        res,
+        errheader,
+        201,
+        400
+      );
+    }
   }
-});
+);
 
 // PATCHs a blog post (edits it)
 // returns 200 if success, 400 if failure
@@ -168,16 +172,20 @@ USERS
 // GETs a user (including profile info and their posts)
 // returns 200 if success, 401 if failure
 
-app.get("/api/users/:id", authenticateUser, (req, res) => {
-  dbRequest(
-    db.findUserById,
-    [req.params.id],
-    res,
-    genErrHeader(req),
-    200,
-    401
-  );
-});
+app.get(
+  "/api/users/:id",
+  //authenticateUser,
+  (req, res) => {
+    dbRequest(
+      db.findUserById,
+      [req.params.id],
+      res,
+      genErrHeader(req),
+      200,
+      401
+    );
+  }
+);
 
 // POSTs a user passed in as a JSON object
 // returns 201 if success or 400 if failure
@@ -208,7 +216,7 @@ app.post("/api/auth/signup", (req, res) => {
 
 app.patch(
   "/api/users/:id/settings",
-  authenticateUser,
+  //authenticateUser,
   (req, res) => {
     const userFieldsToUpdate = req.body;
     const fieldsToValidate = [
