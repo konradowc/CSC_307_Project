@@ -2,11 +2,11 @@
 import mongoose from "mongoose";
 
 const ImageSchema = new mongoose.Schema({
-  url: {
+  image: {
     type: String,
     required: true
   },
-  publicId: {
+  imagePublicId: {
     type: String,
     required: true
   }
