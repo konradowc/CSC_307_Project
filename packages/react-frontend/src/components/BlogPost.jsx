@@ -13,13 +13,24 @@ const BlogPost = ({
   title,
   content,
   image,
-  date = "10.12.25",
+  date,
   onDelete,
   isOwner = false // New prop to control access to the menu
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const menuRef = useRef(null);
+
+
+  const dateObj = date ? new Date(date) : new Date();
+
+  const formattedDate = dateObj.toLocaleDateString("en-US", {
+    month: "numeric",   // e.g. "May"
+    day:   "numeric", // e.g. "7"
+    year:  "numeric"  // e.g. "2025"
+  });
+
+
 
   const toggleMenu = () => {
     setIsMenuOpen((prevState) => !prevState);

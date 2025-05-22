@@ -15,6 +15,10 @@ await mongoose
   })
   .catch((error) => console.log(error));
 
+/*
+USERS (get, add, findById, findByName, findByIdAndUpdate, findByIdAndDelete)
+*/
+
 function getUsers(name) {
   let promise;
   if (name === undefined) {
@@ -25,8 +29,18 @@ function getUsers(name) {
   return promise;
 }
 
+function addUser(user) {
+  const userToAdd = new userModel(user);
+  const promise = userToAdd.save();
+  return promise;
+}
+
 function findUserById(id) {
   return userModel.findById(id);
+}
+
+function findUserByName(name) {
+  return userModel.find({ name: name });
 }
 
 function findUserByIdAndUpdate(id, updates) {
@@ -36,14 +50,21 @@ function findUserByIdAndUpdate(id, updates) {
   });
 }
 
-function addUser(user) {
-  const userToAdd = new userModel(user);
-  const promise = userToAdd.save();
-  return promise;
+function findUserByIdAndDelete(id) {
+  return userModel.findByIdAndDelete(id);
 }
 
-function findUserByName(name) {
-  return userModel.find({ name: name });
+/*
+EMAILS (findUserByAndUpdate, doesUserExist, findUserBy)
+*/
+
+function findUserByEmailAndUpdate(email, updates) {
+  const updatedUser = userModel.findOneAndUpdate(
+    { email: email },
+    { $set: updates },
+    { new: true, runValidators: true }
+  );
+  return updatedUser;
 }
 
 function doesUserEmailExist(email) {
@@ -57,9 +78,9 @@ function findUserByEmail(email) {
   return userModel.findOne({ email: email });
 }
 
-function findUserByIdAndDelete(id) {
-  return userModel.findByIdAndDelete(id);
-}
+/*
+POSTS (get, add, findByIdAndUpdate, findByIdAndDelete)
+*/
 
 function getPosts(city) {
   let promise;
@@ -80,10 +101,6 @@ function addPost(post) {
   return promise;
 }
 
-function findPostByIdAndDelete(id) {
-  return blogModel.findByIdAndDelete(id);
-}
-
 function findPostByIdAndUpdate(id, updates) {
   return blogModel.findByIdAndUpdate(id, updates, {
     new: true,
@@ -91,13 +108,8 @@ function findPostByIdAndUpdate(id, updates) {
   });
 }
 
-function findUserByEmailAndUpdate(email, updates) {
-  const updatedUser = userModel.findOneAndUpdate(
-    { email: email },
-    { $set: updates },
-    { new: true, runValidators: true }
-  );
-  return updatedUser;
+function findPostByIdAndDelete(id) {
+  return blogModel.findByIdAndDelete(id);
 }
 
 export default {
@@ -105,13 +117,13 @@ export default {
   getUsers,
   findUserById,
   findUserByName,
-  getPosts,
-  addPost,
   findUserByIdAndUpdate,
-  findPostByIdAndDelete,
   findUserByIdAndDelete,
-  findPostByIdAndUpdate,
   doesUserEmailExist,
   findUserByEmail,
-  findUserByEmailAndUpdate
+  findUserByEmailAndUpdate,
+  getPosts,
+  addPost,
+  findPostByIdAndUpdate,
+  findPostByIdAndDelete
 };

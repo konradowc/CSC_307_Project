@@ -1,3 +1,4 @@
 node_modules/
 .env
 *.code-workspace
+.DS_Store

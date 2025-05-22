@@ -24,6 +24,11 @@ const UserSchema = new mongoose.Schema( // this is not the final version, will n
       required: false,
       trim: true
     },
+    profile_picture: {
+      // need to implement
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Image"
+    },
     password: {
       // this is where the hashed password will be stored
       type: String,
