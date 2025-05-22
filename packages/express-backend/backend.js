@@ -39,7 +39,7 @@ app.post(
     if (!req.file)
       return res.status(400).send("No file uploaded.");
     res.status(200).json({
-      url: req.file.path, // Cloudinary image URL
+      imageUrl: req.file.path, // Cloudinary image URL
       publicId: req.file.filename // Can be used to delete the image
     });
   }
