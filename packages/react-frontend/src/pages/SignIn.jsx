@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./Auth.css";
+import postcodeLogo from "../assets/postcodeLogo.svg";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -39,7 +40,11 @@ export default function SignIn() {
   return (
     <div className="auth-container">
       <div className="auth-card">
-        <div className="avatar"></div>
+        <img
+          src={postcodeLogo}
+          alt="Postcode logo"
+          className="logo-image"
+        />
         <h1 className="auth-title">Sign In</h1>
 
         <form onSubmit={handleSignIn}>
