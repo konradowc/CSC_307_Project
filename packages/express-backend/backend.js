@@ -68,7 +68,7 @@ app.delete(
 BLOG POSTS
 */
 
-// GETs all the blog posts given a certain city name
+// GETs all the blog posts given a certain city name, or a certain userID
 // returns 200 if success, 401 if failure
 
 app.get("/api/posts", (req, res) => {
