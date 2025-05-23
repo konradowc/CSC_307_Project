@@ -54,7 +54,7 @@ const Profile = () => {
       })
       .catch(console.error);
   }, []);
-
+  // need to make it so that the user gets the posts that they have posted
   useEffect(() => {
     fetch("http://localhost:8000/api/posts?city=CityName")
       .then((r) => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Settings.css";
 import editIcon from "../assets/pen-line.svg";
@@ -12,6 +12,37 @@ const EditAccount = () => {
     city: "City Name",
     state: "CA"
   });
+
+  const token = localStorage.getItem("authToken");
+
+  // make it so that profile is updated with the users actual information
+  useEffect(() => {
+    fetch("http://localhost:8000/users", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const formUser = data.user;
+        setFormData({
+          username: formUser.name,
+          email: formUser.email,
+          city: formUser.city,
+          state: formUser.state
+        });
+      })
+      .catch(console.error);
+  }, []);
+
+  /*const [formData, setFormData] = useState({
+    username: "Jane Doe",
+    email: "janedoe123@gmail.com",
+    city: "City Name",
+    state: "CA"
+  });*/
 
   const [profileImage, setProfileImage] = useState(null);
 
@@ -33,10 +64,40 @@ const EditAccount = () => {
     navigate("/settings");
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     console.log("Saving:", formData, profileImage);
     // TODO: Send to backend
-    navigate("/settings");
+
+    // start by trying to upload the profileimage
+    // if profileimage is not null, delete the image, then post in the new one and take response and put it in with formdata
+
+    try {
+      const response = await fetch(
+        "http://localhost:8000/users",
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify(formData)
+          // need to figure out how to patch in the profile image
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(
+          errorData.error || "Failed to update user."
+        );
+      }
+
+      const data = await response.json();
+      console.log("User updated successfully:", data.user);
+      navigate("/settings");
+    } catch (error) {
+      console.error("Error updating user:", error.message);
+    }
   };
 
   return (

@@ -5,12 +5,43 @@ import "./Settings.css";
 const Settings = () => {
   const navigate = useNavigate(); // hook for navigation
 
-  const user = {
+  const [user, setUser] = useState({
     username: "Jane Doe",
     email: "janedoe123@gmail.com",
     city: "City Name",
     state: "CA"
-  };
+  });
+
+  const token = localStorage.getItem("authToken");
+
+  // make it so that profile is updated with the users actual information
+  useEffect(() => {
+    fetch("http://localhost:8000/users", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const settingsUser = data.user;
+        setUser({
+          username: settingsUser.name,
+          email: settingsUser.email,
+          city: settingsUser.city,
+          state: settingsUser.state
+        });
+      })
+      .catch(console.error);
+  }, []);
+
+  /*const user = {
+    username: "Jane Doe",
+    email: "janedoe123@gmail.com",
+    city: "City Name",
+    state: "CA"
+  };*/
 
   const handleEditClick = () => {
     navigate("/editaccount");
@@ -18,6 +49,7 @@ const Settings = () => {
 
   const handleSignOut = () => {
     // TODO: Add actual sign-out logic if needed (e.g., clearing tokens)
+    localStorage.removeItem("authToken");
     navigate("/signin");
   };
 

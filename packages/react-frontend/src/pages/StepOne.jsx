@@ -35,7 +35,7 @@ const StepOne = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`
           },
-          body: JSON.stringify(updates) // for some reason there is an issue here where the user is not getting their name updated
+          body: JSON.stringify(updates)
         }
       );
 
