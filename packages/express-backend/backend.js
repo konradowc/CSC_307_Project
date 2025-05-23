@@ -68,18 +68,32 @@ app.delete(
 BLOG POSTS
 */
 
-// GETs all the blog posts given a certain city name
+// GETs all the blog posts given a certain city name, or a certain userID
 // returns 200 if success, 401 if failure
 
 app.get("/api/posts", (req, res) => {
-  dbRequest(
-    db.getPosts,
-    [req.query.city],
-    res,
-    genErrHeader(req),
-    200,
-    401
-  );
+  if (req.query.city !== undefined) {
+    dbRequest(
+      db.getPosts,
+      [req.query.city],
+      res,
+      genErrHeader(req),
+      200,
+      401
+    );
+  } else if (req.query.userID !== undefined) {
+    dbRequest(
+      db.getUserPosts,
+      [req.query.userID],
+      res,
+      genErrHeader(req),
+      200,
+      401
+    );
+  } else {
+    console.log(genErrHeader(req) + "no query passed in");
+    res.status(401).send(undefined);
+  }
 });
 
 // POSTs a blog post passed in as a JSON object

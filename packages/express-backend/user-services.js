@@ -79,7 +79,7 @@ function findUserByEmail(email) {
 }
 
 /*
-POSTS (get, add, findByIdAndUpdate, findByIdAndDelete)
+POSTS (get, getUser, add, findByIdAndUpdate, findByIdAndDelete)
 */
 
 function getPosts(city) {
@@ -91,6 +91,19 @@ function getPosts(city) {
     promise = blogModel.find();
   } else {
     promise = blogModel.find({ city: city });
+  }
+  return promise;
+}
+
+function getUserPosts(userID) {
+  let promise;
+  if (userID == undefined) {
+    console.log(
+      "getPosts: UserID was not defined - returning all cities"
+    );
+    promise = blogModel.find();
+  } else {
+    promise = blogModel.find({ userID: userID });
   }
   return promise;
 }
@@ -123,6 +136,7 @@ export default {
   findUserByEmail,
   findUserByEmailAndUpdate,
   getPosts,
+  getUserPosts,
   addPost,
   findPostByIdAndUpdate,
   findPostByIdAndDelete
