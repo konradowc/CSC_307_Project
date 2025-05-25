@@ -57,7 +57,8 @@ export default function CreatePost() {
 
     fetch("http://localhost:8000/api/posts", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" // <-- this is required
+    },
       body: JSON.stringify(newPost)
     })
       .then((res) => {
