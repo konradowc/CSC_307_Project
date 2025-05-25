@@ -161,20 +161,16 @@ app.patch(
 // DELETEs a blog post from id
 // returns 200 if success or 400 if failure
 
-app.delete(
-  "/api/posts/:id",
-  //authenticateUser,
-  (req, res) => {
-    dbRequest(
-      db.findPostByIdAndDelete,
-      [req.params.id],
-      res,
-      genErrHeader(req),
-      200,
-      400
-    );
-  }
-);
+app.delete("/api/posts/:id", authenticateUser, (req, res) => {
+  dbRequest(
+    db.findPostByIdAndDelete,
+    [req.params.id],
+    res,
+    genErrHeader(req),
+    200,
+    400
+  );
+});
 
 /*
 USERS

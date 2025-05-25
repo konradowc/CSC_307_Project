@@ -9,7 +9,8 @@ const Settings = () => {
     username: "Jane Doe",
     email: "janedoe123@gmail.com",
     city: "City Name",
-    state: "CA"
+    state: "CA",
+    profile_picture: null
   });
 
   const token = localStorage.getItem("authToken");
@@ -30,7 +31,8 @@ const Settings = () => {
           username: settingsUser.name,
           email: settingsUser.email,
           city: settingsUser.city,
-          state: settingsUser.state
+          state: settingsUser.state,
+          profile_picture: settingsUser.profile_picture || null
         });
       })
       .catch(console.error);
@@ -50,15 +52,26 @@ const Settings = () => {
   const handleSignOut = () => {
     // TODO: Add actual sign-out logic if needed (e.g., clearing tokens)
     localStorage.removeItem("authToken");
-    navigate("/signin");
+    // need to wipe all previous user info from the state
+    window.location.href = "/signin";
+    //navigate("/signin");
   };
 
+  // need to change settings-avatar so that it is the users profile image
   return (
     <div className="settings-container">
       <h1 className="settings-title">Settings</h1>
 
       <div className="settings-card">
-        <div className="settings-avatar" />
+        {user.profile_picture ? (
+          <img
+            src={user.profile_picture}
+            alt="Profile"
+            className="settings-avatar"
+          />
+        ) : (
+          <div className="settings-avatar" />
+        )}
 
         <div className="settings-info">
           <div className="settings-row">

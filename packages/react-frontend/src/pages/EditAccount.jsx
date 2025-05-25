@@ -13,6 +13,9 @@ const EditAccount = () => {
     state: "CA"
   });
 
+  const [profileImage, setProfileImage] = useState(null);
+  const [profileID, setprofileID] = useState(null);
+
   const token = localStorage.getItem("authToken");
 
   // make it so that profile is updated with the users actual information
@@ -33,6 +36,8 @@ const EditAccount = () => {
           city: formUser.city,
           state: formUser.state
         });
+        setProfileImage(formUser.profile_picture || null);
+        setprofileID(formUser.profile_picture_id || null);
       })
       .catch(console.error);
   }, []);
@@ -43,8 +48,6 @@ const EditAccount = () => {
     city: "City Name",
     state: "CA"
   });*/
-
-  const [profileImage, setProfileImage] = useState(null);
 
   const handleChange = (e) => {
     setFormData({
@@ -70,6 +73,7 @@ const EditAccount = () => {
 
     // start by trying to upload the profileimage
     // if profileimage is not null, delete the image, then post in the new one and take response and put it in with formdata
+    // this uploads the profile picture
 
     try {
       const response = await fetch(
@@ -120,7 +124,11 @@ const EditAccount = () => {
             >
               {profileImage && (
                 <img
-                  src={profileImage}
+                  src={
+                    typeof profileImage === "string"
+                      ? profileImage
+                      : URL.createObjectURL(profileImage)
+                  }
                   alt="Uploaded avatar"
                   className="uploaded-avatar"
                 />
