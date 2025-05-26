@@ -26,8 +26,11 @@ const UserSchema = new mongoose.Schema( // this is not the final version, will n
     },
     profile_picture: {
       // need to implement
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Image"
+      // use cloudinary url
+      type: String
+    },
+    profile_picture_id: {
+      type: String
     },
     password: {
       // this is where the hashed password will be stored

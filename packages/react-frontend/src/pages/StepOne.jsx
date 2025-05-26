@@ -13,7 +13,7 @@ const StepOne = () => {
     e.preventDefault();
     console.log("Username:", username);
     const token = localStorage.getItem("authToken");
-    const updates = { username }; // will need to add a validation that username is not empty
+    const updates = { name: username }; // will need to add a validation that username is not empty
 
     if (username.length === 0) {
       // will need to make this better eventually

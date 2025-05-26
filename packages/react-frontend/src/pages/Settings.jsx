@@ -5,12 +5,45 @@ import "./Settings.css";
 const Settings = () => {
   const navigate = useNavigate(); // hook for navigation
 
-  const user = {
+  const [user, setUser] = useState({
+    username: "Jane Doe",
+    email: "janedoe123@gmail.com",
+    city: "City Name",
+    state: "CA",
+    profile_picture: null
+  });
+
+  const token = localStorage.getItem("authToken");
+
+  // make it so that profile is updated with the users actual information
+  useEffect(() => {
+    fetch("http://localhost:8000/users", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const settingsUser = data.user;
+        setUser({
+          username: settingsUser.name,
+          email: settingsUser.email,
+          city: settingsUser.city,
+          state: settingsUser.state,
+          profile_picture: settingsUser.profile_picture || null
+        });
+      })
+      .catch(console.error);
+  }, []);
+
+  /*const user = {
     username: "Jane Doe",
     email: "janedoe123@gmail.com",
     city: "City Name",
     state: "CA"
-  };
+  };*/
 
   const handleEditClick = () => {
     navigate("/editaccount");
@@ -18,15 +51,27 @@ const Settings = () => {
 
   const handleSignOut = () => {
     // TODO: Add actual sign-out logic if needed (e.g., clearing tokens)
-    navigate("/signin");
+    localStorage.removeItem("authToken");
+    // need to wipe all previous user info from the state
+    window.location.href = "/signin";
+    //navigate("/signin");
   };
 
+  // need to change settings-avatar so that it is the users profile image
   return (
     <div className="settings-container">
       <h1 className="settings-title">Settings</h1>
 
       <div className="settings-card">
-        <div className="settings-avatar" />
+        {user.profile_picture ? (
+          <img
+            src={user.profile_picture}
+            alt="Profile"
+            className="settings-avatar"
+          />
+        ) : (
+          <div className="settings-avatar" />
+        )}
 
         <div className="settings-info">
           <div className="settings-row">

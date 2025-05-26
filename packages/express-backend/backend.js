@@ -33,7 +33,7 @@ IMAGES
 
 app.post(
   "/upload",
-  //authenticateUser,
+  authenticateUser,
   upload.single("file"),
   async (req, res) => {
     if (!req.file)
@@ -98,34 +98,31 @@ app.get("/api/posts", (req, res) => {
 
 // POSTs a blog post passed in as a JSON object
 // returns 201 if success or 400 if failure
-app.post(
-  "/api/posts",
-  //authenticateUser,
-  (req, res) => {
-    const postToAdd = req.body;
-    const fieldsToValidate = [
-      ["city", postToAdd.city]
-      //["title", postToAdd.title],
-      //["content", postToAdd.content],
-      //["image", postToAdd.content],
-      //["imagePublicId", postToAdd.imagePublicId],
-      //["createdAt", postToAdd.createdAt],
-      //["userID", postToAdd.userID]
-    ];
-    const errheader = genErrHeader(req);
+app.post("/api/posts", authenticateUser, (req, res) => {
+  const postToAdd = req.body;
+  const fieldsToValidate = [
+    // will need to ask why we are validating the city
+    ["city", postToAdd.city]
+    //["title", postToAdd.title],
+    //["content", postToAdd.content],
+    //["image", postToAdd.content],
+    //["imagePublicId", postToAdd.imagePublicId],
+    //["createdAt", postToAdd.createdAt],
+    //["userID", postToAdd.userID]
+  ];
+  const errheader = genErrHeader(req);
 
-    if (valid(fieldsToValidate, false, res, errheader)) {
-      dbRequest(
-        db.addPost,
-        [postToAdd],
-        res,
-        errheader,
-        201,
-        400
-      );
-    }
+  if (valid(fieldsToValidate, false, res, errheader)) {
+    dbRequest(
+      db.addPost,
+      [postToAdd],
+      res,
+      errheader,
+      201,
+      400
+    );
   }
-);
+});
 
 // PATCHs a blog post (edits it)
 // returns 200 if success, 400 if failure
@@ -164,20 +161,16 @@ app.patch(
 // DELETEs a blog post from id
 // returns 200 if success or 400 if failure
 
-app.delete(
-  "/api/posts/:id",
-  //authenticateUser,
-  (req, res) => {
-    dbRequest(
-      db.findPostByIdAndDelete,
-      [req.params.id],
-      res,
-      genErrHeader(req),
-      200,
-      400
-    );
-  }
-);
+app.delete("/api/posts/:id", authenticateUser, (req, res) => {
+  dbRequest(
+    db.findPostByIdAndDelete,
+    [req.params.id],
+    res,
+    genErrHeader(req),
+    200,
+    400
+  );
+});
 
 /*
 USERS
@@ -187,8 +180,8 @@ USERS
 // returns 200 if success, 401 if failure
 
 app.get(
-  "/api/users/:id",
-  //authenticateUser,
+  "/api/users/:id", //
+  // authenticateUser,
   (req, res) => {
     dbRequest(
       db.findUserById,
@@ -381,3 +374,22 @@ app.patch("/users", authenticateUser, (req, res) => {
       res.status(500).json({ error: "Internal Server Error" });
     });
 });
+
+app.get("/users", authenticateUser, (req, res) => {
+  const { email } = req.user;
+
+  db.findUserByEmail(email)
+    .then((user) => {
+      return res.status(200).json({ user });
+    })
+    .catch((error) => {
+      console.error("Error finding user:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    });
+});
+
+// this does nothing right now
+/*app.post("/posts", authenticateUser, (req, res) => {
+  const { email } = req.user;
+  db.findUserByEmail(email).then().catch(); // make this so that after finding the user, it takes the users id and posts the blog post maybe
+});*/

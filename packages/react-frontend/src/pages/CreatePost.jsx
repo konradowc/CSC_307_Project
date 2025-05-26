@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CreatePost.css";
 
@@ -10,6 +10,28 @@ export default function CreatePost() {
   const [imageUrl, setImageUrl] = useState(null); // For backend image URL
   const [imagePublicId, setImagePublicId] = useState(null); // For Cloudinary delete
   const navigate = useNavigate();
+  const token = localStorage.getItem("authToken");
+  const [userID, setUserID] = useState(
+    "6801c14b792ac5e5f8f0e0c7"
+  );
+  const [city, setCity] = useState("City Name");
+
+  useEffect(() => {
+    fetch("http://localhost:8000/users", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const user = data.user;
+        setUserID(user._id);
+        setCity(user.city);
+      })
+      .catch(console.error);
+  }, []);
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
@@ -28,6 +50,9 @@ export default function CreatePost() {
     try {
       const res = await fetch("http://localhost:8000/upload", {
         method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
         body: formData
       });
 
@@ -46,19 +71,22 @@ export default function CreatePost() {
   };
 
   const handlePublish = () => {
+    // need to make it so that newPost takes in the correct information
     const newPost = {
       title,
       content,
-      userID: "6801c14b792ac5e5f8f0e0c7",
-      city: "CityName",
+      userID: userID,
+      city: city,
       image: imageUrl,
       imagePublicId: imagePublicId
     };
 
     fetch("http://localhost:8000/api/posts", {
       method: "POST",
-      headers: { "Content-Type": "application/json" // <-- this is required
-    },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
       body: JSON.stringify(newPost)
     })
       .then((res) => {

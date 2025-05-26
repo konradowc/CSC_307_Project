@@ -8,7 +8,7 @@ const StepThree = () => {
   const navigate = useNavigate();
 
   const handleStart = () => {
-    navigate("/"); // or "/" or "/home"
+    navigate("/explore"); // or "/" or "/home"
   };
 
   return (

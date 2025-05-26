@@ -25,7 +25,7 @@ export default function SignIn() {
       if (response.ok) {
         const { token } = await response.json();
         localStorage.setItem("authToken", token);
-        navigate("/");
+        navigate("/explore");
       } else {
         const errorText = await response.text();
         throw new Error(errorText);
