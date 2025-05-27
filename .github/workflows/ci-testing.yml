@@ -13,6 +13,8 @@ jobs:
         with:
           node-version: 22
       - run: npm ci
-      - run: npm run -w express-backend lint
-      - run: npm run -w react-frontend lint
+      - run: npm run format
+      - run: npm run lint
       - run: npm run -w react-frontend build
+      - run: npm run -w express-backend test
+      - run: npm run -w react-frontend test:comp
