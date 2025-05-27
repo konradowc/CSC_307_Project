@@ -316,6 +316,7 @@ function valid(fields, OKifundefined, res, errheader) {
 }
 
 const validators = {
+  // add more as necessary
   validname,
   validcity,
   validemptyposts,
