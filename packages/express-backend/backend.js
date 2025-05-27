@@ -327,7 +327,7 @@ function validname(name) {
 }
 
 function validcity(city) {
-  return city !== ""; // a list of cities in future?
+  return city !== ""; // will be a list of cities in future?
 }
 
 function validemptyposts(posts) {
