@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import postcodeLogo from "../assets/postcodeLogo.svg";
 import "./Onboarding.css";
@@ -6,6 +6,29 @@ import threeOfThree from "../assets/3of3.svg";
 
 const StepThree = () => {
   const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (!token) return;
+
+    fetch("http://localhost:8000/users", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const user = data.user;
+        setUsername(user.name || "there");
+      })
+      .catch((err) => {
+        console.error("Error fetching user info:", err);
+        setUsername("there"); // fallback in case of error
+      });
+  }, []);
 
   const handleStart = () => {
     navigate("/explore"); // or "/" or "/home"
@@ -25,7 +48,7 @@ const StepThree = () => {
         className="step-img"
       />
 
-      <h1>Congrats Jane!</h1>
+      <h1>Congrats {username}!</h1>
       <p className="subtext">You're all set!</p>
 
       <button onClick={handleStart} className="next-button">
