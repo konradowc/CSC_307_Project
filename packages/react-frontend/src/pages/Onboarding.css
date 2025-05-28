@@ -1,11 +1,16 @@
 @import "../style.css";
 
 .onboarding-container {
-  max-width: 400px;
-  margin: 60px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertically center */
+  align-items: center; /* horizontally center */
+  min-height: 100vh; /* full height */
+  margin: 0 auto;
   padding: 0 20px;
   font-family: var(--font-base);
   text-align: center;
+  font-family: var(--font-base);
 }
 
 .logo-image {
@@ -35,6 +40,18 @@ h1 {
   font-size: var(--text-sm);
   color: var(--dark-gray);
   margin-bottom: 32px;
+}
+.form-section {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .input-field {
@@ -74,14 +91,16 @@ h1 {
 }
 
 .form-wrapper {
-  max-width: 420px;
-  /* margin: 0 auto; */
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* so child input/button align centered */
 }
 
 .input-field {
   width: 100%;
-  max-width: 320px;
-  margin: 0 auto 20px;
+  margin-bottom: 20px;
   text-align: left;
 }
 
@@ -103,5 +122,58 @@ h1 {
 
 .next-button {
   width: 100%;
-  max-width: 320px;
+  box-sizing: border-box;
+}
+
+/* Make the container full-height and centered on small screens */
+@media (max-width: 768px) {
+  .onboarding-container {
+    margin: 40px auto;
+    padding: 0 16px;
+  }
+
+  .logo-image {
+    height: 28px;
+    margin-bottom: 24px;
+  }
+
+  .step-img {
+    height: 32px;
+    margin-bottom: 24px;
+  }
+
+  .form-section {
+    padding: 0 16px; /* Add breathing room */
+  }
+
+  h1 {
+    font-size: 1.5rem; /* smaller header */
+    margin-bottom: 4px;
+  }
+
+  .subtext {
+    font-size: 0.875rem;
+    margin-bottom: 24px;
+  }
+
+  .input-field,
+  .next-button {
+    max-width: 100%;
+  }
+}
+
+/* Optimize for very small screens */
+@media (max-width: 400px) {
+  .onboarding-container {
+    margin: 20px auto;
+    padding: 0 12px;
+  }
+
+  h1 {
+    font-size: 1.25rem;
+  }
+
+  .step-img {
+    height: 28px;
+  }
 }

@@ -67,28 +67,30 @@ const StepTwo = () => {
         className="step-img"
       />
 
-      <h1>Where are you at?</h1>
-      <p className="subtext">
-        P.S. You can always change this later.
-      </p>
+      <div className="form-section">
+        <h1>Where are you at?</h1>
+        <p className="subtext">
+          P.S. You can always change this later.
+        </p>
 
-      <form onSubmit={handleNext}>
-        <div className="form-wrapper">
-          <InputField
-            label="City"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-          />
-          <InputField
-            label="State (ex: CA)"
-            value={state}
-            onChange={(e) => setState(e.target.value)}
-          />
-          <button type="submit" className="next-button">
-            Next
-          </button>
-        </div>
-      </form>
+        <form onSubmit={handleNext}>
+          <div className="form-wrapper">
+            <InputField
+              label="City"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+            />
+            <InputField
+              label="State (ex: CA)"
+              value={state}
+              onChange={(e) => setState(e.target.value)}
+            />
+            <button type="submit" className="next-button">
+              Next
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
