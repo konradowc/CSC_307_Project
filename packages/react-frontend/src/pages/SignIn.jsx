@@ -12,9 +12,12 @@ export default function SignIn() {
     e.preventDefault();
     console.log("Signing in:", { email, password });
 
+        const vite_url = `${import.meta.env.VITE_BACKEND_URL}`;
+    console.log("vite_backend_url: " + vite_url);
+
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/signin`,
+        vite_url + `/signin`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
