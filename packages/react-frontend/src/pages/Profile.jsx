@@ -37,10 +37,10 @@ const Profile = () => {
     "6801c14b792ac5e5f8f0e0c0"
   );
   const [profileimage, setProfileImage] = useState(null);
+  const token = localStorage.getItem("authToken");
 
   // make it so that profile is updated with the users actual information
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
     if (!token) return;
 
     // Fetch user info, then fetch posts for that user
