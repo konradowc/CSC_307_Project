@@ -39,7 +39,7 @@ const Explore = () => {
     if (!token) return;
 
     // Fetch user info, then fetch posts for that user
-    fetch("http://localhost:8000/users", {
+    fetch(`${import.meta.env.URL}/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -59,7 +59,7 @@ const Explore = () => {
   //const city = "CityName"; //Update in Sprint 3 to use user data
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/posts?city=${city}`)
+    fetch(`${import.meta.env.URL}/api/posts?city=${city}`)
       .then((r) => r.json())
       .then((fetchedPosts) => {
         const all = newPost

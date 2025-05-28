@@ -26,7 +26,7 @@ const StepTwo = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:8000/users",
+        `${import.meta.env.URL}/users`,
         {
           method: "PATCH",
           headers: {

@@ -44,7 +44,7 @@ const Profile = () => {
     if (!token) return;
 
     // Fetch user info, then fetch posts for that user
-    fetch("http://localhost:8000/users", {
+    fetch(`${import.meta.env.URL}/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -62,7 +62,7 @@ const Profile = () => {
 
         // Then fetch posts for that user
         return fetch(
-          `http://localhost:8000/api/posts?userID=${user._id}`
+          `${import.meta.env.URL}/api/posts?userID=${user._id}`
         );
       })
       .then((res) => {
@@ -100,7 +100,7 @@ const Profile = () => {
     // need to make this so that it actually deletes the post from the users account
     try {
       const response = await fetch(
-        `http://localhost:8000/api/posts/${postID}`,
+        `${import.meta.env.URL}/api/posts/${postID}`,
         {
           method: "DELETE",
           headers: {
