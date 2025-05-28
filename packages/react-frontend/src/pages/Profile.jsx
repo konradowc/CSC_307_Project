@@ -43,8 +43,11 @@ const Profile = () => {
   useEffect(() => {
     if (!token) return;
 
+    const vite_url = `${import.meta.env.VITE_BACKEND_URL}`;
+    console.log("vite_backend_url: " + vite_url);
+
     // Fetch user info, then fetch posts for that user
-    fetch(`${import.meta.env.VITE_BACKEND_URL}/users`, {
+    fetch(url + `/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
