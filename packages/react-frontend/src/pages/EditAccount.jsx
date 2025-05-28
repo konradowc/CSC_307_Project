@@ -20,7 +20,7 @@ const EditAccount = () => {
 
   // make it so that profile is updated with the users actual information
   useEffect(() => {
-    fetch(`${import.meta.env.URL}/users`, {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +77,7 @@ const EditAccount = () => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.URL}/users`,
+        `${import.meta.env.VITE_BACKEND_URL}/users`,
         {
           method: "PATCH",
           headers: {

@@ -31,7 +31,7 @@ export default function SignUp() {
     // then route to /onboarding/step1
     try {
       const response = await fetch(
-        `${import.meta.env.URL}/signup`,
+        `${import.meta.env.VITE_BACKEND_URL}/signup`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

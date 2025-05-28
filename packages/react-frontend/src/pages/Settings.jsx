@@ -17,7 +17,7 @@ const Settings = () => {
 
   // make it so that profile is updated with the users actual information
   useEffect(() => {
-    fetch(`${import.meta.env.URL}/users`, {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

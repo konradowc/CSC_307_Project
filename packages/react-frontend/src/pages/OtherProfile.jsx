@@ -12,13 +12,13 @@ const OtherProfile = () => {
 
   // useEffect(() => {
   //   // Simulate user fetching
-  //   fetch(`${import.meta.env.URL}/api/users/${userId}`)
+  //   fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/${userId}`)
   //     .then((res) => res.json())
   //     .then(setUser)
   //     .catch(console.error);
 
   //   // Fetch posts by that user
-  //   fetch(`${import.meta.env.URL}/api/posts?userId=${userId}`)
+  //   fetch(`${import.meta.env.VITE_BACKEND_URL}/api/posts?userId=${userId}`)
   //     .then((r) => r.json())
   //     .then(setPosts)
   //     .catch(console.error);

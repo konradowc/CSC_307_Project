@@ -17,7 +17,7 @@ export default function CreatePost() {
   const [city, setCity] = useState("City Name");
 
   useEffect(() => {
-    fetch(`${import.meta.env.URL}/users`, {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -48,7 +48,7 @@ export default function CreatePost() {
     formData.append("file", file);
 
     try {
-      const res = await fetch(`${import.meta.env.URL}/upload`, {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/upload`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`
@@ -81,7 +81,7 @@ export default function CreatePost() {
       imagePublicId: imagePublicId
     };
 
-    fetch(`${import.meta.env.URL}/api/posts`, {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/posts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

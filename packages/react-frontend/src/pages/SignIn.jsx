@@ -14,7 +14,7 @@ export default function SignIn() {
 
     try {
       const response = await fetch(
-        `${import.meta.env.URL}/signin`,
+        `${import.meta.env.VITE_BACKEND_URL}/signin`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
