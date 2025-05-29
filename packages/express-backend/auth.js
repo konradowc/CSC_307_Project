@@ -6,7 +6,6 @@ import dotenv from "dotenv";
 dotenv.config();
 
 // for these functions, the username is the email
-// maybe ask about the steps and stuff
 export function registerUser(req, res) {
   const { email, pwd } = req.body; // from form
 
@@ -80,10 +79,7 @@ export async function loginUser(req, res) {
   if (!retrievedUser) {
     // invalid username
     res.status(401).send("Unauthorized");
-    //console.error("could not retrieve user");
   } else {
-    //console.log(retrievedUser.password);
-    //console.log(pwd);
     bcrypt
       .compare(pwd, retrievedUser.password)
       .then((matched) => {
@@ -93,12 +89,10 @@ export async function loginUser(req, res) {
           });
         } else {
           // invalid password
-          res.status(401).send("Unauthorized"); // will need to change these to be more vague
-          //console.error("bad pass");
+          res.status(401).send("Unauthorized");
         }
       })
       .catch(() => {
-        //console.error("erroring for some reason: ", error);
         res.status(401).send("Unauthorized");
       });
   }

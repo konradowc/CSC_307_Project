@@ -52,12 +52,8 @@ const Explore = () => {
         const user = data.user;
         setCity(user.city);
         setUsername(user.name);
-      }); // this will need to extract user data
+      });
   }, []);
-
-  // make this set up to use user data
-
-  //const city = "CityName"; //Update in Sprint 3 to use user data
 
   useEffect(() => {
     fetch(`http://localhost:8000/api/posts?city=${city}`)
@@ -93,10 +89,8 @@ const Explore = () => {
         {posts.map((post) => (
           <BlogPost
             key={post._id}
-            // the authorname and authoravatar doesn't work right now
-            authorName={post.authorName}
-            authorAvatar={post.authorAvatar}
-            // need to fix the two things above
+            authorName={post.username}
+            authorAvatar={post.profile_picture}
             title={post.title}
             content={post.content}
             date={formatDateTime(post.createdAt)}
