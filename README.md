@@ -1,11 +1,5 @@
 CSC 307 Project: PostCode
 
-Link to website:
-https://thankful-ocean-042ec241e.6.azurestaticapps.net
-
-Link to backend:
-postcode-enf6gca7amfudzbf.westus-01.azurewebsites.net
-
 For locals and/or travelers who want insights or updates based on people living in a specific area, the PostCode is a location-based blog platform that lets users discover blog posts from people in their selected city. Unlike Facebook, our product prioritizes geographic context by connecting users to content created by residents without the clutter of unrelated posts or algorithmic noise.
 
 Configuration:
@@ -27,6 +21,9 @@ This project uses multiple databases to handle storing users, blog posts, and im
 Will need to talk to konrad about cicd once that is done
 
 Links to important things:
+
+The website: https://thankful-ocean-042ec241e.6.azurestaticapps.net
+Backend website: postcode-enf6gca7amfudzbf.westus-01.azurewebsites.net
 
 UI prototype:
 Class diagram:
