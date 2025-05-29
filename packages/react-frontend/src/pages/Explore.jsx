@@ -38,10 +38,8 @@ const Explore = () => {
     const token = localStorage.getItem("authToken");
     if (!token) return;
 
-    const vite_url = `${import.meta.env.VITE_BACKEND_URL}`;
-    console.log("vite_url: " + vite_url);
     // Fetch user info, then fetch posts for that user
-    fetch(vite_url + "/users", {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
