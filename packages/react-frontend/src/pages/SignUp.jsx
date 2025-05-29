@@ -9,26 +9,13 @@ export default function SignUp() {
   const [confirm, setConfirm] = useState("");
   const navigate = useNavigate();
 
-  // should configure the handleSignUp so that it sends a post to the backend
-
-  // the flow should be that this page creates the email and password
-  // step1 then creates the username
-  // step2 records the city and state
-  // step3 post the data to the server and get the user going in the home page
-
-  // how authentication is going to work is that this page creates a barebones user
-  // when the user is created, the rest of the steps will then patch in the following information for the user
-  // will probably add a thing where if they somehow skip all the steps have it so that they can't do anything until the rest of the info is filled in
   const handleSignUp = async (e) => {
     e.preventDefault();
     if (password !== confirm) {
       alert("Passwords do not match!");
       return;
     }
-    //console.log("Signing up:", { email, password }); // will need to remove this once it is set up
-    // TODO: send to backend
-    // start by posting the information to registerUser in auth.js
-    // then route to /onboarding/step1
+
     try {
       const response = await fetch(
         "http://localhost:8000/signup",
@@ -49,7 +36,6 @@ export default function SignUp() {
       }
     } catch (error) {
       console.error("error signing up");
-      // may add more
     }
   };
 
