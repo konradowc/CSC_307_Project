@@ -30,9 +30,9 @@ const Profile = () => {
   const routerLocation = useRouterLocation();
   const { newPost } = routerLocation.state || {};
   const [posts, setPosts] = useState([]);
-  const [username, setUsername] = useState("Jane Doe");
-  const [state, setState] = useState("CA");
-  const [city, setCity] = useState("City Name");
+  const [username, setUsername] = useState("");
+  const [state, setState] = useState("");
+  const [city, setCity] = useState("");
   const [userID, setUserID] = useState(
     "6801c14b792ac5e5f8f0e0c0"
   );

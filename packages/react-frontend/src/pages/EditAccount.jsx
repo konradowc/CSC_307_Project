@@ -7,10 +7,10 @@ const EditAccount = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    username: "Jane Doe",
-    email: "janedoe123@gmail.com",
-    city: "City Name",
-    state: "CA"
+    username: "",
+    email: "",
+    city: "",
+    state: ""
   });
 
   const [profileImage, setProfileImage] = useState(null);
@@ -157,12 +157,8 @@ const EditAccount = () => {
 
             <div className="settings-row">
               <div>
-                <label>Email</label>
-                <input
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                />
+              <label>Email</label>
+              <p>{formData.email}</p>
               </div>
             </div>
 
