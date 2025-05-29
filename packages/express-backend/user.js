@@ -1,12 +1,12 @@
 //user.js
 import mongoose from "mongoose";
-// need to dictate whether user or admin
-const UserSchema = new mongoose.Schema( // this is not the final version, will need to assess and improve
+
+// currently have no admin users
+const UserSchema = new mongoose.Schema(
   {
     name: {
-      //usename
       type: String,
-      required: false, // set to false so that way can patch in during steps
+      required: false,
       trim: true
     },
     email: {
@@ -25,7 +25,6 @@ const UserSchema = new mongoose.Schema( // this is not the final version, will n
       trim: true
     },
     profile_picture: {
-      // need to implement
       // use cloudinary url
       type: String
     },
@@ -33,11 +32,10 @@ const UserSchema = new mongoose.Schema( // this is not the final version, will n
       type: String
     },
     password: {
-      // this is where the hashed password will be stored
       type: String,
       required: true,
       trim: true
-    }, // may add a progress step counter
+    },
     posts: [
       {
         type: mongoose.Schema.Types.ObjectId,

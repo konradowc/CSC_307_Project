@@ -39,7 +39,6 @@ const Profile = () => {
   const [profileimage, setProfileImage] = useState(null);
   const token = localStorage.getItem("authToken");
 
-  // make it so that profile is updated with the users actual information
   useEffect(() => {
     if (!token) return;
 
@@ -81,23 +80,7 @@ const Profile = () => {
       .catch(console.error);
   }, []);
 
-  /*.then((r) => r.json())
-      .then(setPosts)
-      .catch(console.error);
-  }, []);*/
-
-  /*useEffect(() => {
-    console.log("newPost received:", newPost);
-    if (newPost?.title && newPost?.content) {
-      setPosts((prevPosts) => [
-        ...prevPosts,
-        { id: prevPosts.length + 1, ...newPost }
-      ]);
-    }
-  }, [newPost]);*/
-
   async function handleDelete(postID) {
-    // need to make this so that it actually deletes the post from the users account
     try {
       const response = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/api/posts/${postID}`,
@@ -127,7 +110,6 @@ const Profile = () => {
     }
   }
 
-  // need to add profile picture in
   return (
     <div className="profile-container">
       <div className="profile-header">

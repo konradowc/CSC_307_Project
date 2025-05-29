@@ -18,7 +18,6 @@ const EditAccount = () => {
 
   const token = localStorage.getItem("authToken");
 
-  // make it so that profile is updated with the users actual information
   useEffect(() => {
     fetch(`${import.meta.env.VITE_BACKEND_URL}/users`, {
       method: "GET",
@@ -41,13 +40,6 @@ const EditAccount = () => {
       })
       .catch(console.error);
   }, []);
-
-  /*const [formData, setFormData] = useState({
-    username: "Jane Doe",
-    email: "janedoe123@gmail.com",
-    city: "City Name",
-    state: "CA"
-  });*/
 
   const handleChange = (e) => {
     setFormData({

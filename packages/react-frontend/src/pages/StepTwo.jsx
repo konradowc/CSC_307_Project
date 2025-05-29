@@ -15,7 +15,7 @@ const StepTwo = () => {
     console.log("City:", city, "State:", state);
 
     const token = localStorage.getItem("authToken");
-    const updates = { city, state }; // need to add validation that city and state is not empty
+    const updates = { city, state };
 
     if (city.length === 0 || state.length === 0) {
       // will need to make this better eventually
@@ -46,7 +46,6 @@ const StepTwo = () => {
 
       const data = await response.json();
       console.log("User updated successfully:", data.user);
-      // Navigate to step 3
       navigate("/onboarding/step3");
     } catch (error) {
       console.error("Error updating user:", error.message);

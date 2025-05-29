@@ -15,7 +15,6 @@ const Settings = () => {
 
   const token = localStorage.getItem("authToken");
 
-  // make it so that profile is updated with the users actual information
   useEffect(() => {
     fetch(`${import.meta.env.VITE_BACKEND_URL}/users`, {
       method: "GET",
@@ -38,26 +37,15 @@ const Settings = () => {
       .catch(console.error);
   }, []);
 
-  /*const user = {
-    username: "Jane Doe",
-    email: "janedoe123@gmail.com",
-    city: "City Name",
-    state: "CA"
-  };*/
-
   const handleEditClick = () => {
     navigate("/editaccount");
   };
 
   const handleSignOut = () => {
-    // TODO: Add actual sign-out logic if needed (e.g., clearing tokens)
     localStorage.removeItem("authToken");
-    // need to wipe all previous user info from the state
     window.location.href = "/signin";
-    //navigate("/signin");
   };
 
-  // need to change settings-avatar so that it is the users profile image
   return (
     <div className="settings-container">
       <h1 className="settings-title">Settings</h1>

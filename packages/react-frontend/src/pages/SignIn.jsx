@@ -32,9 +32,7 @@ export default function SignIn() {
       }
     } catch (error) {
       console.error("error signing in");
-      // may add more
     }
-    // TODO: send to backend
   };
 
   return (
