@@ -5,6 +5,7 @@ const BlogSchema = new mongoose.Schema(
   {
     title: String,
     content: String,
+    state: { type: String, required: true },
     city: { type: String, required: true },
     image: {
       // cloudinary url

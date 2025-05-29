@@ -15,6 +15,7 @@ export default function CreatePost() {
     "6801c14b792ac5e5f8f0e0c7"
   );
   const [city, setCity] = useState("City Name");
+  const [state, setState] = useState("CA");
   const [username, setUserName] = useState("user");
   const [profile_picture, setProfileImage] = useState(null);
   const [profile_picture_id, setProfileID] = useState(null);
@@ -32,6 +33,7 @@ export default function CreatePost() {
         const user = data.user;
         setUserID(user._id);
         setCity(user.city);
+        setState(user.state);
         setUserName(user.name);
         setProfileID(user.profile_picture_id);
         setProfileImage(user.profile_picture);
@@ -82,6 +84,7 @@ export default function CreatePost() {
       content,
       userID: userID,
       username: username,
+      state: state,
       city: city,
       image: imageUrl,
       imagePublicId: imagePublicId,

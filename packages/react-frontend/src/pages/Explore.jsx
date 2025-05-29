@@ -33,9 +33,9 @@ const Explore = () => {
   const [posts, setPosts] = useState([]);
   const [city, setCity] = useState("City Name");
   const [username, setUsername] = useState("Jane Doe");
+  const token = localStorage.getItem("authToken");
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
     if (!token) return;
 
     // Fetch user info, then fetch posts for that user
@@ -90,6 +90,8 @@ const Explore = () => {
             key={post._id}
             authorName={post.username}
             authorAvatar={post.profile_picture}
+            authorCity={post.city}
+            authorState={post.state}
             title={post.title}
             content={post.content}
             date={formatDateTime(post.createdAt)}
