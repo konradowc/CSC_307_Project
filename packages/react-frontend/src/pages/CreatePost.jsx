@@ -15,6 +15,10 @@ export default function CreatePost() {
     "6801c14b792ac5e5f8f0e0c7"
   );
   const [city, setCity] = useState("City Name");
+  const [state, setState] = useState("CA");
+  const [username, setUserName] = useState("user");
+  const [profile_picture, setProfileImage] = useState(null);
+  const [profile_picture_id, setProfileID] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:8000/users", {
@@ -29,6 +33,10 @@ export default function CreatePost() {
         const user = data.user;
         setUserID(user._id);
         setCity(user.city);
+        setState(user.state);
+        setUserName(user.name);
+        setProfileID(user.profile_picture_id);
+        setProfileImage(user.profile_picture);
       })
       .catch(console.error);
   }, []);
@@ -71,14 +79,17 @@ export default function CreatePost() {
   };
 
   const handlePublish = () => {
-    // need to make it so that newPost takes in the correct information
     const newPost = {
       title,
       content,
       userID: userID,
+      username: username,
+      state: state,
       city: city,
       image: imageUrl,
-      imagePublicId: imagePublicId
+      imagePublicId: imagePublicId,
+      profile_picture: profile_picture,
+      profile_picture_id: profile_picture_id
     };
 
     fetch("http://localhost:8000/api/posts", {

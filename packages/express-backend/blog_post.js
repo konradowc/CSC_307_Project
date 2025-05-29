@@ -5,9 +5,10 @@ const BlogSchema = new mongoose.Schema(
   {
     title: String,
     content: String,
+    state: { type: String, required: true },
     city: { type: String, required: true },
     image: {
-      // make this so that it is simply a url which will be accessed by cloudinary
+      // cloudinary url
       type: String,
       required: false
     },
@@ -20,6 +21,17 @@ const BlogSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true
+    },
+    username: {
+      type: String,
+      required: true
+    },
+    profile_picture: {
+      // use cloudinary url
+      type: String
+    },
+    profile_picture_id: {
+      type: String
     }
   },
   { collection: "blog_list" }
