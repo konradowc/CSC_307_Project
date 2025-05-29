@@ -131,13 +131,17 @@ const Profile = () => {
           </div>
         </div>
 
-        <Link to="/createPost" className="create-button">
+        <Link
+          to="/createPost"
+          className="create-button"
+          title="Create Blog Post"
+        >
           <img
             src={penLine}
             alt="Create"
             className="pen-icon"
           />
-          Create Blog Post
+          <span>Create Blog Post</span>
         </Link>
       </div>
 
