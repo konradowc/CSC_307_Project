@@ -2,7 +2,9 @@ name: CI Testing
 
 on:
   push:
-    branches: [main, ko/cicd]
+    branches:
+      - main
+      - ko/cicd # remove later
 
 jobs:
   build:

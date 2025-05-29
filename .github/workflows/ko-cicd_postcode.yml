@@ -6,7 +6,8 @@ name: Build and deploy Node.js app to Azure Web App - postcode
 on:
   push:
     branches:
-      - ko/cicd
+      - main
+      - ko/cicd # remove later
   workflow_dispatch:
 
 jobs:
