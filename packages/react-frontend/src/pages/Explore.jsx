@@ -48,6 +48,7 @@ const Explore = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log("Fetched user data:", data); // Add this
         const user = data.user;
         setCity(user.city);
         setUsername(user.name);
