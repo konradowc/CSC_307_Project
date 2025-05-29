@@ -60,22 +60,16 @@ function App() {
             element={<EditAccount />}
           />
           <Route path="/createPost" element={<CreatePost />} />
-          <Route
-            path="/onboarding/step1"
-            element={<StepOne />}
-          />
-          <Route
-            path="/onboarding/step2"
-            element={<StepTwo />}
-          />
-          <Route
-            path="/onboarding/step3"
-            element={<StepThree />}
-          />
         </Route>
 
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/onboarding/step1" element={<StepOne />} />
+        <Route path="/onboarding/step2" element={<StepTwo />} />
+        <Route
+          path="/onboarding/step3"
+          element={<StepThree />}
+        />
       </Routes>
     </Router>
   );
