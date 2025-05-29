@@ -6,10 +6,11 @@ import trash from "../assets/trash.svg";
 import trashRed from "../assets/trash-red.svg";
 import closeIcon from "../assets/x.svg";
 
-
 const BlogPost = ({
   authorName,
   authorAvatar,
+  authorState,
+  authorCity,
   title,
   content,
   image,
@@ -21,16 +22,13 @@ const BlogPost = ({
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const menuRef = useRef(null);
 
-
   const dateObj = date ? new Date(date) : new Date();
 
   const formattedDate = dateObj.toLocaleDateString("en-US", {
-    month: "numeric",   // e.g. "May"
-    day:   "numeric", // e.g. "7"
-    year:  "numeric"  // e.g. "2025"
+    month: "numeric", // e.g. "May"
+    day: "numeric", // e.g. "7"
+    year: "numeric" // e.g. "2025"
   });
-
-
 
   const toggleMenu = () => {
     setIsMenuOpen((prevState) => !prevState);
@@ -71,7 +69,7 @@ const BlogPost = ({
 
   return (
     <li className="blogpost-item">
-        {authorName && (
+      {authorName && (
         <div className="blogpost-author">
           <img
             src={authorAvatar}
@@ -80,7 +78,9 @@ const BlogPost = ({
           />
           <div>
             <h3 className="author-name">{authorName}</h3>
-            <p className="author-location">City Name, CA</p>
+            <p className="author-location">
+              {authorCity}, {authorState}
+            </p>
           </div>
         </div>
       )}
