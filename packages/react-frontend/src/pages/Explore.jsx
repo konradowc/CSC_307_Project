@@ -31,8 +31,8 @@ const Explore = () => {
   const routerLocation = useRouterLocation();
   const { newPost } = routerLocation.state || {};
   const [posts, setPosts] = useState([]);
-  const [city, setCity] = useState("City Name");
-  const [username, setUsername] = useState("Jane Doe");
+  const [city, setCity] = useState("");
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
