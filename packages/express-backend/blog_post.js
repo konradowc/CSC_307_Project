@@ -7,7 +7,7 @@ const BlogSchema = new mongoose.Schema(
     content: String,
     city: { type: String, required: true },
     image: {
-      // make this so that it is simply a url which will be accessed by cloudinary
+      // cloudinary url
       type: String,
       required: false
     },

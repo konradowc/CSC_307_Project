@@ -71,7 +71,6 @@ export default function CreatePost() {
   };
 
   const handlePublish = () => {
-    // need to make it so that newPost takes in the correct information
     const newPost = {
       title,
       content,

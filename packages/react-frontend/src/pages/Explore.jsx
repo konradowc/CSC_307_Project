@@ -51,12 +51,8 @@ const Explore = () => {
         const user = data.user;
         setCity(user.city);
         setUsername(user.name);
-      }); // this will need to extract user data
+      });
   }, []);
-
-  // make this set up to use user data
-
-  //const city = "CityName"; //Update in Sprint 3 to use user data
 
   useEffect(() => {
     fetch(`http://localhost:8000/api/posts?city=${city}`)

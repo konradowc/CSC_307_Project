@@ -18,8 +18,6 @@ const upload = multer({ storage });
 app.use(express.json());
 app.use(cors());
 
-// need to determine which routes to protect with authenticateUser, will probably talk with the team and also use own discretion
-
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
@@ -387,9 +385,3 @@ app.get("/users", authenticateUser, (req, res) => {
       res.status(500).json({ error: "Internal Server Error" });
     });
 });
-
-// this does nothing right now
-/*app.post("/posts", authenticateUser, (req, res) => {
-  const { email } = req.user;
-  db.findUserByEmail(email).then().catch(); // make this so that after finding the user, it takes the users id and posts the blog post maybe
-});*/
