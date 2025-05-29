@@ -7,7 +7,7 @@ const EditAccount = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    username: "",
+    name: "",
     email: "",
     city: "",
     state: ""
@@ -30,7 +30,7 @@ const EditAccount = () => {
       .then((data) => {
         const formUser = data.user;
         setFormData({
-          username: formUser.name,
+          name: formUser.name,
           email: formUser.email,
           city: formUser.city,
           state: formUser.state
@@ -140,8 +140,8 @@ const EditAccount = () => {
               <div>
                 <label>Username</label>
                 <input
-                  name="username"
-                  value={formData.username}
+                  name="name"
+                  value={formData.name}
                   onChange={handleChange}
                 />
               </div>
@@ -157,8 +157,8 @@ const EditAccount = () => {
 
             <div className="settings-row">
               <div>
-              <label>Email</label>
-              <p>{formData.email}</p>
+                <label>Email</label>
+                <p>{formData.email}</p>
               </div>
             </div>
 
