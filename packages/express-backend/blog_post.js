@@ -20,6 +20,17 @@ const BlogSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true
+    },
+    username: {
+      type: String,
+      required: true
+    },
+    profile_picture: {
+      // use cloudinary url
+      type: String
+    },
+    profile_picture_id: {
+      type: String
     }
   },
   { collection: "blog_list" }

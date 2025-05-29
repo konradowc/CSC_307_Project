@@ -88,10 +88,8 @@ const Explore = () => {
         {posts.map((post) => (
           <BlogPost
             key={post._id}
-            // the authorname and authoravatar doesn't work right now
-            authorName={post.authorName}
-            authorAvatar={post.authorAvatar}
-            // need to fix the two things above
+            authorName={post.username}
+            authorAvatar={post.profile_picture}
             title={post.title}
             content={post.content}
             date={formatDateTime(post.createdAt)}

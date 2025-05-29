@@ -99,7 +99,6 @@ app.get("/api/posts", (req, res) => {
 app.post("/api/posts", authenticateUser, (req, res) => {
   const postToAdd = req.body;
   const fieldsToValidate = [
-    // will need to ask why we are validating the city
     ["city", postToAdd.city]
     //["title", postToAdd.title],
     //["content", postToAdd.content],

@@ -21,5 +21,6 @@ This project uses multiple databases to handle storing users, blog posts, and im
 Will need to talk to konrad about cicd once that is done
 
 Links to important things:
+
 UI prototype:
 Class diagram:
