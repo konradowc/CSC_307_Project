@@ -14,7 +14,7 @@ For ESLint, the file is default except for the addition of allowing jest and nod
 
 Additionally to run ESLint, run "npm run lint", to run Prettier, run "npm run format".
 
-For testing, cd into packages/react-frontend and run "npm run test:comp" or "npm run test:comp -- --coverage" for coverage report.
+For testing, run "npm run test:comp --workspace=react-frontend" or cd into packages/react-frontend and run "npm run test:comp" or "npm run test:comp -- --coverage" for coverage report.
 
 Set up for backend stuff:
 
