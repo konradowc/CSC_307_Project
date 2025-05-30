@@ -31,9 +31,9 @@ const Profile = () => {
   //const { newPost } = routerLocation.state || {};
   const newPost = routerLocation?.state?.newPost;
   const [posts, setPosts] = useState([]);
-  const [username, setUsername] = useState("Jane Doe");
-  const [state, setState] = useState("CA");
-  const [city, setCity] = useState("City Name");
+  const [username, setUsername] = useState("");
+  const [state, setState] = useState("");
+  const [city, setCity] = useState("");
   const [userID, setUserID] = useState(
     "6801c14b792ac5e5f8f0e0c0"
   );
@@ -132,13 +132,17 @@ const Profile = () => {
           </div>
         </div>
 
-        <Link to="/createPost" className="create-button">
+        <Link
+          to="/createPost"
+          className="create-button"
+          title="Create Blog Post"
+        >
           <img
             src={penLine}
             alt="Create"
             className="pen-icon"
           />
-          Create Blog Post
+          <span>Create Blog Post</span>
         </Link>
       </div>
 

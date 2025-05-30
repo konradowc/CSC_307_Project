@@ -22,5 +22,8 @@ Will need to talk to konrad about cicd once that is done
 
 Links to important things:
 
+The website: https://thankful-ocean-042ec241e.6.azurestaticapps.net
+Backend website: postcode-enf6gca7amfudzbf.westus-01.azurewebsites.net
+
 UI prototype:
 Class diagram:

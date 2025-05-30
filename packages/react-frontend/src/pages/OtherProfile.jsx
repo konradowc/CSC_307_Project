@@ -29,8 +29,8 @@ const OtherProfile = () => {
   useEffect(() => {
     const mockUser = {
       id: userId,
-      name: "John Doe",
-      location: "City Name, CA"
+      name: "",
+      location: ""
     };
 
     const mockPosts = [

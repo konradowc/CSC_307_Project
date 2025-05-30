@@ -48,12 +48,14 @@ const StepThree = () => {
         className="step-img"
       />
 
-      <h1>Congrats {username}!</h1>
-      <p className="subtext">You're all set!</p>
+      <div className="form-section">
+        <h1>Congrats {username}!</h1>
+        <p className="subtext">You're all set!</p>
 
-      <button onClick={handleStart} className="next-button">
-        Start
-      </button>
+        <button onClick={handleStart} className="next-button">
+          Start
+        </button>
+      </div>
     </div>
   );
 };

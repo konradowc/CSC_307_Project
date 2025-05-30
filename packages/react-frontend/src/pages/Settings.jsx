@@ -6,10 +6,10 @@ const Settings = () => {
   const navigate = useNavigate(); // hook for navigation
 
   const [user, setUser] = useState({
-    username: "Jane Doe",
-    email: "janedoe123@gmail.com",
-    city: "City Name",
-    state: "CA",
+    username: "",
+    email: "",
+    city: "",
+    state: "",
     profile_picture: null
   });
 
