@@ -28,7 +28,8 @@ function formatDateTime(isoString, options = {}) {
 
 const Profile = () => {
   const routerLocation = useRouterLocation();
-  const { newPost } = routerLocation.state || {};
+  //const { newPost } = routerLocation.state || {};
+  const newPost = routerLocation?.state?.newPost;
   const [posts, setPosts] = useState([]);
   const [username, setUsername] = useState("");
   const [state, setState] = useState("");
