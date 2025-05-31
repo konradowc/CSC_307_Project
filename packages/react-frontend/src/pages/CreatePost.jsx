@@ -56,13 +56,16 @@ export default function CreatePost() {
     formData.append("file", file);
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/upload`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`
-        },
-        body: formData
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/upload`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`
+          },
+          body: formData
+        }
+      );
 
       if (!res.ok)
         throw new Error(

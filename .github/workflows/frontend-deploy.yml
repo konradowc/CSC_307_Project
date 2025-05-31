@@ -4,12 +4,10 @@ on:
   push:
     branches:
       - main
-      - ko/cicd # remove later
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
-      - ko/cicd # remove later
 
 jobs:
   build_and_deploy_job:

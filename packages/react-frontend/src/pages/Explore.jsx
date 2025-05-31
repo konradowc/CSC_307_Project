@@ -35,7 +35,6 @@ const Explore = () => {
   const [username, setUsername] = useState("");
   const token = localStorage.getItem("authToken");
 
-
   useEffect(() => {
     if (!token) return;
 
@@ -57,7 +56,9 @@ const Explore = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/posts?city=${city}`)
+    fetch(
+      `${import.meta.env.VITE_BACKEND_URL}/api/posts?city=${city}`
+    )
       .then((r) => r.json())
       .then((fetchedPosts) => {
         const all = newPost

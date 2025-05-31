@@ -157,8 +157,8 @@ const EditAccount = () => {
 
             <div className="settings-row">
               <div>
-              <label>Email</label>
-              <p>{formData.email}</p>
+                <label>Email</label>
+                <p>{formData.email}</p>
               </div>
             </div>
 
