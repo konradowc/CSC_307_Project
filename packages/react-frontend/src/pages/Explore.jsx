@@ -6,7 +6,6 @@ import {
 import BlogPost from "../components/BlogPost";
 import "./Profile.css";
 import "../components/BlogPost.css";
-import flowersImage from "../assets/flowers.png";
 
 function formatDateTime(isoString, options = {}) {
   const date = new Date(isoString);
@@ -75,10 +74,10 @@ const Explore = () => {
 
   return (
     <div className="profile-container">
-      <h1 className="heading" style={{ marginBottom: "1rem" }}>
+      <h1 className="explore-heading">
         Welcome Back, {username}.
       </h1>
-      <p style={{ fontSize: "1rem", marginBottom: "2rem" }}>
+      <p className="explore-subtext">
         Catch up on posts from people nearby!
       </p>
 
