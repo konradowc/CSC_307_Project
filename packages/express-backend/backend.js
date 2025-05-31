@@ -11,7 +11,7 @@ import {
 } from "./auth.js";
 
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 8000;
 
 const upload = multer({ storage });
 
@@ -262,9 +262,7 @@ app.delete(
 );
 
 app.listen(port, () => {
-  console.log(
-    `Example app listening at http://localhost:${port}`
-  );
+  console.log(`Running on port ${port}`);
 });
 
 // helper functions
@@ -313,6 +311,7 @@ function valid(fields, OKifundefined, res, errheader) {
 }
 
 const validators = {
+  // add more as necessary
   validname,
   validcity,
   validemptyposts,
@@ -324,7 +323,7 @@ function validname(name) {
 }
 
 function validcity(city) {
-  return city !== ""; // list of cities in future?
+  return city !== ""; // will be a list of cities in future?
 }
 
 function validemptyposts(posts) {

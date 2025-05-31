@@ -1,0 +1,22 @@
+name: CI Testing
+
+on:
+  push:
+    branches:
+      - main
+      - ko/cicd # remove later
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npm run format
+      - run: npm run lint
+      - run: npm run -w react-frontend build
+      - run: npm run -w express-backend test
+      - run: npm run -w react-frontend test:comp

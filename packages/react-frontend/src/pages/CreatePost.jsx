@@ -21,7 +21,7 @@ export default function CreatePost() {
   const [profile_picture_id, setProfileID] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:8000/users", {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +56,7 @@ export default function CreatePost() {
     formData.append("file", file);
 
     try {
-      const res = await fetch("http://localhost:8000/upload", {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/upload`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`
@@ -92,7 +92,7 @@ export default function CreatePost() {
       profile_picture_id: profile_picture_id
     };
 
-    fetch("http://localhost:8000/api/posts", {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/posts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
