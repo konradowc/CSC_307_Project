@@ -255,6 +255,18 @@ body {
   }
 }
 
+.explore-heading {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.explore-subtext {
+  font-size: var(--text-base);
+  margin-bottom: 2rem;
+  color: var(--dark-gray);
+}
+
 @media (max-width: 400px) {
   .profile-container {
     padding: 0 12px 32px;
@@ -265,6 +277,14 @@ body {
   }
 
   .blogpost-content {
+    font-size: 0.95rem;
+  }
+
+  .explore-heading {
+    font-size: 1.5rem;
+  }
+
+  .explore-subtext {
     font-size: 0.95rem;
   }
 }

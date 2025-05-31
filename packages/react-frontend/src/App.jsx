@@ -40,8 +40,21 @@ function App() {
   return (
     <Router>
       <Routes>
+        {/* Auth pages */}
+        <Route path="/" element={<SignIn />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+
+        {/* Onboarding pages */}
+        <Route path="/onboarding/step1" element={<StepOne />} />
+        <Route path="/onboarding/step2" element={<StepTwo />} />
+        <Route
+          path="/onboarding/step3"
+          element={<StepThree />}
+        />
+
+        {/* all other routes use the nav bar */}
         <Route element={<WithNavbar />}>
-          <Route path="/" element={<SignIn />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/profile" element={<Profile />} />
           {/* Routing when connected to backend */}
@@ -61,15 +74,6 @@ function App() {
           />
           <Route path="/createPost" element={<CreatePost />} />
         </Route>
-
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/onboarding/step1" element={<StepOne />} />
-        <Route path="/onboarding/step2" element={<StepTwo />} />
-        <Route
-          path="/onboarding/step3"
-          element={<StepThree />}
-        />
       </Routes>
     </Router>
   );
