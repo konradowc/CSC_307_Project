@@ -13,8 +13,9 @@ const EditAccount = () => {
     state: ""
   });
 
-  const [profileImage, setProfileImage] = useState(null);
+  const [profileImage, setProfileImage] = useState(null); // this is the image preview
   const [profileID, setprofileID] = useState(null);
+  const [profileFile, setProfileFile] = useState(null);
 
   const token = localStorage.getItem("authToken");
 
@@ -52,11 +53,39 @@ const EditAccount = () => {
     const file = e.target.files[0];
     if (file) {
       setProfileImage(URL.createObjectURL(file));
+      setProfileFile(file); // store file to upload
     }
   };
 
   const handleCancel = () => {
     navigate("/settings");
+  };
+
+  const putImageinCloudinary = async (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/upload`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`
+          },
+          body: formData
+        }
+      );
+
+      if (!res.ok)
+        throw new Error(
+          `Upload failed with status ${res.status}`
+        );
+      return res.json();
+    } catch (error) {
+      console.error("upload went wrong with error, ", error);
+      return { imageUrl: null, publicId: null };
+    }
   };
 
   const handleSave = async () => {
@@ -71,6 +100,42 @@ const EditAccount = () => {
     // that change is reflected in the blogposts, or we could leave it off, maybe let people change username and deassociate from old posts
 
     try {
+      let imageurl = profileImage;
+      let publicId = profileID;
+
+      if (profileFile) {
+        if (profileID) {
+          await fetch(
+            `${import.meta.env.VITE_BACKEND_URL}/upload/${profileID}`,
+            {
+              method: "DELETE",
+              headers: {
+                Authorization: `Bearer ${token}`
+              }
+            }
+          );
+        }
+
+        const uploadresult =
+          await putImageinCloudinary(profileFile);
+
+        if (
+          !uploadresult?.imageUrl ||
+          !uploadresult?.publicId
+        ) {
+          throw new Error("Image upload failed.");
+        }
+
+        imageurl = uploadresult.imageUrl;
+        publicId = uploadresult.publicId;
+      }
+
+      const updatedData = {
+        ...formData,
+        profile_picture: imageurl,
+        profile_picture_id: publicId
+      };
+
       const response = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/users`,
         {
@@ -79,8 +144,7 @@ const EditAccount = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`
           },
-          body: JSON.stringify(formData)
-          // need to figure out how to patch in the profile image
+          body: JSON.stringify(updatedData)
         }
       );
 

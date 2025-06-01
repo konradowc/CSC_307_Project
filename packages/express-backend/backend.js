@@ -360,10 +360,33 @@ app.patch("/users", authenticateUser, (req, res) => {
           .json({ error: "User not found" });
       }
       console.log("Updated successfully:", updatedUser);
-      res.status(200).json({
-        message: "User updated successfully",
-        user: updatedUser
-      });
+
+      const { name, profile_picture, profile_picture_id } =
+        updates;
+
+      if (name || profile_picture || profile_picture_id) {
+        db.updatePostInfoAfterProfileChange(
+          updatedUser._id,
+          updates
+        )
+          .then(() => {
+            res.status(200).json({
+              message: "User updated successfully",
+              user: updatedUser
+            });
+          })
+          .catch((error) => {
+            console.error("Error updating user posts:", error);
+            res
+              .status(500)
+              .json({ error: "Failed to update blog posts" });
+          });
+      } else {
+        res.status(200).json({
+          message: "User updated successfully",
+          user: updatedUser
+        });
+      }
     })
     .catch((error) => {
       console.error("Error updating user:", error);
