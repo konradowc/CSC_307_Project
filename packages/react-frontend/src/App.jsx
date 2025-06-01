@@ -41,7 +41,7 @@ function App() {
     <Router>
       <Routes>
         <Route element={<WithNavbar />}>
-          <Route path="/" />
+          <Route path="/" element={<SignIn />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/profile" element={<Profile />} />
           {/* Routing when connected to backend */}

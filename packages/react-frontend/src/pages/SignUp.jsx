@@ -18,7 +18,7 @@ export default function SignUp() {
 
     try {
       const response = await fetch(
-        "http://localhost:8000/signup",
+        `${import.meta.env.VITE_BACKEND_URL}/signup`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

@@ -28,7 +28,8 @@ function formatDateTime(isoString, options = {}) {
 
 const Profile = () => {
   const routerLocation = useRouterLocation();
-  const { newPost } = routerLocation.state || {};
+  //const { newPost } = routerLocation.state || {};
+  const newPost = routerLocation?.state?.newPost;
   const [posts, setPosts] = useState([]);
   const [username, setUsername] = useState("");
   const [state, setState] = useState("");
@@ -43,7 +44,7 @@ const Profile = () => {
     if (!token) return;
 
     // Fetch user info, then fetch posts for that user
-    fetch("http://localhost:8000/users", {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -61,7 +62,7 @@ const Profile = () => {
 
         // Then fetch posts for that user
         return fetch(
-          `http://localhost:8000/api/posts?userID=${user._id}`
+          `${import.meta.env.VITE_BACKEND_URL}/api/posts?userID=${user._id}`
         );
       })
       .then((res) => {
@@ -83,7 +84,7 @@ const Profile = () => {
   async function handleDelete(postID) {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/posts/${postID}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/posts/${postID}`,
         {
           method: "DELETE",
           headers: {
@@ -131,13 +132,17 @@ const Profile = () => {
           </div>
         </div>
 
-        <Link to="/createPost" className="create-button">
+        <Link
+          to="/createPost"
+          className="create-button"
+          title="Create Blog Post"
+        >
           <img
             src={penLine}
             alt="Create"
             className="pen-icon"
           />
-          Create Blog Post
+          <span>Create Blog Post</span>
         </Link>
       </div>
 

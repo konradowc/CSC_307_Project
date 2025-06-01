@@ -35,12 +35,11 @@ const Explore = () => {
   const [username, setUsername] = useState("");
   const token = localStorage.getItem("authToken");
 
-
   useEffect(() => {
     if (!token) return;
 
     // Fetch user info, then fetch posts for that user
-    fetch("http://localhost:8000/users", {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -57,7 +56,9 @@ const Explore = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/posts?city=${city}`)
+    fetch(
+      `${import.meta.env.VITE_BACKEND_URL}/api/posts?city=${city}`
+    )
       .then((r) => r.json())
       .then((fetchedPosts) => {
         const all = newPost

@@ -24,7 +24,7 @@ const StepOne = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:8000/users",
+        `${import.meta.env.VITE_BACKEND_URL}/users`,
         {
           method: "PATCH",
           headers: {
@@ -63,23 +63,25 @@ const StepOne = () => {
         className="step-img"
       />
 
-      <h1>Welcome! First things first...</h1>
-      <p className="subtext">
-        P.S. You can always change this later.
-      </p>
+      <div className="form-section">
+        <h1>Welcome! First things first...</h1>
+        <p className="subtext">
+          P.S. You can always change this later.
+        </p>
 
-      <form onSubmit={handleNext}>
-        <div className="form-wrapper">
-          <InputField
-            label="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <button type="submit" className="next-button">
-            Next
-          </button>
-        </div>
-      </form>
+        <form onSubmit={handleNext}>
+          <div className="form-wrapper">
+            <InputField
+              label="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <button type="submit" className="next-button">
+              Next
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
