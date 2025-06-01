@@ -67,6 +67,9 @@ const EditAccount = () => {
     // if profileimage is not null, delete the image, then post in the new one and take response and put it in with formdata
     // this uploads the profile picture
 
+    // besides the profile pic, will need to probably make it so that when the user name is changed,
+    // that change is reflected in the blogposts, or we could leave it off, maybe let people change username and deassociate from old posts
+
     try {
       const response = await fetch(
         "http://localhost:8000/users",
