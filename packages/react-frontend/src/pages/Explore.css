@@ -1,0 +1,36 @@
+@import "../style.css";
+
+.profile-container {
+  max-width: 100%;
+  padding: 0px 80px 80px;
+  box-sizing: border-box;
+  font-family: var(--font-base);
+}
+
+.heading {
+  font-size: var(--text-xl);
+  font-weight: 700;
+}
+
+.posts-heading {
+  font-size: var(--text-base);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.post-count {
+  background-color: var(--black);
+  color: var(--white);
+  font-size: var(--text-xs);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.posts-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
