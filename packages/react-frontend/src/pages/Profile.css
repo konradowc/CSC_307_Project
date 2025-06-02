@@ -13,6 +13,14 @@ body {
   box-sizing: border-box;
 }
 
+/* for profile pic */
+.profile-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 /* Header */
 .profile-header {
   display: flex;

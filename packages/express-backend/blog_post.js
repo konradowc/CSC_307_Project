@@ -22,6 +22,7 @@ const BlogSchema = new mongoose.Schema(
       ref: "User",
       required: true
     },
+    // see if can use userid to get username
     username: {
       type: String,
       required: true

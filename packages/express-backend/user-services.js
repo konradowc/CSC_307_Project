@@ -125,6 +125,26 @@ function findPostByIdAndDelete(id) {
   return blogModel.findByIdAndDelete(id);
 }
 
+function updatePostInfoAfterProfileChange(id, updates) {
+  const updateFields = {};
+  if (updates.name) updateFields.username = updates.name;
+  if (updates.profile_picture)
+    updateFields.profile_picture = updates.profile_picture;
+  if (updates.profile_picture_id)
+    updateFields.profile_picture_id =
+      updates.profile_picture_id;
+
+  // If no relevant fields to update, just return a resolved promise immediately
+  if (Object.keys(updateFields).length === 0) {
+    return Promise.resolve(null);
+  }
+
+  return blogModel.updateMany(
+    { userID: id },
+    { $set: updateFields }
+  );
+}
+
 export default {
   addUser,
   getUsers,
@@ -139,5 +159,6 @@ export default {
   getUserPosts,
   addPost,
   findPostByIdAndUpdate,
-  findPostByIdAndDelete
+  findPostByIdAndDelete,
+  updatePostInfoAfterProfileChange
 };
