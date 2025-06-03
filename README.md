@@ -18,9 +18,7 @@ For testing, run "npm run test:comp --workspace=react-frontend" or cd into packa
 
 Set up for backend stuff:
 
-This project uses multiple databases to handle storing users, blog posts, and images. MongoDB stores users and blog posts while Cloudinary stores images. In order to get these set up, please create an account for MongoDB so that you can access the atlas cloud repository after contacting the dev team. Cloudinary does not require an account, instead to gain access, talking to the dev team is required. Additionally create a .env file within the express backend folder and ask for the secrets. The dev team will give them to you if they feel so inclined. After that, you will be ready to get started on the project.
-
-Will need to talk to konrad about cicd once that is done
+This project uses multiple databases to handle storing users, blog posts, and images. MongoDB stores users and blog posts while Cloudinary stores images. In order to get these set up, please create an account for MongoDB so that you can access the atlas cloud repository after contacting the dev team. Cloudinary does not require an account, instead to gain access, talking to the dev team is required. Additionally create a .env file within the express backend folder and ask for the secrets. The dev team will give them to you if they feel so inclined. Also create a .env file in the frontend folder and ask for the secrets. After that, you will be ready to get started on the project.
 
 Links to important things:
 
