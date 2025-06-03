@@ -15,7 +15,12 @@ const StepOne = () => {
     const token = localStorage.getItem("authToken");
     const updates = { name: username };
 
-    const BACKEND_URL = process.env.VITE_BACKEND_URL || "https://localhost/8000";
+    const BACKEND_URL =
+  typeof import.meta !== 'undefined' &&
+  import.meta.env &&
+  import.meta.env.VITE_BACKEND_URL
+    ? import.meta.env.VITE_BACKEND_URL
+    : 'https://localhost:8000';
 
     if (username.length === 0) {
       // will need to make this better eventually

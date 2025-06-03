@@ -34,7 +34,12 @@ const Explore = () => {
   const [username, setUsername] = useState("");
   const token = localStorage.getItem("authToken");
 
-  const BACKEND_URL = process.env.VITE_BACKEND_URL || "https://localhost/8000";
+  const BACKEND_URL =
+  typeof import.meta !== 'undefined' &&
+  import.meta.env &&
+  import.meta.env.VITE_BACKEND_URL
+    ? import.meta.env.VITE_BACKEND_URL
+    : 'https://localhost:8000';
 
   useEffect(() => {
     if (!token) return;
