@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Settings.css";
 import editIcon from "../assets/pen-line.svg";
-import { BACKEND_URL } from "../../env";
 
 const EditAccount = () => {
   const navigate = useNavigate();

@@ -6,7 +6,6 @@ import {
 import BlogPost from "../components/BlogPost";
 import "./Profile.css";
 import "../components/BlogPost.css";
-import { BACKEND_URL } from "../../env";
 
 function formatDateTime(isoString, options = {}) {
   const date = new Date(isoString);
@@ -34,6 +33,8 @@ const Explore = () => {
   const [city, setCity] = useState("");
   const [username, setUsername] = useState("");
   const token = localStorage.getItem("authToken");
+
+  const BACKEND_URL = process.env.VITE_BACKEND_URL || "https://localhost/8000";
 
   useEffect(() => {
     if (!token) return;

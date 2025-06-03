@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./Auth.css";
 import postcodeLogo from "../assets/postcodeLogo.svg";
-import { BACKEND_URL } from "../../env";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const navigate = useNavigate();
+
+  const BACKEND_URL = process.env.VITE_BACKEND_URL || "https://localhost/8000";
 
   const handleSignUp = async (e) => {
     e.preventDefault();
