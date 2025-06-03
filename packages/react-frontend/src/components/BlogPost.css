@@ -119,17 +119,24 @@
   position: relative;
 }
 
+.popup-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem; /* Adds spacing between icon, text, and buttons */
+}
+
 .popup-icon {
   width: 64px;
   height: 64px;
-  margin-bottom: 16px;
+  /* margin-bottom: 16px; */
 }
 
 .popup h2 {
   font-size: var(--text-lg);
   font-weight: 600;
   margin: 0;
-  margin-bottom: 12px;
+  /* margin-bottom: 12px; */
 }
 
 .popup p {
@@ -137,13 +144,16 @@
   color: var(--black);
   line-height: 1.5;
   margin: 0;
-  margin-bottom: 24px;
+  text-align: center;
+  /* margin-bottom: 24px; */
 }
 
 .popup-actions {
   display: flex;
   justify-content: space-between;
   gap: 16px;
+  width: 100%;
+  margin-top: 1rem;
 }
 
 .popup-actions button {
