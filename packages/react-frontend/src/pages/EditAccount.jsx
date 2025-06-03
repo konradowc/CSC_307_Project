@@ -67,16 +67,13 @@ const EditAccount = () => {
     formData.append("file", file);
 
     try {
-      const res = await fetch(
-        BACKEND_URL + `/upload`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`
-          },
-          body: formData
-        }
-      );
+      const res = await fetch(BACKEND_URL + `/upload`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        body: formData
+      });
 
       if (!res.ok)
         throw new Error(
@@ -106,15 +103,12 @@ const EditAccount = () => {
 
       if (profileFile) {
         if (profileID) {
-          await fetch(
-            BACKEND_URL + `/upload/${profileID}`,
-            {
-              method: "DELETE",
-              headers: {
-                Authorization: `Bearer ${token}`
-              }
+          await fetch(BACKEND_URL + `/upload/${profileID}`, {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${token}`
             }
-          );
+          });
         }
 
         const uploadresult =
@@ -137,17 +131,14 @@ const EditAccount = () => {
         profile_picture_id: publicId
       };
 
-      const response = await fetch(
-        BACKEND_URL + `/users`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-          },
-          body: JSON.stringify(updatedData)
-        }
-      );
+      const response = await fetch(BACKEND_URL + `/users`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(updatedData)
+      });
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -213,14 +204,6 @@ const EditAccount = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div>
-                <label>State (ex: CA)</label>
-                <input
-                  name="state"
-                  value={formData.state}
-                  onChange={handleChange}
-                />
-              </div>
             </div>
 
             <div className="settings-row">
@@ -236,6 +219,14 @@ const EditAccount = () => {
                 <input
                   name="city"
                   value={formData.city}
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
+                <label>State (ex: CA)</label>
+                <input
+                  name="state"
+                  value={formData.state}
                   onChange={handleChange}
                 />
               </div>
