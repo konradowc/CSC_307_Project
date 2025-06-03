@@ -1,9 +1,5 @@
 {
-  "routes": [
-    {
-      "route": "/*",
-      "serve": "/../packages/react-frontend/index.html",
-      "statusCode": 200
-    }
-  ]
+  "navigationFallback": {
+    "rewrite": "/index.html"
+  }
 }
