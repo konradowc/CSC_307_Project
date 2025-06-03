@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./Auth.css";
 import postcodeLogo from "../assets/postcodeLogo.svg";
+import { BACKEND_URL } from "../../env";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -18,7 +19,7 @@ export default function SignUp() {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/signup`,
+        BACKEND_URL + `/signup`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

@@ -6,6 +6,7 @@ import {
 import BlogPost from "../components/BlogPost";
 import "./Profile.css";
 import "../components/BlogPost.css";
+import { BACKEND_URL } from "../../env";
 
 function formatDateTime(isoString, options = {}) {
   const date = new Date(isoString);
@@ -38,7 +39,7 @@ const Explore = () => {
     if (!token) return;
 
     // Fetch user info, then fetch posts for that user
-    fetch(`${import.meta.env.VITE_BACKEND_URL}/users`, {
+    fetch(BACKEND_URL + `/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +57,7 @@ const Explore = () => {
 
   useEffect(() => {
     fetch(
-      `${import.meta.env.VITE_BACKEND_URL}/api/posts?city=${city}`
+      BACKEND_URL + `/api/posts?city=${city}`
     )
       .then((r) => r.json())
       .then((fetchedPosts) => {

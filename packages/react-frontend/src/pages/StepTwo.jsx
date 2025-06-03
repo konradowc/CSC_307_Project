@@ -4,6 +4,7 @@ import "./Onboarding.css";
 import twoOfThree from "../assets/2of3.svg";
 import postcodeLogo from "../assets/postcodeLogo.svg";
 import { useNavigate } from "react-router-dom";
+import { BACKEND_URL } from "../../env";
 
 const StepTwo = () => {
   const [city, setCity] = useState("");
@@ -26,7 +27,7 @@ const StepTwo = () => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/users`,
+        BACKEND_URL + `/users`,
         {
           method: "PATCH",
           headers: {
