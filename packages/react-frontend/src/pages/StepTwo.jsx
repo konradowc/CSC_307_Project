@@ -4,12 +4,13 @@ import "./Onboarding.css";
 import twoOfThree from "../assets/2of3.svg";
 import postcodeLogo from "../assets/postcodeLogo.svg";
 import { useNavigate } from "react-router-dom";
-import { BACKEND_URL } from "../../env";
 
 const StepTwo = () => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const navigate = useNavigate(); // hook for navigation
+
+  const BACKEND_URL = process.env.VITE_BACKEND_URL || "https://localhost/8000";
 
   const handleNext = async (e) => {
     e.preventDefault();

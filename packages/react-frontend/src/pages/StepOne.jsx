@@ -4,7 +4,6 @@ import InputField from "../components/InputField";
 import "./Onboarding.css";
 import oneOfThree from "../assets/1of3.svg";
 import postcodeLogo from "../assets/postcodeLogo.svg";
-import { BACKEND_URL } from "../../env";
 
 const StepOne = () => {
   const [username, setUsername] = useState("");
@@ -15,6 +14,8 @@ const StepOne = () => {
     console.log("Username:", username);
     const token = localStorage.getItem("authToken");
     const updates = { name: username };
+
+    const BACKEND_URL = process.env.VITE_BACKEND_URL || "https://localhost/8000";
 
     if (username.length === 0) {
       // will need to make this better eventually

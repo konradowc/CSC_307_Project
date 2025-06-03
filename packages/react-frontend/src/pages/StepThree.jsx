@@ -8,11 +8,13 @@ const StepThree = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
 
+  const BACKEND_URL = process.env.VITE_BACKEND_URL || "https://localhost/8000";
+
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     if (!token) return;
 
-    fetch("http://localhost:8000/users", {
+    fetch(BACKEND_URL + `/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

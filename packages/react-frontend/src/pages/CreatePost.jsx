@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CreatePost.css";
-import { BACKEND_URL } from "../../env";
 
 export default function CreatePost() {
   const [title, setTitle] = useState("");
@@ -20,6 +19,8 @@ export default function CreatePost() {
   const [username, setUserName] = useState("user");
   const [profile_picture, setProfileImage] = useState(null);
   const [profile_picture_id, setProfileID] = useState(null);
+
+  const BACKEND_URL = process.env.VITE_BACKEND_URL || "https://localhost/8000";
 
   useEffect(() => {
     fetch(BACKEND_URL + `/users`, {

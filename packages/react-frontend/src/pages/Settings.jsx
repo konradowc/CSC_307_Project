@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Settings.css";
-import { BACKEND_URL } from "../../env";
 
 const Settings = () => {
   const navigate = useNavigate(); // hook for navigation
@@ -15,6 +14,8 @@ const Settings = () => {
   });
 
   const token = localStorage.getItem("authToken");
+
+  const BACKEND_URL = process.env.VITE_BACKEND_URL || "https://localhost/8000";
 
   useEffect(() => {
     fetch(BACKEND_URL + `/users`, {
