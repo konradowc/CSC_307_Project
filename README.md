@@ -25,5 +25,5 @@ Links to important things:
 The website: https://thankful-ocean-042ec241e.6.azurestaticapps.net
 Backend website: postcode-enf6gca7amfudzbf.westus-01.azurewebsites.net
 
-UI prototype:
-Class diagram:
+UI prototype: https://www.figma.com/design/GO6QIe4MWIkW48swSMNaGy/CSC-307?node-id=0-1&t=dVnCdQ0z4GsgQDjn-1
+Class diagram: https://www.figma.com/board/LiEHpAt1mrZ6abhbuEe21l/CSC-307?node-id=0-1&t=fDRSLvtFXHUsQ2rK-1
