@@ -2,7 +2,7 @@
   "routes": [
     {
       "route": "/*",
-      "serve": "/index.html",
+      "serve": "/../packages/react-frontend/index.html",
       "statusCode": 200
     }
   ]
