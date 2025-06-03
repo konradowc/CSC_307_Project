@@ -144,23 +144,25 @@ const BlogPost = ({
             >
               <img src={closeIcon} alt="Close" />
             </button>
-            <img
-              src={trashRed}
-              alt="trash icon"
-              className="popup-icon"
-            />
-            <h2>Are you sure?</h2>
-            <p>
-              Do you really want to delete this message? This
-              process cannot be undone.
-            </p>
-            <div className="popup-actions">
-              <button onClick={handleCancelDelete}>
-                Cancel
-              </button>
-              <button onClick={handleConfirmDelete}>
-                Delete
-              </button>
+            <div className="popup-inner">
+              <img
+                src={trashRed}
+                alt="trash icon"
+                className="popup-icon"
+              />
+              <h2>Are you sure?</h2>
+              <p>
+                Do you really want to delete this message? This
+                process cannot be undone.
+              </p>
+              <div className="popup-actions">
+                <button onClick={handleCancelDelete}>
+                  Cancel
+                </button>
+                <button onClick={handleConfirmDelete}>
+                  Delete
+                </button>
+              </div>
             </div>
           </div>
         </div>
