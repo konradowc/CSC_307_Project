@@ -44,7 +44,7 @@ const Settings = () => {
 
   const handleSignOut = () => {
     localStorage.removeItem("authToken");
-    window.location.href = "/signin";
+    window.location.href = "/signin"; // there is an issue here
   };
 
   return (
