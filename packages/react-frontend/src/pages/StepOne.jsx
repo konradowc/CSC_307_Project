@@ -4,6 +4,7 @@ import InputField from "../components/InputField";
 import "./Onboarding.css";
 import oneOfThree from "../assets/1of3.svg";
 import postcodeLogo from "../assets/postcodeLogo.svg";
+import { BACKEND_URL } from "../../env";
 
 const StepOne = () => {
   const [username, setUsername] = useState("");
@@ -24,7 +25,7 @@ const StepOne = () => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/users`,
+        BACKEND_URL + `/users`,
         {
           method: "PATCH",
           headers: {

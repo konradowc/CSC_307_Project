@@ -15,6 +15,7 @@ module.exports = {
     "^.+\\.[jt]sx?$": "babel-jest"
   },
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
+  setupFiles: ["<rootDir>/jest.env.setup.js"],
   moduleNameMapper: {
     "\\.(jpg|jpeg|png|gif|webp|svg)$":
       "<rootDir>/__mocks__/fileMock.cjs",

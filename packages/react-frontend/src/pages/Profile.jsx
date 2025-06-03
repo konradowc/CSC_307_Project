@@ -6,6 +6,7 @@ import {
 import BlogPost from "../components/BlogPost";
 import "./Profile.css";
 import penLine from "../assets/pen-line.svg";
+import { BACKEND_URL } from "../../env";
 
 function formatDateTime(isoString, options = {}) {
   const date = new Date(isoString);
@@ -44,7 +45,7 @@ const Profile = () => {
     if (!token) return;
 
     // Fetch user info, then fetch posts for that user
-    fetch(`${import.meta.env.VITE_BACKEND_URL}/users`, {
+    fetch(BACKEND_URL + `/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -62,7 +63,7 @@ const Profile = () => {
 
         // Then fetch posts for that user
         return fetch(
-          `${import.meta.env.VITE_BACKEND_URL}/api/posts?userID=${user._id}`
+          BACKEND_URL + `/api/posts?userID=${user._id}`
         );
       })
       .then((res) => {
@@ -84,7 +85,7 @@ const Profile = () => {
   async function handleDelete(postID) {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/posts/${postID}`,
+        BACKEND_URL + `/api/posts/${postID}`,
         {
           method: "DELETE",
           headers: {
