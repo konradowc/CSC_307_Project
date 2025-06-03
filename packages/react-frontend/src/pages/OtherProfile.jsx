@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import BlogPost from "../components/BlogPost";
 import "./Profile.css";
+//import { BACKEND_URL } from "../../env";
 
 const OtherProfile = () => {
   const { userId } = useParams(); // assuming route is like /users/:userId
@@ -12,13 +13,13 @@ const OtherProfile = () => {
 
   // useEffect(() => {
   //   // Simulate user fetching
-  //   fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/${userId}`)
+  //   fetch(BACKEND_URL + `/api/users/${userId}`)
   //     .then((res) => res.json())
   //     .then(setUser)
   //     .catch(console.error);
 
   //   // Fetch posts by that user
-  //   fetch(`${import.meta.env.VITE_BACKEND_URL}/api/posts?userId=${userId}`)
+  //   fetch(BACKEND_URL + `/api/posts?userId=${userId}`)
   //     .then((r) => r.json())
   //     .then(setPosts)
   //     .catch(console.error);

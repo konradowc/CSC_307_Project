@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Settings.css";
 import editIcon from "../assets/pen-line.svg";
+import { BACKEND_URL } from "../../env";
 
 const EditAccount = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const EditAccount = () => {
   const token = localStorage.getItem("authToken");
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_BACKEND_URL}/users`, {
+    fetch(BACKEND_URL + `/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -67,7 +68,7 @@ const EditAccount = () => {
 
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/upload`,
+        BACKEND_URL + `/upload`,
         {
           method: "POST",
           headers: {
@@ -106,7 +107,7 @@ const EditAccount = () => {
       if (profileFile) {
         if (profileID) {
           await fetch(
-            `${import.meta.env.VITE_BACKEND_URL}/upload/${profileID}`,
+            BACKEND_URL + `/upload/${profileID}`,
             {
               method: "DELETE",
               headers: {
@@ -137,7 +138,7 @@ const EditAccount = () => {
       };
 
       const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/users`,
+        BACKEND_URL + `/users`,
         {
           method: "PATCH",
           headers: {
