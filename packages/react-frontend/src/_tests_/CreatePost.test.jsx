@@ -13,8 +13,8 @@ import BlogPost from "../components/BlogPost";
 const flowersImage = "mock-image-url.jpg";
 
 // mock backend url
-jest.mock('../../env.js', () => ({
-  getBackendUrl: () => 'http://localhost:8000',
+jest.mock("../../env.js", () => ({
+  getBackendUrl: () => "http://localhost:8000"
 }));
 
 // mock navigate
@@ -456,12 +456,13 @@ test("shows error when fetching posts fails", async () => {
     .fn()
     .mockResolvedValueOnce({
       ok: true,
-      json: () => Promise.resolve({ user: mockUser }),
+      json: () => Promise.resolve({ user: mockUser })
     })
     .mockResolvedValueOnce({
       ok: false, // simulate failed posts fetch
       status: 500,
-      json: () => Promise.resolve({ error: "Internal Server Error" }),
+      json: () =>
+        Promise.resolve({ error: "Internal Server Error" })
     });
 
   console.error = jest.fn();
@@ -475,22 +476,27 @@ test("shows error when fetching posts fails", async () => {
   );
 
   await waitFor(() => {
-    expect(console.error).toHaveBeenCalledWith(expect.any(Error));
+    expect(console.error).toHaveBeenCalledWith(
+      expect.any(Error)
+    );
   });
 });
 
 test("shows user profile picture when available", async () => {
-  const userWithPic = { ...mockUser, profile_picture: "pic.jpg" };
+  const userWithPic = {
+    ...mockUser,
+    profile_picture: "pic.jpg"
+  };
 
   global.fetch = jest
     .fn()
     .mockResolvedValueOnce({
       ok: true,
-      json: () => Promise.resolve({ user: userWithPic }),
+      json: () => Promise.resolve({ user: userWithPic })
     })
     .mockResolvedValueOnce({
       ok: true,
-      json: () => Promise.resolve([mockSavedPost]),
+      json: () => Promise.resolve([mockSavedPost])
     });
 
   render(
@@ -502,7 +508,10 @@ test("shows user profile picture when available", async () => {
   );
 
   await waitFor(() => {
-    expect(screen.getByAltText("Profile")).toHaveAttribute("src", "pic.jpg");
+    expect(screen.getByAltText("Profile")).toHaveAttribute(
+      "src",
+      "pic.jpg"
+    );
   });
 });
 

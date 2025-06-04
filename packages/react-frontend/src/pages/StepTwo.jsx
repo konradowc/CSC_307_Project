@@ -4,14 +4,12 @@ import "./Onboarding.css";
 import twoOfThree from "../assets/2of3.svg";
 import postcodeLogo from "../assets/postcodeLogo.svg";
 import { useNavigate } from "react-router-dom";
-import { getBackendUrl } from '../../env';
+import { getBackendUrl } from "../../env";
 
 const StepTwo = () => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const navigate = useNavigate(); // hook for navigation
-
-  
 
   const handleNext = async (e) => {
     e.preventDefault();
@@ -28,17 +26,14 @@ const StepTwo = () => {
     }
 
     try {
-      const response = await fetch(
-        getBackendUrl() + `/users`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-          },
-          body: JSON.stringify(updates)
-        }
-      );
+      const response = await fetch(getBackendUrl() + `/users`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(updates)
+      });
 
       if (!response.ok) {
         const errorData = await response.json();

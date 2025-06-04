@@ -6,7 +6,7 @@ import {
 import BlogPost from "../components/BlogPost";
 import "./Profile.css";
 import penLine from "../assets/pen-line.svg";
-import { getBackendUrl } from '../../env';
+import { getBackendUrl } from "../../env";
 
 function formatDateTime(isoString, options = {}) {
   const date = new Date(isoString);
@@ -40,8 +40,6 @@ const Profile = () => {
   );
   const [profileimage, setProfileImage] = useState(null);
   const token = localStorage.getItem("authToken");
-
-  
 
   useEffect(() => {
     if (!token) return;

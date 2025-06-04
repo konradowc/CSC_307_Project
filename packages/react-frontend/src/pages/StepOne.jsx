@@ -4,7 +4,7 @@ import InputField from "../components/InputField";
 import "./Onboarding.css";
 import oneOfThree from "../assets/1of3.svg";
 import postcodeLogo from "../assets/postcodeLogo.svg";
-import { getBackendUrl } from '../../env';
+import { getBackendUrl } from "../../env";
 
 const StepOne = () => {
   const [username, setUsername] = useState("");
@@ -16,8 +16,6 @@ const StepOne = () => {
     const token = localStorage.getItem("authToken");
     const updates = { name: username };
 
-    
-
     if (username.length === 0) {
       // will need to make this better eventually
       console.error("need a username");
@@ -26,17 +24,14 @@ const StepOne = () => {
     }
 
     try {
-      const response = await fetch(
-        getBackendUrl() + `/users`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-          },
-          body: JSON.stringify(updates)
-        }
-      );
+      const response = await fetch(getBackendUrl() + `/users`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(updates)
+      });
 
       if (!response.ok) {
         const errorData = await response.json();

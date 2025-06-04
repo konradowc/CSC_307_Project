@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Settings.css";
 import editIcon from "../assets/pen-line.svg";
-import { getBackendUrl } from '../../env';
+import { getBackendUrl } from "../../env";
 
 const EditAccount = () => {
   const navigate = useNavigate();
@@ -19,8 +19,6 @@ const EditAccount = () => {
   const [profileFile, setProfileFile] = useState(null);
 
   const token = localStorage.getItem("authToken");
-
-
 
   useEffect(() => {
     fetch(getBackendUrl() + `/users`, {
@@ -69,16 +67,13 @@ const EditAccount = () => {
     formData.append("file", file);
 
     try {
-      const res = await fetch(
-        getBackendUrl() + `/upload`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`
-          },
-          body: formData
-        }
-      );
+      const res = await fetch(getBackendUrl() + `/upload`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        body: formData
+      });
 
       if (!res.ok)
         throw new Error(
@@ -139,17 +134,14 @@ const EditAccount = () => {
         profile_picture_id: publicId
       };
 
-      const response = await fetch(
-        getBackendUrl() + `/users`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-          },
-          body: JSON.stringify(updatedData)
-        }
-      );
+      const response = await fetch(getBackendUrl() + `/users`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(updatedData)
+      });
 
       if (!response.ok) {
         const errorData = await response.json();

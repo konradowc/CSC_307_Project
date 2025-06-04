@@ -6,7 +6,7 @@ import {
 import BlogPost from "../components/BlogPost";
 import "./Profile.css";
 import "../components/BlogPost.css";
-import { getBackendUrl } from '../../env';
+import { getBackendUrl } from "../../env";
 
 function formatDateTime(isoString, options = {}) {
   const date = new Date(isoString);
@@ -35,8 +35,6 @@ const Explore = () => {
   const [username, setUsername] = useState("");
   const token = localStorage.getItem("authToken");
 
-  
-
   useEffect(() => {
     if (!token) return;
 
@@ -58,9 +56,7 @@ const Explore = () => {
   }, []);
 
   useEffect(() => {
-    fetch(
-      getBackendUrl() + `/api/posts?city=${city}`
-    )
+    fetch(getBackendUrl() + `/api/posts?city=${city}`)
       .then((r) => r.json())
       .then((fetchedPosts) => {
         const all = newPost

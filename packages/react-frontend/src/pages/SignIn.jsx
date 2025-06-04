@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./Auth.css";
 import postcodeLogo from "../assets/postcodeLogo.svg";
-import { getBackendUrl } from '../../env';
+import { getBackendUrl } from "../../env";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
-  
 
   const handleSignIn = async (e) => {
     e.preventDefault();

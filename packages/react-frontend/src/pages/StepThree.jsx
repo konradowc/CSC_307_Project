@@ -3,13 +3,11 @@ import { useNavigate } from "react-router-dom";
 import postcodeLogo from "../assets/postcodeLogo.svg";
 import "./Onboarding.css";
 import threeOfThree from "../assets/3of3.svg";
-import { getBackendUrl } from '../../env';
+import { getBackendUrl } from "../../env";
 
 const StepThree = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
-
-  
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");

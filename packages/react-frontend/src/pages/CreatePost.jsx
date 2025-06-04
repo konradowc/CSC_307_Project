@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CreatePost.css";
-import { getBackendUrl } from '../../env';
+import { getBackendUrl } from "../../env";
 
 export default function CreatePost() {
   const [title, setTitle] = useState("");
@@ -57,16 +57,13 @@ export default function CreatePost() {
     formData.append("file", file);
 
     try {
-      const res = await fetch(
-        getBackendUrl() + `/upload`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`
-          },
-          body: formData
-        }
-      );
+      const res = await fetch(getBackendUrl() + `/upload`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        body: formData
+      });
 
       if (!res.ok)
         throw new Error(
