@@ -15,6 +15,7 @@ jobs:
           node-version: 22
       - run: npm ci
       - run: npm run format
+      - run: npm run prettier
       - run: npm run lint
       - run: npm run -w react-frontend build
       - run: npm run -w express-backend test

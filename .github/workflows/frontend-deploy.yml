@@ -1,9 +1,11 @@
 name: Azure Static Web Apps CI/CD
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    workflows:
+      - "CI Testing"
+    types:
+      - completed
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
