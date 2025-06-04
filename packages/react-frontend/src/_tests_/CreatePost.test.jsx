@@ -11,6 +11,11 @@ import Profile from "../pages/Profile";
 
 const flowersImage = "mock-image-url.jpg";
 
+// mock backend url
+jest.mock('../../env.js', () => ({
+  getBackendUrl: () => 'http://localhost:8000',
+}));
+
 // mock navigate
 const mockNavigate = jest.fn();
 jest.mock("react-router-dom", () => {

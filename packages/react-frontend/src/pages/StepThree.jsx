@@ -3,23 +3,19 @@ import { useNavigate } from "react-router-dom";
 import postcodeLogo from "../assets/postcodeLogo.svg";
 import "./Onboarding.css";
 import threeOfThree from "../assets/3of3.svg";
+import { getBackendUrl } from '../../env';
 
 const StepThree = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
 
-  const BACKEND_URL =
-  typeof import.meta !== 'undefined' &&
-  import.meta.env &&
-  import.meta.env.VITE_BACKEND_URL
-    ? import.meta.env.VITE_BACKEND_URL
-    : 'https://localhost:8000';
+  
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     if (!token) return;
 
-    fetch(BACKEND_URL + `/users`, {
+    fetch(getBackendUrl() + `/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

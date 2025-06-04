@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Settings.css";
+import { getBackendUrl } from '../../env';
 
 const Settings = () => {
   const navigate = useNavigate(); // hook for navigation
@@ -15,15 +16,10 @@ const Settings = () => {
 
   const token = localStorage.getItem("authToken");
 
-  const BACKEND_URL =
-  typeof import.meta !== 'undefined' &&
-  import.meta.env &&
-  import.meta.env.VITE_BACKEND_URL
-    ? import.meta.env.VITE_BACKEND_URL
-    : 'https://localhost:8000';
+  
 
   useEffect(() => {
-    fetch(BACKEND_URL + `/users`, {
+    fetch(getBackendUrl() + `/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

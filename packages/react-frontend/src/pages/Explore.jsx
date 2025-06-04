@@ -6,6 +6,7 @@ import {
 import BlogPost from "../components/BlogPost";
 import "./Profile.css";
 import "../components/BlogPost.css";
+import { getBackendUrl } from '../../env';
 
 function formatDateTime(isoString, options = {}) {
   const date = new Date(isoString);
@@ -34,18 +35,13 @@ const Explore = () => {
   const [username, setUsername] = useState("");
   const token = localStorage.getItem("authToken");
 
-  const BACKEND_URL =
-  typeof import.meta !== 'undefined' &&
-  import.meta.env &&
-  import.meta.env.VITE_BACKEND_URL
-    ? import.meta.env.VITE_BACKEND_URL
-    : 'https://localhost:8000';
+  
 
   useEffect(() => {
     if (!token) return;
 
     // Fetch user info, then fetch posts for that user
-    fetch(BACKEND_URL + `/users`, {
+    fetch(getBackendUrl() + `/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -63,7 +59,7 @@ const Explore = () => {
 
   useEffect(() => {
     fetch(
-      BACKEND_URL + `/api/posts?city=${city}`
+      getBackendUrl() + `/api/posts?city=${city}`
     )
       .then((r) => r.json())
       .then((fetchedPosts) => {

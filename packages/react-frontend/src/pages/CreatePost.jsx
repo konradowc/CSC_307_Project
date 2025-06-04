@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CreatePost.css";
+import { getBackendUrl } from '../../env';
 
 export default function CreatePost() {
   const [title, setTitle] = useState("");
@@ -20,15 +21,8 @@ export default function CreatePost() {
   const [profile_picture, setProfileImage] = useState(null);
   const [profile_picture_id, setProfileID] = useState(null);
 
-  const BACKEND_URL =
-  typeof import.meta !== 'undefined' &&
-  import.meta.env &&
-  import.meta.env.VITE_BACKEND_URL
-    ? import.meta.env.VITE_BACKEND_URL
-    : 'https://localhost:8000';
-
   useEffect(() => {
-    fetch(BACKEND_URL + `/users`, {
+    fetch(getBackendUrl() + `/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -64,7 +58,7 @@ export default function CreatePost() {
 
     try {
       const res = await fetch(
-        BACKEND_URL + `/upload`,
+        getBackendUrl() + `/upload`,
         {
           method: "POST",
           headers: {
@@ -102,7 +96,7 @@ export default function CreatePost() {
       profile_picture_id: profile_picture_id
     };
 
-    fetch(BACKEND_URL + `/api/posts`, {
+    fetch(getBackendUrl() + `/api/posts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -6,6 +6,7 @@ import {
 import BlogPost from "../components/BlogPost";
 import "./Profile.css";
 import penLine from "../assets/pen-line.svg";
+import { getBackendUrl } from '../../env';
 
 function formatDateTime(isoString, options = {}) {
   const date = new Date(isoString);
@@ -40,18 +41,13 @@ const Profile = () => {
   const [profileimage, setProfileImage] = useState(null);
   const token = localStorage.getItem("authToken");
 
-  const BACKEND_URL =
-  typeof import.meta !== 'undefined' &&
-  import.meta.env &&
-  import.meta.env.VITE_BACKEND_URL
-    ? import.meta.env.VITE_BACKEND_URL
-    : 'https://localhost:8000';
+  
 
   useEffect(() => {
     if (!token) return;
 
     // Fetch user info, then fetch posts for that user
-    fetch(BACKEND_URL + `/users`, {
+    fetch(getBackendUrl() + `/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -69,7 +65,7 @@ const Profile = () => {
 
         // Then fetch posts for that user
         return fetch(
-          BACKEND_URL + `/api/posts?userID=${user._id}`
+          getBackendUrl() + `/api/posts?userID=${user._id}`
         );
       })
       .then((res) => {
@@ -91,7 +87,7 @@ const Profile = () => {
   async function handleDelete(postID) {
     try {
       const response = await fetch(
-        BACKEND_URL + `/api/posts/${postID}`,
+        getBackendUrl() + `/api/posts/${postID}`,
         {
           method: "DELETE",
           headers: {

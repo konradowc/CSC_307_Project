@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./Auth.css";
 import postcodeLogo from "../assets/postcodeLogo.svg";
+import { getBackendUrl } from '../../env';
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -9,12 +10,7 @@ export default function SignUp() {
   const [confirm, setConfirm] = useState("");
   const navigate = useNavigate();
 
-  const BACKEND_URL =
-  typeof import.meta !== 'undefined' &&
-  import.meta.env &&
-  import.meta.env.VITE_BACKEND_URL
-    ? import.meta.env.VITE_BACKEND_URL
-    : 'https://localhost:8000';
+  
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -25,7 +21,7 @@ export default function SignUp() {
 
     try {
       const response = await fetch(
-        BACKEND_URL + `/signup`,
+        getBackendUrl() + `/signup`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
