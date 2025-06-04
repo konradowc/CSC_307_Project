@@ -8,6 +8,7 @@ import {
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 import CreatePost from "../pages/CreatePost";
 import Profile from "../pages/Profile";
+import BlogPost from "../components/BlogPost";
 
 const flowersImage = "mock-image-url.jpg";
 
@@ -448,4 +449,76 @@ test("shows error when deleting post fails", async () => {
   });
 
   alertSpy.mockRestore();
+});
+
+test("shows error when fetching posts fails", async () => {
+  global.fetch = jest
+    .fn()
+    .mockResolvedValueOnce({
+      ok: true,
+      json: () => Promise.resolve({ user: mockUser }),
+    })
+    .mockResolvedValueOnce({
+      ok: false, // simulate failed posts fetch
+      status: 500,
+      json: () => Promise.resolve({ error: "Internal Server Error" }),
+    });
+
+  console.error = jest.fn();
+
+  render(
+    <MemoryRouter initialEntries={["/profile"]}>
+      <Routes>
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </MemoryRouter>
+  );
+
+  await waitFor(() => {
+    expect(console.error).toHaveBeenCalledWith(expect.any(Error));
+  });
+});
+
+test("shows user profile picture when available", async () => {
+  const userWithPic = { ...mockUser, profile_picture: "pic.jpg" };
+
+  global.fetch = jest
+    .fn()
+    .mockResolvedValueOnce({
+      ok: true,
+      json: () => Promise.resolve({ user: userWithPic }),
+    })
+    .mockResolvedValueOnce({
+      ok: true,
+      json: () => Promise.resolve([mockSavedPost]),
+    });
+
+  render(
+    <MemoryRouter initialEntries={["/profile"]}>
+      <Routes>
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </MemoryRouter>
+  );
+
+  await waitFor(() => {
+    expect(screen.getByAltText("Profile")).toHaveAttribute("src", "pic.jpg");
+  });
+});
+
+test("renders delete confirmation popup", () => {
+  render(
+    <BlogPost
+      title="Sample"
+      content="This is a sample post"
+      date="2024-06-01T00:00:00.000Z"
+      isOwner={true}
+      onDelete={() => {}}
+    />
+  );
+
+  fireEvent.click(screen.getByAltText("Menu"));
+  fireEvent.click(screen.getByText(/Delete Blog Post/i));
+
+  expect(screen.getByText(/Are you sure/i)).toBeInTheDocument();
 });
