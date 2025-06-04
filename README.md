@@ -159,8 +159,8 @@ This project requires environment variables for both frontend and backend.
 
 - **Live Website**: [PostCode Frontend](https://thankful-ocean-042ec241e.6.azurestaticapps.net)
 - **Backend API**: [PostCode Backend](https://postcode-enf6gca7amfudzbf.westus-01.azurewebsites.net)
-- **UI Prototype**: [Figma Design](https://www.figma.com/design/GO6QIe4MWIkW48swSMNaGy/CSC-307?node-id=0-1&t=dVnCdQ0z4GsgQDjn-1)
-- **Class Diagram**: [Diagram](https://www.figma.com/board/LiEHpAt1mrZ6abhbuEe21l/CSC-307?node-id=0-1&t=fDRSLvtFXHUsQ2rK-1)
+- **UI Prototype (last updated 5/6/2025)**: [Figma Design](https://www.figma.com/design/GO6QIe4MWIkW48swSMNaGy/CSC-307?node-id=0-1&t=dVnCdQ0z4GsgQDjn-1)
+- **Class Diagram (last updated 6/3/2025)**: [Diagram](https://www.figma.com/board/LiEHpAt1mrZ6abhbuEe21l/CSC-307?node-id=0-1&t=fDRSLvtFXHUsQ2rK-1)
 
 
 
