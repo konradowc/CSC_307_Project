@@ -132,7 +132,7 @@ Configuration files for both Prettier and ESLint are located in the root directo
 ## Environment Configuration
 
 
-This project requires environment variables for both frontend and backend.
+This project requires environment variables for the backend.
 
 
 1. **MongoDB**:
@@ -147,7 +147,7 @@ This project requires environment variables for both frontend and backend.
 
 
 3. **.env Files**:
-  - Create a `.env` file in both `packages/express-backend/` and `packages/react-frontend/`
+  - Create a `.env` file in `packages/express-backend/`
   - Contact the dev team for secret values
 
 
