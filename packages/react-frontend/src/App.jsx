@@ -12,7 +12,6 @@ import CreatePost from "./pages/CreatePost";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Navbar from "./components/Navbar";
-//import { loginUser, signupUser } from "./Security";
 import StepOne from "./pages/StepOne";
 import StepTwo from "./pages/StepTwo";
 import StepThree from "./pages/StepThree";

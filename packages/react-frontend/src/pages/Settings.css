@@ -203,12 +203,12 @@
   }
 
   .settings-row > div {
-    width: 100%; /* ✅ Fill available width */
+    width: 100%; /* Fill available width */
     min-width: unset;
   }
 
   .settings-info {
-    width: 100%; /* ✅ Ensure full width on mobile */
+    width: 100%; /* Ensure full width on mobile */
   }
 
   .settings-actions {

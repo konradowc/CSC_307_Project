@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import BlogPost from "../components/BlogPost";
 import "./Profile.css";
-//import { getBackendUrl } from '../../env';
 
 const OtherProfile = () => {
   const { userId } = useParams(); // assuming route is like /users/:userId
