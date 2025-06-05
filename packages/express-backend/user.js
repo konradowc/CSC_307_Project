@@ -1,7 +1,6 @@
 //user.js
 import mongoose from "mongoose";
 
-// currently have no admin users
 const UserSchema = new mongoose.Schema(
   {
     name: {

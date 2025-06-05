@@ -46,21 +46,16 @@ app.post(
 // DELETEs a single image from cloudinary
 // returns 200 if success, 500 if failure
 
-app.delete(
-  "/upload/:publicId",
-  //authenticateUser,
-  async (req, res) => {
-    // will need to encode publicId when inserting into endpoint
-    dbRequest(
-      deleteImage,
-      [req.params.publicId],
-      res,
-      genErrHeader(req),
-      200,
-      500
-    );
-  }
-);
+app.delete("/upload/:publicId", async (req, res) => {
+  dbRequest(
+    deleteImage,
+    [req.params.publicId],
+    res,
+    genErrHeader(req),
+    200,
+    500
+  );
+});
 
 /*
 BLOG POSTS
@@ -98,15 +93,7 @@ app.get("/api/posts", (req, res) => {
 // returns 201 if success or 400 if failure
 app.post("/api/posts", authenticateUser, (req, res) => {
   const postToAdd = req.body;
-  const fieldsToValidate = [
-    ["city", postToAdd.city]
-    //["title", postToAdd.title],
-    //["content", postToAdd.content],
-    //["image", postToAdd.content],
-    //["imagePublicId", postToAdd.imagePublicId],
-    //["createdAt", postToAdd.createdAt],
-    //["userID", postToAdd.userID]
-  ];
+  const fieldsToValidate = [["city", postToAdd.city]];
   const errheader = genErrHeader(req);
 
   if (valid(fieldsToValidate, false, res, errheader)) {
@@ -124,36 +111,22 @@ app.post("/api/posts", authenticateUser, (req, res) => {
 // PATCHs a blog post (edits it)
 // returns 200 if success, 400 if failure
 
-app.patch(
-  "/api/posts/:id",
-  //authenticateUser,
-  (req, res) => {
-    const postFieldsToUpdate = req.body;
-    const fieldsToValidate = [
-      ["city", postFieldsToUpdate.city]
-      //["title", postFieldsToUpdate.title],
-      //["content", postFieldsToUpdate.content],
-      //["image", postFieldsToUpdate.content],
-      //["imagePublicId", postFieldsToUpdate.imagePublicId],
-      //["createdAt", postFieldsToUpdate.createdAt],
-      //["userID", postFieldsToUpdate.userID]
-    ];
-    const errheader = genErrHeader(req);
+app.patch("/api/posts/:id", (req, res) => {
+  const postFieldsToUpdate = req.body;
+  const fieldsToValidate = [["city", postFieldsToUpdate.city]];
+  const errheader = genErrHeader(req);
 
-    // TO-DO: update old images
-
-    if (valid(fieldsToValidate, true, res, errheader)) {
-      dbRequest(
-        db.findPostByIdAndUpdate,
-        [req.params.id, postFieldsToUpdate],
-        res,
-        errheader,
-        200,
-        400
-      );
-    }
+  if (valid(fieldsToValidate, true, res, errheader)) {
+    dbRequest(
+      db.findPostByIdAndUpdate,
+      [req.params.id, postFieldsToUpdate],
+      res,
+      errheader,
+      200,
+      400
+    );
   }
-);
+});
 
 // DELETEs a blog post from id
 // returns 200 if success or 400 if failure
@@ -176,24 +149,19 @@ USERS
 // GETs a user (including profile info and their posts)
 // returns 200 if success, 401 if failure
 
-app.get(
-  "/api/users/:id", //
-  // authenticateUser,
-  (req, res) => {
-    dbRequest(
-      db.findUserById,
-      [req.params.id],
-      res,
-      genErrHeader(req),
-      200,
-      401
-    );
-  }
-);
+app.get("/api/users/:id", (req, res) => {
+  dbRequest(
+    db.findUserById,
+    [req.params.id],
+    res,
+    genErrHeader(req),
+    200,
+    401
+  );
+});
 
 // POSTs a user passed in as a JSON object
 // returns 201 if success or 400 if failure
-// will probably remove this
 app.post("/api/auth/signup", (req, res) => {
   const userToAdd = req.body;
   const fieldsToValidate = [
@@ -218,48 +186,40 @@ app.post("/api/auth/signup", (req, res) => {
 // PATCHs a user's profile settings
 // returns 200 if success, 400 if failure
 
-app.patch(
-  "/api/users/:id/settings",
-  //authenticateUser,
-  (req, res) => {
-    const userFieldsToUpdate = req.body;
-    const fieldsToValidate = [
-      ["name", userFieldsToUpdate.name],
-      ["city", userFieldsToUpdate.city],
-      ["undefinedposts", userFieldsToUpdate.posts] // posts should be undefined
-    ];
-    const errheader = genErrHeader(req);
+app.patch("/api/users/:id/settings", (req, res) => {
+  const userFieldsToUpdate = req.body;
+  const fieldsToValidate = [
+    ["name", userFieldsToUpdate.name],
+    ["city", userFieldsToUpdate.city],
+    ["undefinedposts", userFieldsToUpdate.posts] // posts should be undefined
+  ];
+  const errheader = genErrHeader(req);
 
-    if (valid(fieldsToValidate, true, res, errheader)) {
-      dbRequest(
-        db.findUserByIdAndUpdate,
-        [req.params.id, userFieldsToUpdate],
-        res,
-        genErrHeader(req),
-        200,
-        400
-      );
-    }
-  }
-);
-
-// DELETEs a user from id
-// returns 200 if success or 400 if failure
-
-app.delete(
-  "/api/users/:id",
-  //authenticateUser,
-  (req, res) => {
+  if (valid(fieldsToValidate, true, res, errheader)) {
     dbRequest(
-      db.findUserByIdAndDelete,
-      [req.params.id],
+      db.findUserByIdAndUpdate,
+      [req.params.id, userFieldsToUpdate],
       res,
       genErrHeader(req),
       200,
       400
     );
   }
-);
+});
+
+// DELETEs a user from id
+// returns 200 if success or 400 if failure
+
+app.delete("/api/users/:id", (req, res) => {
+  dbRequest(
+    db.findUserByIdAndDelete,
+    [req.params.id],
+    res,
+    genErrHeader(req),
+    200,
+    400
+  );
+});
 
 app.listen(port, () => {
   console.log(`Running on port ${port}`);
@@ -323,7 +283,7 @@ function validname(name) {
 }
 
 function validcity(city) {
-  return city !== ""; // will be a list of cities in future?
+  return city !== "";
 }
 
 function validemptyposts(posts) {
@@ -344,7 +304,6 @@ function genErrHeader(req) {
 manual stuff
 */
 
-// will probably add the posts and stuff for the function
 app.post("/signup", registerUser);
 app.post("/signin", loginUser);
 
