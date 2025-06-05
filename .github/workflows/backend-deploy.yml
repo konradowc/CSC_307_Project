@@ -4,7 +4,7 @@
 name: Build and deploy Node.js app to Azure Web App - postcode
 
 on:
-  workflow_dispatch:
+  workflow_run:
     workflows:
       - "CI Testing"
     types:
