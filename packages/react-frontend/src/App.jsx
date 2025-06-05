@@ -57,11 +57,6 @@ function App() {
         <Route element={<WithNavbar />}>
           <Route path="/explore" element={<Explore />} />
           <Route path="/profile" element={<Profile />} />
-          {/* Routing when connected to backend */}
-          {/* <Route
-            path="/users/:userId"
-            element={<OtherProfile />}
-          /> */}
           <Route
             path="/otherprofile"
             element={<OtherProfile />}

@@ -1,9 +1,7 @@
 @import "../style.css";
 
 .settings-container {
-  /* padding: 0px 80px;
-  max-width: 1440px;
-  margin: 0 auto; */
+  
   max-width: 100%; /*is this necessary?*/
   padding: 0px 80px 80px; /* top | sides | bottom */
   box-sizing: border-box;
@@ -15,7 +13,6 @@
   font-weight: 700;
   margin-top: 0px;
   margin-bottom: 72px;
-  /* padding-left: 80px; */
 }
 
 .settings-card {
@@ -26,8 +23,6 @@
   padding: 100px;
   border-radius: 24px;
   border: 1px solid var(--light-gray);
-  /* max-width: 900px; */
-  /* margin: 0 auto; */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
 }
 
@@ -44,7 +39,6 @@
 }
 
 .settings-row > div {
-  /* flex: 1; */
   min-width: 300px; /* allow growing on large screens */
 }
 

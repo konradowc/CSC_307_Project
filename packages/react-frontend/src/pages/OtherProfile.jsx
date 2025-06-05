@@ -9,24 +9,6 @@ const OtherProfile = () => {
   const [user, setUser] = useState(null);
   const [posts, setPosts] = useState([]);
 
-  // For connecting to backend
-
-  // useEffect(() => {
-  //   // Simulate user fetching
-  //   fetch(getBackendUrl() + `/api/users/${userId}`)
-  //     .then((res) => res.json())
-  //     .then(setUser)
-  //     .catch(console.error);
-
-  //   // Fetch posts by that user
-  //   fetch(getBackendUrl() + `/api/posts?userId=${userId}`)
-  //     .then((r) => r.json())
-  //     .then(setPosts)
-  //     .catch(console.error);
-  // }, [userId]);
-
-  // hardcoded for now
-
   useEffect(() => {
     const mockUser = {
       id: userId,
